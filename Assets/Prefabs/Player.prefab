@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7148716943611569209}
   - component: {fileID: 7148716943611569210}
   - component: {fileID: 720646816}
-  - component: {fileID: 720646815}
+  - component: {fileID: 5041971328487028418}
   - component: {fileID: -6593218008384008361}
   - component: {fileID: 8780202083422600478}
   - component: {fileID: 2805095677099423720}
@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4245738604243887485, guid: a1e169ff1cb9afb49b1fb6f9677e5d51, type: 3}
+  m_Sprite: {fileID: -467307283419413426, guid: 42b603e2a8c817042802baca6a68967a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5625, y: 1.5625}
+  m_Size: {x: 3.125, y: 3.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -112,8 +112,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &720646815
-BoxCollider2D:
+--- !u!70 &5041971328487028418
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,19 +125,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009819448, y: -1.095505}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.125, y: 3.125}
-    newSize: {x: 1.5625, y: 1.5625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.49152148, y: 0.78739655}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.004088491, y: 0.4804495}
+  m_Size: {x: 0.52347344, y: 0.78514826}
+  m_Direction: 0
 --- !u!114 &-6593218008384008361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +163,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   onGround: 0
-  bottomOffset: {x: -0.01, y: -1.47}
+  bottomOffset: {x: -0.01, y: 0.11}
   collisionRadius: 0.1
 --- !u!114 &2805095677099423720
 MonoBehaviour:
