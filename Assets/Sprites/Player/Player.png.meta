@@ -1654,6 +1654,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_Death_6
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 70
+        height: 35
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00000000000000000800000000000000
+      internalID: 0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1665,80 +1686,106 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Attack_4_5: 3073330023287801917
       Player_Dodge_7: -4208382038922187411
-      Player_Death_1: 5227767282447512884
-      Player_Attack_4_3: -11298786051027754
       Player_Attack_4_7: 1147484591617698546
       Player_Attack_1_1: 6644483228789976820
-      Player_Take_Damage_0: -9134602995593621190
-      Player_Run_6: -2326533491371090439
+      Player_Death_6: 0
       Player_Run_5: 5743889843950775253
       Player_Fall_0: -1193118917850865341
-      Player_Attack_2_2: -7565963910520955016
-      Player_Attack_1_8: -6740410515182607438
-      Player_Jump_5: -186415178674561052
-      Player_Dodge_2: 3656380257326402257
-      Player_Dodge_3: -3965777161845477969
-      Player_Attack_1_7: 7254404256272088979
       Player_Attack_2_3: -2437685659297053118
       Player_Attack_3_3: -7713436181025844757
-      Player_Attack_1_9: -368401515618120443
+      Player_Jump_5: -186415178674561052
+      Player_Dodge_2: 3656380257326402257
+      Player_Attack_1_7: 7254404256272088979
       Player_Attack_4_1: -2183683830778304492
-      Player_Death_4: 3314662284431173991
-      Player_Jump_0: -4142276880962872504
-      Player_Idle_5: 4245344421344247407
-      Player_Jump_1: -2833288000470796695
-      Player_Jump_7: -6449261802505695524
-      Player_Dodge_6: -2799151123091565875
-      Player_Attack_1_3: 2429752291990142803
       Player_Attack_3_2: 6953913331530084431
-      Player_Death_5: -224287705477160955
-      Player_Attack_4_2: -4602214431661924507
-      Player_Attack_4_4: -391640690745770133
-      Player_Death_0: -625099412930161800
-      Player_Take_Damage_2: -2136476117788982089
-      Player_Fall_5: -5006888766522083146
+      Player_Dodge_6: -2799151123091565875
+      Player_Jump_1: -2833288000470796695
+      Player_Attack_1_3: 2429752291990142803
+      Player_Claw_2: 0
       Player_Dodge_1: 251623392735547943
-      Player_Idle_2: 6236088313408774587
       Player_Dodge_5: -5291040989909215771
       Player_Jump_2: -560937678416875687
-      Player_Attack_1_4: 5965606625383036724
-      Player_Attack_1_2: -5348503334029685206
       Player_Attack_2_1: 8259541448387475485
+      Player_Claw_1_5: 0
+      Player_Claw_0: 0
       Player_Attack_1_5: -5185822226372146389
-      Player_Attack_3_1: 8915559442604700741
       Player_Attack_1_6: -3092529070303952417
-      Player_Jump_4: -6684733232908654282
-      Player_Jump_6: -4657594874730478759
-      Player_Attack_4_6: 2605971381607217956
-      Player_Idle_1: -5258030014049578038
-      Player_Idle_0: -467307283419413426
-      Player_Jump_8: -8712537506018747961
       Player_Death_3: -894729927518332931
+      Player_Claw_Attack_1_1: 0
       Player_Fall_3: -1973582045016827254
-      Player_Run_7: -1732827444613157014
-      Player_Jump_11: -4138356294339237655
-      Player_Fall_2: -4894582833811548398
+      Player_Claw_1_2: 0
+      Player_Attack_3_1: 8915559442604700741
+      Player_Claw_1: 0
+      Player_Claw_1_3: 0
+      Player_Test_3: 0
       Player_Run_4: 3041140956625590587
-      Player_Run_1: 7927430643088319458
       Player_Attack_1_0: -1454337063218153646
-      Player_Idle_3: -1461283530703516926
       Player_Dodge_4: -4802804912074169348
       Player_Fall_1: 3231906144451490875
-      Player_Attack_4_0: -6073281806941170289
       Player_Jump_9: -643346927723006273
+      Player_Test_2: 0
       Player_Jump_3: -1627450272019776505
-      Player_Run_2: -1396096166093489214
-      Player_Idle_4: 9073950842162242612
-      Player_Jump_10: 8634783765964253897
-      Player_Dodge_0: 3611682936500537232
-      Player_Fall_4: -2215648299479125745
+      Player_Test_0: 0
       Player_Run_0: 7071935623343613943
-      Player_Run_3: 1781292534199600417
+      Player_Claw_4: 0
       Player_Take_Damage_1: -1964527916674183466
       Player_Attack_2_0: -8369643376997749837
       Player_Attack_3_0: -3684481620486347214
+      Player_Claw_Attack_1_0: 0
+      Player_Attack_4_5: 3073330023287801917
+      Player_Death_1: 5227767282447512884
+      Player_Claw_1_1: 0
+      Player_Attack_4_3: -11298786051027754
+      Player_Claw_1_6: 0
+      Player_Take_Damage_0: -9134602995593621190
+      Player_Run_6: -2326533491371090439
+      Player_Attack_1_8: -6740410515182607438
+      Player_Attack_4_2: -4602214431661924507
+      Player_Attack_2_2: -7565963910520955016
+      Player_Take_Damage_2: -2136476117788982089
+      Player_Dodge_3: -3965777161845477969
+      Player_Attack_1_9: -368401515618120443
+      Player_Claw_3: 0
+      Player_Death_4: 3314662284431173991
+      Player_Jump_0: -4142276880962872504
+      Player_Idle_5: 4245344421344247407
+      Player_Jump_7: -6449261802505695524
+      Player_Claw_5: 0
+      Player_Attack_4_4: -391640690745770133
+      Player_Death_5: -224287705477160955
+      Player_Claw_1_4: 0
+      Player_Death_0: -625099412930161800
+      Player_Fall_5: -5006888766522083146
+      Player_Test_4: 0
+      Player_Claw_Attack_1_2: 0
+      Player_Idle_2: 6236088313408774587
+      Player_Attack_1_4: 5965606625383036724
+      Player_Attack_1_2: -5348503334029685206
+      Player_Attack_4_6: 2605971381607217956
+      Player_Claw_Attack_1_3: 0
+      Player_Jump_4: -6684733232908654282
+      Player_Jump_6: -4657594874730478759
+      Player_Idle_1: -5258030014049578038
+      Player_Idle_0: -467307283419413426
+      Player_Jump_8: -8712537506018747961
+      Player_Run_7: -1732827444613157014
+      Player_Jump_11: -4138356294339237655
+      Player_Fall_2: -4894582833811548398
+      Player_Test_1: 0
+      Player_Claw_Attack_1_4: 0
+      Player_Run_1: 7927430643088319458
+      Player_Idle_3: -1461283530703516926
+      Player_Claw_Attack_1_6: 0
+      Player_Attack_4_0: -6073281806941170289
+      Player_Run_2: -1396096166093489214
+      Player_Idle_4: 9073950842162242612
+      Player_Jump_10: 8634783765964253897
+      Player_Claw_Attack_1_5: 0
+      Player_Dodge_0: 3611682936500537232
+      Player_Claw_1_0: 0
+      Player_Fall_4: -2215648299479125745
+      Player_Run_3: 1781292534199600417
       Player_Death_2: -2905380826100750944
   spritePackingTag: 
   pSDRemoveMatte: 0

@@ -41,10 +41,11 @@ public class Player : MonoBehaviour
         Vector2 destination = new Vector2(x, y);
         anim.FlipDirection(x);
 
-        if (coll.onGround) jumpCount = 2;
 
         Walk(destination);
         anim.SetHorizontalMovement(x, y, rb.velocity.y);
+        
+        if (coll.onGround) jumpCount = 2;
         if (Input.GetButtonDown("Jump") && jumpCount > 1)
         {
             anim.SetTrigger("jump");
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
     }
 
     private void Walk(Vector2 des)
