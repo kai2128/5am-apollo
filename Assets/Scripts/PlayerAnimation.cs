@@ -42,11 +42,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         var facing = side switch
         {
-            > 0 => false,
-            < 0 => true,
-            _ => sr.flipX
+            > 0 => 1,
+            < 0 => -1,
+            _ => transform.localScale.x 
         };
-        sr.flipX = facing;
+        transform.localScale = new Vector3(facing, 1, 1) ;
     }
     
 }

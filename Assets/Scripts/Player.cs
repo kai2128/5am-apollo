@@ -11,12 +11,14 @@ public class Player : MonoBehaviour
 
     public float speed = 5;
     [Range(1, 10)] public float jumpVelocity = 7f;
-    public float dashSpeed = 15;
-    private float dashTimer;
-    public float totalDashTime;
     public int jumpCount = 2;
+
+    [Header("Dash")] 
+    public bool canDash = true;
     public bool isDasing = false;
-    private float dashDirection;
+    public float dashSpeed = 10;
+    public float dashCooldown = 0.2f;
+    public float dashTime = 0.4f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDasing)
+            return;
+        
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         float xRaw = Input.GetAxisRaw("Horizontal");
@@ -47,12 +52,10 @@ public class Player : MonoBehaviour
             jumpCount--;
         }
 
-        if (Input.GetButtonDown("Dash") && !isDasing)
+        if (Input.GetButtonDown("Dash") && canDash)
         {
-            Dash((int)x);
+            StartCoroutine(Dash());
         }
-        CheckDash();
-        
     }
 
     private void Walk(Vector2 des)
@@ -60,26 +63,21 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(des.x * speed, rb.velocity.y);
     }
 
-    private void CheckDash()
-    {
-        if (!isDasing) return;
-        rb.velocity = transform.right * (dashDirection * dashSpeed);
-        dashTimer -= Time.deltaTime;
-
-        if (dashTimer <= 0)
-        {
-            isDasing = false;
-        }
-    }
-
-    private void Dash(int x)
+    private IEnumerator Dash()
     {
         anim.SetTrigger("dash");
+        canDash = false;
         isDasing = true;
-        dashTimer = totalDashTime;
-        
-        rb.velocity = Vector2.zero;
-        dashDirection = x; 
-    }
+        yield return new WaitForSeconds(0.2f);
 
+        rb.velocity = Vector2.zero;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0.02f;
+        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = originalGravity;
+        isDasing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
 }
