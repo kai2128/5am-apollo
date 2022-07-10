@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private Animator anim;
+    public Animator anim;
 
-    private Player player;
     private PlayerCollision col;
     [HideInInspector]
     public SpriteRenderer sr;
@@ -16,7 +15,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         col = GetComponentInParent<PlayerCollision>();
-        player = GetComponentInParent<Player>();
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -48,5 +46,11 @@ public class PlayerAnimation : MonoBehaviour
         };
         transform.localScale = new Vector3(facing, 1, 1) ;
     }
-    
+
+    public float GetCurrentStateTime(int layer = 0)
+    {
+        var stateInfo = anim.GetCurrentAnimatorStateInfo(layer);
+        float currentTime = stateInfo.normalizedTime % 1;
+        return currentTime;
+    }
 }

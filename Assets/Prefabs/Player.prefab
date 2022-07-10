@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 7148716943611569210}
   - component: {fileID: 720646816}
   - component: {fileID: 5041971328487028418}
+  - component: {fileID: 6724532752222172120}
   - component: {fileID: -6593218008384008361}
   - component: {fileID: 8780202083422600478}
   - component: {fileID: 2805095677099423720}
@@ -174,6 +175,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.004088491, y: 0.4804495}
   m_Size: {x: 0.52347344, y: 0.78514826}
   m_Direction: 0
+--- !u!114 &6724532752222172120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148716943611569212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e70184dafb644b1bb72d086552a23f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
+  isDashing: 0
 --- !u!114 &-6593218008384008361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +206,6 @@ MonoBehaviour:
   jumpVelocity: 7
   jumpCount: 2
   canDash: 1
-  isDasing: 0
   dashSpeed: 10
   dashCooldown: 0.2
   dashTime: 0.4
