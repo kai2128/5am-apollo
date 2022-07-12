@@ -17,5 +17,10 @@ namespace Utils
             }
             transform.localScale = localScale;
         }
+
+        public static Vector2 GetOppositeDirection(this Transform transform)
+        {
+            return transform.localScale.x > 0 ? Vector2.left : Vector2.right;
+        }
     }
 }

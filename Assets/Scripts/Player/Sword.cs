@@ -13,10 +13,16 @@ namespace Player
         public float interval = 2f;
         private float _timer;
         private string _attackType;
-        
-        public float[] forwardForces = {0.3f, 0.2f, 0.5f};
+
+        public float[] forwardForces = { 0.3f, 0.2f, 0.5f };
+        public float[] lightDamages = { 5, 3, 6 };
         public float airForwardForces = 0.2f;
+        public float airDamage = 2f;
         public float groundForce = 10f;
+        public float groundDamage = 8f;
+
+
+        private AttackArguments _atkArgs = new();
 
         // Start is called before the first frame update
         void Start()
@@ -34,6 +40,7 @@ namespace Player
             {
                 return;
             }
+            
             LightAttack();
             AirAttack();
             RangedAttack();
@@ -41,17 +48,20 @@ namespace Player
 
         void AirAttack()
         {
-            if (!_col.onGround && Input.GetButtonDown("Fire1")  && Input.GetAxis("Vertical") >= 0)
+            if (!_col.onGround && Input.GetButtonDown("Fire1") && Input.GetAxis("Vertical") >= 0)
             {
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
+                _atkArgs = new AttackArguments(airDamage);
                 _anim.SetTrigger("swordAttackAir");
                 _movement.PauseForAnimation();
                 _movement.MoveForward(airForwardForces);
-            } else if (!_col.onGround && Input.GetButtonDown("Fire1"))
+            }
+            else if (!_col.onGround && Input.GetButtonDown("Fire1"))
             {
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
+                _atkArgs = new AttackArguments(groundDamage, groundForce);
                 _anim.SetTrigger("swordAttackGround");
                 _movement.PauseForAnimation();
                 _movement.MoveToGround(groundForce);
@@ -72,19 +82,19 @@ namespace Player
 
         void LightAttack()
         {
-            if( _col.onGround && Input.GetButtonDown("Fire1"))
+            if (_col.onGround && Input.GetButtonDown("Fire1"))
             {
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep++;
                 if (PlayerManager.Instance.comboStep > 3)
                     PlayerManager.Instance.comboStep = 1;
                 _timer = interval;
-                
+                _atkArgs = new AttackArguments(lightDamages[PlayerManager.Instance.comboStep - 1]);
                 _anim.SetTrigger("swordAttack1");
                 _movement.PauseForAnimation();
                 _movement.MoveForward(forwardForces[PlayerManager.Instance.comboStep - 1]);
             }
-            
+
             // reset combo counter
             if (_timer != 0)
             {
@@ -99,7 +109,8 @@ namespace Player
 
         public void OnHitEnemy(Collider2D col)
         {
-            col.gameObject.GetComponent<Enemy.Enemy>().GetHit(new AttackArguments(PlayerManager.Instance.transform, 5));
+            col.gameObject.GetComponent<Enemy.Enemy>()
+                .GetHit(_atkArgs.UpdateTransform(PlayerManager.Instance.transform));
         }
     }
 }

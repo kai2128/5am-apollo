@@ -5,6 +5,7 @@ namespace Player
 {
     public class Claw : MonoBehaviour
     {
+        public float clawDamage = 3;
         public void EndAttack()
         {
             PlayerManager.Instance.isAttacking = false;
@@ -15,7 +16,7 @@ namespace Player
         {
             if (col.CompareTag("Enemy"))
             {
-                col.gameObject.GetComponent<Enemy.Enemy>().GetHit(new AttackArguments(PlayerManager.Instance.transform, 5));
+                col.gameObject.GetComponent<Enemy.Enemy>().GetHit(new AttackArguments(PlayerManager.Instance.transform, 3));
             }
         }
     }

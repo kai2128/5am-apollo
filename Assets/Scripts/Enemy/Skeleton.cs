@@ -7,17 +7,15 @@ namespace Enemy
 {
     public class Skeleton : Enemy
     {
-        public float speed;
+        public float getHitForce;
         private Vector2 _dir;
         
         public override void GetHit(AttackArguments atkArgs)
         {
-            // var localScale = transform.localScale;
-            // localScale.x = Math.Abs(localScale.x) *  atkArgs.facing;
-            // transform.localScale = localScale;
             transform.LookAtTarget(atkArgs.transform);
             isHit = true;
-            _dir = atkArgs.transform.localScale;
+            getHitForce = atkArgs.force;
+            _dir = transform.GetOppositeDirection();
             anim.SetTrigger("hit");
         }
 
@@ -26,7 +24,7 @@ namespace Enemy
             animInfo = anim.GetCurrentAnimatorStateInfo(0);
             if (isHit)
             {
-                rb.velocity = _dir * speed;
+                rb.velocity = _dir * getHitForce;
                 if (animInfo.normalizedTime >= .6f)
                     isHit = false;
             }
