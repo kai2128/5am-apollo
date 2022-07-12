@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Player
@@ -7,14 +8,18 @@ namespace Player
     public class PlayerManager: MonoBehaviour
     {
         public static PlayerManager Instance { get; private set; }
-    
-        [Header("states")]
-        public bool isAttacking = false;
 
+        [Header("states")] 
+        public bool isInvulnerable = false;
+        public bool isAttacking = false;
+        [Space]
         public bool canMove = true;
         public bool isDashing = false;
         public int comboStep = 1;
 
+        [Header("Properties")] 
+        public float hp = 20;
+        
         [HideInInspector] 
         public PlayerAnimation playerAnim;
         public Transform playerTrans;
@@ -31,6 +36,16 @@ namespace Player
             playerTrans = GetComponent<Transform>();
             playerMovement = GetComponent<PlayerMovement>();
             playerCol = GetComponent<PlayerCollision>();
+        }
+
+        public void becomeInvulnerable()
+        {
+            isInvulnerable = true;
+            DOVirtual.DelayedCall(0.35f, becomeVulnerable, false);
+        }
+        public void becomeVulnerable()
+        {
+            isInvulnerable = false;
         }
 
 

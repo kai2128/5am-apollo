@@ -1,5 +1,6 @@
 using System;
 using Class;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Player
@@ -18,7 +19,7 @@ namespace Player
         public float[] lightDamages = { 5, 3, 6 };
         public float airForwardForces = 0.2f;
         public float airDamage = 2f;
-        public float groundForce = 10f;
+        public float groundForce = 3f;
         public float groundDamage = 8f;
 
 
@@ -109,6 +110,7 @@ namespace Player
 
         public void OnHitEnemy(Collider2D col)
         {
+            DOVirtual.Float(.2f, 1f, 0.6f, duration => _anim.anim.speed = duration);
             col.gameObject.GetComponent<Enemy.Enemy>()
                 .GetHit(_atkArgs.UpdateTransform(PlayerManager.Instance.transform));
         }

@@ -24,8 +24,10 @@ namespace Class
         private void UpdateDamage(float dmg, float frc = 0)
         {
             damage = dmg;
-            if(frc == 0)
-                force = 0.4f * dmg; // calculate force base on damage   
+            if (frc == 0)
+                force = 0.2f * dmg; // calculate force base on damage   
+            else
+                force = frc;
         }
 
         public void Reset()
@@ -44,18 +46,17 @@ namespace Class
             return this;
         }
         
-        public AttackArguments  Refresh(bool hasForce = true)
+        public AttackArguments Refresh(bool hasForce = true)
         {
             facing =  transform.localScale.x < 0 ? -1 : 1;
             dir = facing < 0 ? Vector2.left : Vector2.right;
             if(hasForce && force == 0)
-                force = 0.4f * damage; // calculate force base on damage
+                force = 0.2f * damage; // calculate force base on damage
             return this;
         }
 
         public AttackArguments()
         {
-            
         }
     }
 }

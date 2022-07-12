@@ -12,6 +12,7 @@ namespace Enemy
         protected Animator anim;
 
         public bool isHit;
+        public float hp;
 
         protected void Start()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Class;
+using DG.Tweening;
 using UnityEngine;
 using Utils;
 
@@ -10,6 +11,7 @@ namespace Enemy
         public float getHitForce;
         private Vector2 _dir;
         
+        
         public override void GetHit(AttackArguments atkArgs)
         {
             transform.LookAtTarget(atkArgs.transform);
@@ -17,6 +19,7 @@ namespace Enemy
             getHitForce = atkArgs.force;
             _dir = transform.GetOppositeDirection();
             anim.SetTrigger("hit");
+            DOVirtual.Float(.2f, 1f, 0.4f, duration => anim.speed = duration);
         }
 
         private void Update()

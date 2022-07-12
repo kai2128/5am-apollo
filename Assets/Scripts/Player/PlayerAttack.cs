@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Player
@@ -42,6 +43,9 @@ namespace Player
         private void OnTriggerEnter2D(Collider2D col)
         {
             Sword sd = GetComponentInChildren<Sword>();
+            
+            if(currentSkill == 0)
+                DOVirtual.Float(.2f, 1f, 0.7f, duration => GetComponentInChildren<Animator>().speed = duration);
             
             if (col.CompareTag("Enemy") && currentSkill == 1)
                 sd.OnHitEnemy(col);

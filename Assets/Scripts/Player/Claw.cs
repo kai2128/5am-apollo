@@ -1,4 +1,5 @@
 using Class;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Player
