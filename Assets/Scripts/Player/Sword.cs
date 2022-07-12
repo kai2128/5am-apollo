@@ -1,4 +1,5 @@
 using System;
+using Class;
 using UnityEngine;
 
 namespace Player
@@ -96,9 +97,9 @@ namespace Player
             }
         }
 
-        public void OnHit(Collider2D col)
+        public void OnHitEnemy(Collider2D col)
         {
-            Debug.Log(123);
+            col.gameObject.GetComponent<Enemy.Enemy>().GetHit(new AttackArguments(PlayerManager.Instance.transform, 5));
         }
     }
 }

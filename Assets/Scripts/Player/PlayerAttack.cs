@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -36,6 +37,14 @@ namespace Player
                     currentSkill = 0;
             }
             skills[currentSkill].SetActive(true);
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            Sword sd = GetComponentInChildren<Sword>();
+            
+            if (col.CompareTag("Enemy") && currentSkill == 1)
+                sd.OnHitEnemy(col);
         }
     }
 }

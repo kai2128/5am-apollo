@@ -7,6 +7,8 @@ namespace Player
         [Header("Layers")]
         public LayerMask groundLayer;
 
+        public LayerMask enemyMask;
+
         [Header("Collisions")]
         public bool onGround;
         public Vector2 bottomOffset;
@@ -16,7 +18,8 @@ namespace Player
         void Update()
         {
             Vector2 pos = transform.position;
-            onGround = Physics2D.OverlapCircle(pos + bottomOffset, collisionRadius, groundLayer);
+            onGround = Physics2D.OverlapCircle(pos + bottomOffset, collisionRadius, groundLayer) ||
+                       Physics2D.OverlapCircle(pos + bottomOffset, collisionRadius, enemyMask);
         }
 
         private void OnDrawGizmos()

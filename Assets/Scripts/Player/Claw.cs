@@ -1,3 +1,4 @@
+using Class;
 using UnityEngine;
 
 namespace Player
@@ -12,10 +13,9 @@ namespace Player
     
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.tag == "Enemy")
+            if (col.CompareTag("Enemy"))
             {
-                Debug.Log(1);
-                col.gameObject.GetComponent<Enemy>().GetHit(transform.localScale);
+                col.gameObject.GetComponent<Enemy.Enemy>().GetHit(new AttackArguments(PlayerManager.Instance.transform, 5));
             }
         }
     }
