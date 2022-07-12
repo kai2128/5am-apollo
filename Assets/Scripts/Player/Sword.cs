@@ -7,9 +7,12 @@ namespace Player
         private PlayerAnimation _anim;
         private PlayerCollision _col;
         private PlayerMovement _movement;
-        public float forwardForce1 = 0.3f;
-        public float forwardForce2 = 0.2f;
-        public float forwardForce3 = 0.5f;
+
+        public float interval = 2f;
+        private float _timer;
+        private string _attackType;
+        
+        public float[] forwardForces = {0.3f, 0.2f, 0.5f};
 
         // Start is called before the first frame update
         void Start()
@@ -23,12 +26,36 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetButtonDown("Fire1") && !PlayerManager.Instance.isDashing && _col.onGround)
+            Attack();
+        }
+
+        void Attack()
+        {
+            if (!PlayerManager.Instance.isAttacking && !PlayerManager.Instance.isDashing &&
+                Input.GetButtonDown("Fire1"))
             {
-                _anim.SetTrigger("swordAttack1");
                 PlayerManager.Instance.isAttacking = true;
-                StartCoroutine(PlayerManager.Instance.ToggleAttack(0.3f));
+                PlayerManager.Instance.comboStep++;
+                if (PlayerManager.Instance.comboStep > 3)
+                    PlayerManager.Instance.comboStep = 1;
+                _timer = interval;
+                
+                _anim.SetTrigger("swordAttack1");
+                _movement.PauseForAnimation();
+                _movement.MoveForward(forwardForces[PlayerManager.Instance.comboStep - 1]);
             }
+
+            // reset combo counter
+            if (_timer != 0)
+            {
+                _timer -= Time.deltaTime;
+                if (_timer < 0)
+                {
+                    _timer = 0;
+                    PlayerManager.Instance.comboStep = 1;
+                }
+            }
+            
         }
         
     }

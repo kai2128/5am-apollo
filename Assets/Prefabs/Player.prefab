@@ -148,6 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7676a0b712e43114fa128540da4a0ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interval: 2
+  forwardForce1: 0.3
+  forwardForce2: 0.2
+  forwardForce3: 0.5
 --- !u!1 &7148716943611569212
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,8 +300,10 @@ MonoBehaviour:
   isAttacking: 0
   canMove: 1
   isDashing: 0
+  comboStep: 1
   playerAnim: {fileID: 0}
   playerTrans: {fileID: 0}
+  playerCol: {fileID: 0}
   playerMovement: {fileID: 0}
 --- !u!114 &-6593218008384008361
 MonoBehaviour:
@@ -397,6 +403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2700e2cecf889a4e9f977c12c02cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 1203679457}
+  - {fileID: 2488566603993709486}
+  currentSkill: 0
 --- !u!1001 &7148716942611060946
 PrefabInstance:
   m_ObjectHideFlags: 0

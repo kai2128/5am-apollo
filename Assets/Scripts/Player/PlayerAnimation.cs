@@ -24,6 +24,8 @@ namespace Player
             anim.SetBool("onGround", col.onGround);
             anim.SetBool("isAttacking", PlayerManager.Instance.isAttacking);
             anim.SetBool("isDashing", PlayerManager.Instance.isDashing);
+            
+            anim.SetInteger("comboStep", PlayerManager.Instance.comboStep);
         }
 
         public void SetHorizontalMovement(float x, float y, float yVel)

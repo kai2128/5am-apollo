@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -12,6 +13,7 @@ namespace Player
 
         public bool canMove = true;
         public bool isDashing = false;
+        public int comboStep = 1;
 
         [HideInInspector] 
         public PlayerAnimation playerAnim;
@@ -38,10 +40,16 @@ namespace Player
             isAttacking = !isAttacking;
         }
         
-        public IEnumerator ToggleMovement(float after)
+        public IEnumerator ToggleMovement(float after, bool? flag)
         {
+            if (flag == null) flag = !canMove;
             yield return new WaitForSeconds(after);
-            canMove = !canMove;
+            canMove = (bool)flag;
+        }
+
+        public void AttackOver()
+        {
+            isAttacking = false;
         }
     }
 }

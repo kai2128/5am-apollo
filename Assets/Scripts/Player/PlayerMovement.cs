@@ -46,10 +46,25 @@ namespace Player
             rb.gravityScale = 1;
         }
 
+        public void PauseForAnimation(float percentage = 1)
+        {
+            AnimatorStateInfo stateInfo = anim.anim.GetCurrentAnimatorStateInfo(0);
+            AnimatorClipInfo[] animatorClipInfo = anim.anim.GetCurrentAnimatorClipInfo(0);
+            float totalDuration = animatorClipInfo[0].clip.length * stateInfo.normalizedTime;
+            float duration = totalDuration * percentage;
+            StartCoroutine(PauseMovement(duration));
+        }
+
         // Update is called once per frame
         void Update()
         {
-            if (!PlayerManager.Instance.canMove)
+            if(!PlayerManager.Instance.canMove)
+                return;
+            
+            if (Input.GetButtonDown("Dash") && canDash)
+                StartCoroutine(Dash());
+            
+            if (PlayerManager.Instance.isAttacking)
                 return;
 
             float x = Input.GetAxis("Horizontal");
@@ -70,11 +85,6 @@ namespace Player
                 rb.velocity = Vector2.up * jumpVelocity;
                 jumpCount--;
             }
-
-            if (Input.GetButtonDown("Dash") && canDash)
-            {
-                StartCoroutine(Dash());
-            }
         }
 
         public void Walk(Vector2 des)
@@ -90,6 +100,7 @@ namespace Player
         {
             anim.SetTrigger("dash");
             canDash = false;
+            PlayerManager.Instance.isAttacking = false;
             PlayerManager.Instance.isDashing = true;
             PlayerManager.Instance.canMove = false;
             rb.velocity = Vector2.zero;
@@ -99,7 +110,7 @@ namespace Player
             rb.gravityScale = 0.0001f;
             rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
 
-            StartCoroutine(PlayerManager.Instance.ToggleMovement(dashTime - 0.15f));
+            StartCoroutine(PlayerManager.Instance.ToggleMovement(dashTime - 0.15f, true));
             yield return new WaitForSeconds(dashTime);
             rb.gravityScale = originalGravity;
             PlayerManager.Instance.isDashing = false;
