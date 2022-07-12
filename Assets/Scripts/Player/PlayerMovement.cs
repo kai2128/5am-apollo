@@ -1,103 +1,110 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Xml;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
-public class PlayerMovement : MonoBehaviour
+namespace Player
 {
-    [HideInInspector] public Rigidbody2D rb;
-    private PlayerAnimation anim;
-    private PlayerCollision coll;
-
-    public float speed = 5;
-    [Range(1, 10)] public float jumpVelocity = 7f;
-    public int jumpCount = 2;
-
-    [Header("Dash")] public bool canDash = true;
-    public float dashSpeed = 10;
-    public float dashCooldown = 0.2f;
-    public float dashTime = 0.4f;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerMovement : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<PlayerAnimation>();
-        coll = GetComponent<PlayerCollision>();
-    }
+        [HideInInspector] public Rigidbody2D rb;
+        private PlayerAnimation anim;
+        private PlayerCollision coll;
 
-    public void MoveForward(float force)
-    {
-        rb.velocity = new Vector2(transform.localScale.x * force, rb.velocity.y);
-    }
+        public float speed = 5;
+        [Range(1, 10)] public float jumpVelocity = 7f;
+        public int jumpCount = 2;
 
-    public IEnumerator PauseMovement(float time)
-    {
-        var oldVel = rb.velocity;
-        var oldGravity = rb.gravityScale;
-        rb.velocity = Vector2.zero;
-        rb.gravityScale = 0;
-        PlayerManager.Instance.canMove = false;
+        [Header("Dash")] public bool canDash = true;
+        public float dashSpeed = 10;
+        public float dashCooldown = 0.2f;
+        public float dashTime = 0.4f;
 
-        yield return new WaitForSeconds(time);
-        PlayerManager.Instance.canMove = true;
-        rb.velocity = oldVel;
-        rb.gravityScale = 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (PlayerManager.Instance.isDashing || !PlayerManager.Instance.canMove)
-            return;
-
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        float xRaw = Input.GetAxisRaw("Horizontal");
-        float yRaw = Input.GetAxisRaw("Vertical");
-        Vector2 destination = new Vector2(x, y);
-        anim.FlipDirection(x);
-
-
-        Walk(destination);
-        anim.SetHorizontalMovement(x, y, rb.velocity.y);
-
-        if (coll.onGround) jumpCount = 2;
-        if (Input.GetButtonDown("Jump") && jumpCount > 1)
+        // Start is called before the first frame update
+        void Start()
         {
-            anim.SetTrigger("jump");
-            rb.velocity = Vector2.up * jumpVelocity;
-            jumpCount--;
+            rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<PlayerAnimation>();
+            coll = GetComponent<PlayerCollision>();
         }
 
-        if (Input.GetButtonDown("Dash") && canDash)
+        public void MoveForward(float force)
         {
-            StartCoroutine(Dash());
+            rb.velocity = new Vector2(transform.localScale.x * force, rb.velocity.y);
         }
-    }
 
-    private void Walk(Vector2 des)
-    {
-        rb.velocity = new Vector2(des.x * speed, rb.velocity.y);
-    }
+        public IEnumerator PauseMovement(float time)
+        {
+            var oldVel = rb.velocity;
+            var oldGravity = rb.gravityScale;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+            PlayerManager.Instance.canMove = false;
 
-    private IEnumerator Dash()
-    {
-        anim.SetTrigger("dash");
-        canDash = false;
-        PlayerManager.Instance.isDashing = true;
-        yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(time);
+            PlayerManager.Instance.canMove = true;
+            rb.velocity = oldVel;
+            rb.gravityScale = 1;
+        }
 
-        rb.velocity = Vector2.zero;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0.02f;
-        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
-        yield return new WaitForSeconds(dashTime);
-        rb.gravityScale = originalGravity;
-        PlayerManager.Instance.isDashing = false;
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        // Update is called once per frame
+        void Update()
+        {
+            if (!PlayerManager.Instance.canMove)
+                return;
+
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            float xRaw = Input.GetAxisRaw("Horizontal");
+            float yRaw = Input.GetAxisRaw("Vertical");
+            Vector2 destination = new Vector2(x, y);
+            anim.FlipDirection(x);
+
+
+            Walk(destination);
+            anim.SetHorizontalMovement(x, y, rb.velocity.y);
+
+            if (coll.onGround) jumpCount = 2;
+            if (Input.GetButtonDown("Jump") && jumpCount > 1)
+            {
+                anim.SetTrigger("jump");
+                rb.velocity = Vector2.up * jumpVelocity;
+                jumpCount--;
+            }
+
+            if (Input.GetButtonDown("Dash") && canDash)
+            {
+                StartCoroutine(Dash());
+            }
+        }
+
+        public void Walk(Vector2 des)
+        {
+            if(PlayerManager.Instance.isDashing)
+                if(des.x == 0)
+                    return;
+            
+            rb.velocity = new Vector2(des.x * speed, rb.velocity.y);
+        }
+
+        private IEnumerator Dash()
+        {
+            anim.SetTrigger("dash");
+            canDash = false;
+            PlayerManager.Instance.isDashing = true;
+            PlayerManager.Instance.canMove = false;
+            rb.velocity = Vector2.zero;
+            float originalGravity = rb.gravityScale;
+            yield return new WaitForSeconds(0.1f);
+
+            rb.gravityScale = 0.0001f;
+            rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+
+            StartCoroutine(PlayerManager.Instance.ToggleMovement(dashTime - 0.15f));
+            yield return new WaitForSeconds(dashTime);
+            rb.gravityScale = originalGravity;
+            PlayerManager.Instance.isDashing = false;
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+        }
     }
 }

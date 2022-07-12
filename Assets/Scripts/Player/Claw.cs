@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Claw : MonoBehaviour
+namespace Player
 {
-    public void EndAttack()
+    public class Claw : MonoBehaviour
     {
-        PlayerManager.Instance.isAttacking = false;
-        gameObject.SetActive(false);
-    }
-    
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.tag == "Enemy")
+        public void EndAttack()
         {
-            Debug.Log(1);
-            col.gameObject.GetComponent<Enemy>().GetHit(transform.localScale);
+            PlayerManager.Instance.isAttacking = false;
+            gameObject.SetActive(false);
+        }
+    
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.tag == "Enemy")
+            {
+                Debug.Log(1);
+                col.gameObject.GetComponent<Enemy>().GetHit(transform.localScale);
+            }
         }
     }
 }

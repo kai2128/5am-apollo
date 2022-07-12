@@ -1,31 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpEnhance : MonoBehaviour
+namespace Player
 {
-    private Rigidbody2D rb;
-
-    public float fallMultiplier = 3f;
-    public float lowJumpMultiplier = 1.5f;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class JumpEnhance : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D rb;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (rb.velocity.y < 0)
+        public float fallMultiplier = 3f;
+        public float lowJumpMultiplier = 1.5f;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb = GetComponent<Rigidbody2D>();
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+
+        // Update is called once per frame
+        void Update()
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
+            else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
     }
 }

@@ -1,52 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+namespace Player
 {
-    PlayerAnimation playerAnim;
-    private PlayerMovement playerMovement;
-    private GameObject clawEffect;
-    public float clawForwardForce = 0.3f;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerAttack : MonoBehaviour
     {
-        playerAnim = transform.parent.gameObject.GetComponent<PlayerAnimation>();
-        playerMovement = transform.parent.gameObject.GetComponent<PlayerMovement>();
-    }
+        public GameObject[] skills;
+        public int currentSkill = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        transform.eulerAngles = new Vector3(x, y, 0);
-
-        if (Input.GetButtonDown("Fire1") && !PlayerManager.Instance.isDashing)
+        // Start is called before the first frame update
+        void Start()
         {
-            PlayerManager.Instance.isAttacking = true;
-            playerAnim.SetTrigger("claw");
-            StartCoroutine(playerMovement.PauseMovement(playerAnim.GetCurrentStateTime() + 0.5f));
-            playerMovement.MoveForward(clawForwardForce);
-            ClawEffect();
+            skills.ToList().ForEach(skill => skill.SetActive(false));
+            skills[currentSkill].SetActive(true);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            SwitchSkill();
+        }
+
+        void SwitchSkill()
+        {
+            if (!Input.GetKeyDown(KeyCode.Q) && !Input.GetKeyDown(KeyCode.E)) return;
+            
+            skills[currentSkill].SetActive(false);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (--currentSkill < 0)
+                    currentSkill = skills.Length - 1;                    
+            }else if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (++currentSkill > skills.Length - 1)
+                    currentSkill = 0;
+            }
+            skills[currentSkill].SetActive(true);
         }
     }
-
-
-    private void ClawEffect()
-    {
-        transform.GetChild(0).gameObject.SetActive(true);
-    }
-
-//     private void OnTriggerEnter2D(Collider2D col)
-//     {
-//         Debug.Log(col.tag);
-//         if (col.CompareTag("Enemy"))
-//         {
-//             col.gameObject.GetComponent<Enemy>().GetHit(transform.localScale);
-//         }
-//     }
-// }
 }
