@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -13,6 +14,8 @@ namespace Player
         private string _attackType;
         
         public float[] forwardForces = {0.3f, 0.2f, 0.5f};
+        public float airForwardForces = 0.2f;
+        public float groundForce = 10f;
 
         // Start is called before the first frame update
         void Start()
@@ -26,13 +29,49 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            Attack();
+            if (PlayerManager.Instance.isAttacking && PlayerManager.Instance.isDashing)
+            {
+                return;
+            }
+            LightAttack();
+            AirAttack();
+            RangedAttack();
         }
 
-        void Attack()
+        void AirAttack()
         {
-            if (!PlayerManager.Instance.isAttacking && !PlayerManager.Instance.isDashing &&
-                Input.GetButtonDown("Fire1"))
+            if (!_col.onGround && Input.GetButtonDown("Fire1")  && Input.GetAxis("Vertical") >= 0)
+            {
+                PlayerManager.Instance.isAttacking = true;
+                PlayerManager.Instance.comboStep = 1;
+                _anim.SetTrigger("swordAttackAir");
+                _movement.PauseForAnimation();
+                _movement.MoveForward(airForwardForces);
+            } else if (!_col.onGround && Input.GetButtonDown("Fire1"))
+            {
+                PlayerManager.Instance.isAttacking = true;
+                PlayerManager.Instance.comboStep = 1;
+                _anim.SetTrigger("swordAttackGround");
+                _movement.PauseForAnimation();
+                _movement.MoveToGround(groundForce);
+            }
+        }
+
+        void RangedAttack()
+        {
+            if (Input.GetButtonDown("Fire2") && _col.onGround)
+            {
+                PlayerManager.Instance.isAttacking = true;
+                PlayerManager.Instance.comboStep = 1;
+                _anim.SetTrigger("swordAttackRanged");
+                _movement.rb.velocity = Vector2.zero;
+                _movement.PauseForAnimation();
+            }
+        }
+
+        void LightAttack()
+        {
+            if( _col.onGround && Input.GetButtonDown("Fire1"))
             {
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep++;
@@ -44,7 +83,7 @@ namespace Player
                 _movement.PauseForAnimation();
                 _movement.MoveForward(forwardForces[PlayerManager.Instance.comboStep - 1]);
             }
-
+            
             // reset combo counter
             if (_timer != 0)
             {
@@ -55,8 +94,11 @@ namespace Player
                     PlayerManager.Instance.comboStep = 1;
                 }
             }
-            
         }
-        
+
+        public void OnHit(Collider2D col)
+        {
+            Debug.Log(123);
+        }
     }
 }

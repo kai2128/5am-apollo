@@ -149,9 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 2
-  forwardForce1: 0.3
-  forwardForce2: 0.2
-  forwardForce3: 0.5
+  forwardForces:
+  - 0.8
+  - 0.5
+  - 0.4
+  airForwardForces: 0.2
+  groundForce: 10
 --- !u!1 &7148716943611569212
 GameObject:
   m_ObjectHideFlags: 0

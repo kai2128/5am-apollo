@@ -32,17 +32,22 @@ namespace Player
             rb.velocity = new Vector2(transform.localScale.x * force, rb.velocity.y);
         }
 
+        public void MoveToGround(float force)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Vector2.down.y * force);
+        }
+
         public IEnumerator PauseMovement(float time)
         {
-            var oldVel = rb.velocity;
-            var oldGravity = rb.gravityScale;
+            // var oldVel = rb.velocity;
+            // var oldGravity = rb.gravityScale;
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
             PlayerManager.Instance.canMove = false;
 
             yield return new WaitForSeconds(time);
             PlayerManager.Instance.canMove = true;
-            rb.velocity = oldVel;
+            // rb.velocity = oldVel;
             rb.gravityScale = 1;
         }
 
