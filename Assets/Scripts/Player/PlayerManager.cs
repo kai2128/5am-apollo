@@ -23,6 +23,7 @@ namespace Player
         [HideInInspector] 
         public PlayerAnimation playerAnim;
         public Transform playerTrans;
+        public Rigidbody2D rb;
         public PlayerCollision playerCol;
         public PlayerMovement playerMovement; 
     
@@ -33,6 +34,7 @@ namespace Player
 
             Instance = this;
             playerAnim = GetComponent<PlayerAnimation>();
+            rb = GetComponent<Rigidbody2D>();
             playerTrans = GetComponent<Transform>();
             playerMovement = GetComponent<PlayerMovement>();
             playerCol = GetComponent<PlayerCollision>();
