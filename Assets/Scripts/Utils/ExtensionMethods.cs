@@ -47,6 +47,32 @@ namespace Utils
         {
             return transform.localScale.x < 0 ? -1 : 1;
         }
+        
+        public static bool IsFacingRight(this Transform transform)
+        {
+            return transform.GetFacingFloat() > 0;
+        }
+        
+        public static bool IsFacingTarget(this Transform transform, Vector2 target)
+        {
+            // in front of target
+            if (transform.position.x >= target.x && transform.IsFacingLeft())
+            {
+                return true;
+            }
+            // behind of target
+            if (transform.position.x <= target.x && transform.IsFacingRight())
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        public static bool IsFacingLeft(this Transform transform)
+        {
+            return transform.GetFacingFloat() < 0;
+        }
 
         // public static void FlipDirection(this Transform transform)
         // {

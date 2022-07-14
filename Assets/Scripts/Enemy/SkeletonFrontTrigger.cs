@@ -17,9 +17,5 @@ namespace Enemy
         
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            gameObject.transform.parent.GetComponentInParent<Skeleton>().OnFrontCollisionEnter(col);
-        }
     }
 }

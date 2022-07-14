@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199682106}
   - component: {fileID: 1199682107}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1203679458}
   - component: {fileID: 8409627583275053726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ClawPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1912158611}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8326390743017895894}
   - component: {fileID: 882216651420876733}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,8 +185,14 @@ MonoBehaviour:
   - 0.8
   - 0.5
   - 0.4
+  lightDamages:
+  - 5
+  - 3
+  - 6
   airForwardForces: 0.2
+  airDamage: 2
   groundForce: 10
+  groundDamage: 8
 --- !u!1 &7148716943611569212
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +212,7 @@ GameObject:
   - component: {fileID: 8244665359697744627}
   - component: {fileID: 2179110603635726328}
   - component: {fileID: 1664366799751595785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -332,12 +338,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e70184dafb644b1bb72d086552a23f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInvulnerable: 0
   isAttacking: 0
   canMove: 1
   isDashing: 0
   comboStep: 1
+  hp: 20
   playerAnim: {fileID: 0}
   playerTrans: {fileID: 0}
+  rb: {fileID: 0}
   playerCol: {fileID: 0}
   playerMovement: {fileID: 0}
 --- !u!114 &-6593218008384008361
@@ -511,6 +520,10 @@ PrefabInstance:
     - target: {fileID: 4194683199314292063, guid: 42f74d984d574bd46b755a3361123cca, type: 3}
       propertyPath: m_Name
       value: Claw
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194683199314292063, guid: 42f74d984d574bd46b755a3361123cca, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4194683199314292063, guid: 42f74d984d574bd46b755a3361123cca, type: 3}
       propertyPath: m_IsActive

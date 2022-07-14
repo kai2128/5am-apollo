@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
+using System.Numerics;
 using Class;
 using DG.Tweening;
 using Player;
 using UnityEngine;
 using Utils;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
 
 namespace Enemy
 {
@@ -24,6 +28,7 @@ namespace Enemy
 
         public float getHitForce;
         private Vector2 _dir;
+        private BoxCollider2D boxCollider2D;
 
         [SerializeField] private State currentState;
         [Header("Properties")] public float attackDamage = 20f;
@@ -31,27 +36,62 @@ namespace Enemy
         public float walkSpeed = 1.5f;
         public float idleTime = 1.5f;
         public float walkTime = 5f;
-        [Header("Roam")] public float roamRadius = 20f;
-        public float minRoamDistance = 4f;
-        public float maxRoamDistance = 10f;
+        [Header("Roam")] public float chaseRadius = 15f;
+        public float walkRadius = 10f;
 
+        public LayerMask playerLayer;
         public LayerMask groundLayer;
-        [SerializeField]private float timer;
+        [SerializeField] private float timer;
         [SerializeField] private Transform groundCheck, wallCheck;
         [SerializeField] private float groundCheckDist, wallCheckDist;
         [SerializeField] bool groundDetected, wallDetected;
 
         private Vector2 movement;
+
         private new void Start()
         {
             base.Start();
+            boxCollider2D = GetComponent<BoxCollider2D>();
             currentState = State.Idle;
         }
 
         private AttackArguments getHitArgs;
 
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.CompareTag("Player"))
+            {
+                if (currentState == State.Idle || currentState == State.Walk)
+                {
+                    SwitchState(State.React);
+                }
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D col)
+        {
+            if (Vector2.Distance(col.gameObject.transform.position, startingPosition) >= chaseRadius)
+                return;
+
+            if (col.CompareTag("Player"))
+            {
+                if (currentState == State.Idle || currentState == State.Walk)
+                {
+                    SwitchState(State.React);
+                }
+            }
+        }
+
         public override void GetHit(AttackArguments atkArgs)
         {
+            // while attacking cannot be cancelled / damaged
+            if (currentState == State.Attack)
+            {
+                // only can attack from behind if skeleton is attacking
+                if (atkArgs.dir.x != transform.GetFacingDirection().x)
+                    return;
+            }
+
             getHitArgs = atkArgs;
             SwitchState(State.Hit);
         }
@@ -83,30 +123,37 @@ namespace Enemy
                     break;
             }
         }
-        
+
 
         private void OnDrawGizmos()
         {
+            Start();
+
+            // terrain check
             var groundPos = groundCheck.position;
             Gizmos.DrawLine(groundPos, new Vector2(groundPos.x, groundPos.y - groundCheckDist));
             var wallPos = wallCheck.position;
             Gizmos.DrawLine(wallPos, new Vector2(wallPos.x + wallCheckDist, wallPos.y));
 
+            // attack range
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, new Vector2(transform.position.x  + attackRange, transform.position.y));
-        }
+            Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + attackRange, transform.position.y));
 
-        public void OnFrontCollisionEnter(Collider2D col)
-        {
-            if (col.CompareTag("Ground"))
-            {
-                Debug.Log(1);
-            }
+            // chase range
+            var radius = transform.position;
+            radius.x -= chaseRadius;
+            Gizmos.DrawLine(radius, new Vector2(radius.x + chaseRadius * 2, startingPosition.y));
+
+            Gizmos.color = Color.grey;
+            // walk range
+            radius = transform.position;
+            radius.x -= walkRadius;
+            Gizmos.DrawLine(radius, new Vector2(radius.x + walkRadius * 2, startingPosition.y));
         }
 
         private void EnterWalkingState()
         {
-            anim.SetBool("isWalking", true);
+            anim.Play("Walk");
         }
 
         private void UpdateWalkingState()
@@ -117,6 +164,12 @@ namespace Enemy
             if (!groundDetected || wallDetected)
             {
                 FlipDirection();
+            }
+            else if (Vector2.Distance(startingPosition, rb.position) >= chaseRadius)
+            {
+                transform.LookAtTarget(startingPosition);
+                movement.Set(walkSpeed * transform.GetFacingDirection().x, rb.velocity.y);
+                rb.velocity = movement;
             }
             else
             {
@@ -133,7 +186,6 @@ namespace Enemy
 
         private void ExitWalkingState()
         {
-            anim.SetBool("isWalking", false);
         }
 
         private void EnterHitState()
@@ -141,16 +193,21 @@ namespace Enemy
             transform.LookAtTarget(getHitArgs.transform);
             getHitForce = getHitArgs.force;
             _dir = transform.GetOppositeDirection();
-            anim.SetTrigger("hit");
+            anim.Play("Hit");
             DOVirtual.Float(.2f, 1f, 0.4f, duration => anim.speed = duration);
         }
 
         private void UpdateHitState()
         {
-            animInfo = anim.GetCurrentAnimatorStateInfo(0);
             rb.velocity = _dir * getHitForce;
-            if (animInfo.normalizedTime >= 1f)
-                SwitchState(State.React);
+            timer += Time.deltaTime;
+            if (timer > 0.3f)
+            {
+                if (anim.HasPlayedOver(0.9f))
+                {
+                    SwitchState(State.React);
+                }
+            }
         }
 
         private void ExitHitState()
@@ -159,6 +216,7 @@ namespace Enemy
 
         private void EnterIdleState()
         {
+            anim.Play("Idle");
         }
 
         private void UpdateIdleState()
@@ -176,51 +234,69 @@ namespace Enemy
 
         private void EnterAttackState()
         {
-            anim.SetTrigger("attack");
+            anim.Play("Attack");
             rb.velocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Static;
+            sr.color = new Color(1f, .8f, .8f);
         }
 
         private void UpdateAttackState()
         {
-            if(anim.HasPlayedOver(1f))
-                SwitchState(State.Chase);   
+            if (anim.HasPlayedOver(1f))
+                SwitchState(State.Chase);
         }
 
         private void ExitAttackState()
         {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            anim.Play("Idle");
+            sr.color = Color.white;
         }
 
         private void EnterChaseState()
         {
-            anim.SetBool("isWalking", true);
+            anim.Play("Walk");
+            sr.color = new Color(1f, .8f, .8f);
         }
 
         private void UpdateChaseState()
         {
+            groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDist, groundLayer);
+            wallDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDist, groundLayer);
             var position = rb.position;
             transform.LookAtTarget(PlayerManager.Instance.transform);
-            Vector2 target = new Vector2(PlayerManager.Instance.transform.position.x,  position.y);
-            Vector2 newPos = Vector2.MoveTowards( position, target, walkSpeed * 1.2f * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
+            Vector2 target = new Vector2(PlayerManager.Instance.transform.position.x, position.y);
+            Vector2 newPos = Vector2.MoveTowards(position, target, walkSpeed * 1.2f * Time.fixedDeltaTime);
+            if(groundDetected && !wallDetected)
+                rb.MovePosition(newPos);
+            
             if (Vector2.Distance(target, rb.position) <= attackRange)
             {
-                SwitchState(State.Attack); 
+                SwitchState(State.Attack);
+            }
+
+            if ( Vector2.Distance(target, startingPosition) >= chaseRadius)
+            {
+                if (!transform.IsFacingTarget(startingPosition))
+                {
+                        SwitchState(State.Idle);
+                }
             }
         }
 
         private void ExitChaseState()
         {
-            anim.SetBool("isWalking", false);
+            sr.color = Color.white;
         }
 
         private void EnterReactState()
         {
-            anim.SetTrigger("react");
+            transform.LookAtTarget(PlayerManager.Instance.transform);
+            anim.Play("React");
         }
 
         private void UpdateReactState()
         {
-            Debug.Log(anim.HasPlayedOver());
             if (anim.HasPlayedOver())
             {
                 SwitchState(State.Chase);
@@ -233,14 +309,14 @@ namespace Enemy
 
         private void EnterDieState()
         {
-            anim.SetTrigger("die");
+            anim.Play("Die");
         }
 
         private void UpdateDieState()
         {
             if (anim.HasPlayedOver(1f))
             {
-                Destroy(this);                
+                Destroy(this);
             }
         }
 
