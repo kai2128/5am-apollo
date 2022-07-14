@@ -106,8 +106,11 @@ namespace Utils
             return animInfo.normalizedTime;
         }
 
-        public static bool HasPlayedOver(this Animator anim, float percentage = 1f)
+        public static bool HasPlayedOver(this Animator anim, float percentage = 1f, string stateName = null)
         {
+            if (stateName != null && !anim.GetCurrentAnimatorStateInfo(0).IsName(stateName))
+                return false;
+            
             return anim.GetCurrentPlayTime() >= percentage && !anim.IsInTransition(0);
         }
     }

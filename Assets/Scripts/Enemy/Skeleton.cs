@@ -28,7 +28,7 @@ namespace Enemy
 
         public float getHitForce;
         private Vector2 _dir;
-        private BoxCollider2D boxCollider2D;
+        private PolygonCollider2D weaponCol ;
 
         [SerializeField] private State currentState;
         [Header("Properties")] public float attackDamage = 20f;
@@ -51,7 +51,9 @@ namespace Enemy
         private new void Start()
         {
             base.Start();
-            boxCollider2D = GetComponent<BoxCollider2D>();
+            maxHp = 20;
+            currentHp = maxHp;
+            weaponCol = GetComponent<PolygonCollider2D>();
             currentState = State.Idle;
         }
 
@@ -61,7 +63,12 @@ namespace Enemy
         {
             if (col.CompareTag("Player"))
             {
-                if (currentState == State.Idle || currentState == State.Walk)
+                if (currentState == State.Attack)
+                {
+                    if(weaponCol.IsTouching(col) && col.CompareTag("Player"))
+                        col.gameObject.GetComponent<PlayerOnHit>().GetHit(new AttackArguments(attackDamage));
+                }
+                if (currentState is State.Idle or State.Walk)
                 {
                     SwitchState(State.React);
                 }
@@ -84,6 +91,9 @@ namespace Enemy
 
         public override void GetHit(AttackArguments atkArgs)
         {
+            if(currentState == State.Die)
+                return;
+            
             // while attacking cannot be cancelled / damaged
             if (currentState == State.Attack)
             {
@@ -190,6 +200,7 @@ namespace Enemy
 
         private void EnterHitState()
         {
+            currentHp -= getHitArgs.damage;
             transform.LookAtTarget(getHitArgs.transform);
             getHitForce = getHitArgs.force;
             _dir = transform.GetOppositeDirection();
@@ -201,6 +212,8 @@ namespace Enemy
         {
             rb.velocity = _dir * getHitForce;
             timer += Time.deltaTime;
+            if(currentHp <= 0)
+                SwitchState(State.Die);
             if (timer > 0.3f)
             {
                 if (anim.HasPlayedOver(0.9f))
@@ -212,6 +225,7 @@ namespace Enemy
 
         private void ExitHitState()
         {
+
         }
 
         private void EnterIdleState()
@@ -314,9 +328,9 @@ namespace Enemy
 
         private void UpdateDieState()
         {
-            if (anim.HasPlayedOver(1f))
+            if (anim.HasPlayedOver())
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
 

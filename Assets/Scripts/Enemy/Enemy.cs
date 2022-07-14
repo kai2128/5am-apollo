@@ -12,8 +12,8 @@ namespace Enemy
         protected Animator anim;
         protected Vector3 startingPosition;
 
-        public bool isHit;
-        public float hp;
+        public float currentHp;
+        public float maxHp;
 
         protected void Start()
         {

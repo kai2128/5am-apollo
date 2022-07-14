@@ -63,7 +63,7 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            if(!PlayerManager.Instance.canMove)
+            if(!PlayerManager.Instance.canMove || PlayerManager.Instance.isDeath)
                 return;
             
             if (Input.GetButtonDown("Dash") && canDash)

@@ -39,14 +39,5 @@ namespace Player
             transform.GetChild(0).gameObject.SetActive(true);
         }
 
-//     private void OnTriggerEnter2D(Collider2D col)
-//     {
-//         Debug.Log(col.tag);
-//         if (col.CompareTag("Enemy"))
-//         {
-//             col.gameObject.GetComponent<Enemy>().GetHit(transform.localScale);
-//         }
-//     }
-// }
     }
 }
