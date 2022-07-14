@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 8244665359697744627}
   - component: {fileID: 2179110603635726328}
   - component: {fileID: 1664366799751595785}
+  - component: {fileID: 1363603100}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -342,13 +343,19 @@ MonoBehaviour:
   isAttacking: 0
   canMove: 1
   isDashing: 0
+  isDeath: 0
   comboStep: 1
-  hp: 20
+  spawnPoint: {x: 1.54, y: -3.84}
+  maxHp: 20
+  currentHp: 0
   playerAnim: {fileID: 0}
   playerTrans: {fileID: 0}
+  anim: {fileID: 0}
+  sr: {fileID: 0}
   rb: {fileID: 0}
   playerCol: {fileID: 0}
   playerMovement: {fileID: 0}
+  col: {fileID: 0}
 --- !u!114 &-6593218008384008361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +461,18 @@ MonoBehaviour:
   - {fileID: 1203679457}
   - {fileID: 2488566603993709486}
   currentSkill: 0
+--- !u!114 &1363603100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148716943611569212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8455a8e525462d8d9ceb7e0c966919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7148716942611060946
 PrefabInstance:
   m_ObjectHideFlags: 0
