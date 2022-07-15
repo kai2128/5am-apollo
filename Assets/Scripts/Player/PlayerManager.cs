@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 
@@ -41,6 +42,9 @@ namespace Player
         public CapsuleCollider2D col;
         [HideInInspector] 
         public PlayerAttack playerAttack;
+
+        public CinemachineVirtualCamera mainCamera;
+
 
         private void OnDrawGizmos()
         {
@@ -90,6 +94,7 @@ namespace Player
             sr.enabled = true;
             currentHp = maxHp;
             playerAttack.ActiveCurrentSkill();
+            mainCamera.MoveToTopOfPrioritySubqueue();
         }
 
 

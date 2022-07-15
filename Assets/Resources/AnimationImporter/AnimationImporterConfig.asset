@@ -28,7 +28,7 @@ MonoBehaviour:
     _globalDirectory: Assets
   _animationsTargetLocation:
     _locationType: 2
-    _globalDirectory: Assets/Animations/Enemy/Boss_1
+    _globalDirectory: Assets/Animations/Effects
   _animationControllersTargetLocation:
     _locationType: 2
     _globalDirectory: Assets/Animations/AnimatorControllers
