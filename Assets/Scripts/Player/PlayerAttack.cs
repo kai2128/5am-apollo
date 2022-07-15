@@ -13,14 +13,28 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            skills.ToList().ForEach(skill => skill.SetActive(false));
-            skills[currentSkill].SetActive(true);
+            DisableAllSKill();
+            ActiveCurrentSkill();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (PlayerManager.Instance.isDeath)
+            {
+                DisableAllSKill();
+                return;
+            }
             SwitchSkill();
+        }
+        
+        public void ActiveCurrentSkill()
+        {
+            skills[currentSkill].SetActive(true);
+        }
+        void DisableAllSKill()
+        {
+            skills.ToList().ForEach(skill => skill.SetActive(false));
         }
 
         void SwitchSkill()

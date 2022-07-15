@@ -25,13 +25,22 @@ namespace Player
         
         [HideInInspector] 
         public PlayerAnimation playerAnim;
+        [HideInInspector] 
         public Transform playerTrans;
+        [HideInInspector] 
         public Animator anim;
+        [HideInInspector] 
         public SpriteRenderer sr;
+        [HideInInspector] 
         public Rigidbody2D rb;
+        [HideInInspector] 
         public PlayerCollision playerCol;
+        [HideInInspector] 
         public PlayerMovement playerMovement;
+        [HideInInspector] 
         public CapsuleCollider2D col;
+        [HideInInspector] 
+        public PlayerAttack playerAttack;
 
         private void OnDrawGizmos()
         {
@@ -54,6 +63,7 @@ namespace Player
             playerTrans = GetComponent<Transform>();
             playerMovement = GetComponent<PlayerMovement>();
             playerCol = GetComponent<PlayerCollision>();
+            playerAttack = GetComponent<PlayerAttack>();
         }
 
         public void becomeInvulnerable()
@@ -79,6 +89,7 @@ namespace Player
             anim.enabled = true;
             sr.enabled = true;
             currentHp = maxHp;
+            playerAttack.ActiveCurrentSkill();
         }
 
 

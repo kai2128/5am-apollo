@@ -51,6 +51,7 @@ namespace Player
                 PlayerManager.Instance.playerAnim.SetTrigger("die");
                 StartCoroutine(BlinkRed());
                 PlayerManager.Instance.isDeath = true;
+                PlayerManager.Instance.canMove = false;
             }
         }
         
