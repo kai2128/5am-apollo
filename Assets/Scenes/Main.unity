@@ -6123,6 +6123,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
+--- !u!114 &781092628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5984091341110651573, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+  m_PrefabInstance: {fileID: 3183641273358501850}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1030119266
 GameObject:
   m_ObjectHideFlags: 0
@@ -6379,7 +6390,7 @@ PrefabInstance:
     - target: {fileID: 3183641273358501855, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
       propertyPath: vcam
       value: 
-      objectReference: {fileID: 1106052378}
+      objectReference: {fileID: 781092628}
     - target: {fileID: 4799375311779208435, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
       propertyPath: m_Follow
       value: 
