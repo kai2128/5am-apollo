@@ -88,7 +88,9 @@ public class LevelSystem : MonoBehaviour
         frontXpBar.fillAmount = 0f;
         backXpBar.fillAmount = 0f;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
-        GetComponent<Player.PlayerManager>().IncreaseHealth(level);
+        Player.PlayerManager playerManager = GetComponent<Player.PlayerManager>();
+        playerManager.IncreaseHealth(level);
+        playerManager.IncreaseDmg(level);
         requiredXP = CalculateRequiredXp();
     }
 

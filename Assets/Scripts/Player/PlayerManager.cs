@@ -42,7 +42,7 @@ namespace Player
         public CapsuleCollider2D col;
         [HideInInspector]
         public PlayerAttack playerAttack;
-
+        public float attackLevelMultiplier = 1.0f;
         public CinemachineVirtualCamera mainCamera;
 
 
@@ -121,6 +121,11 @@ namespace Player
             var increment = (currentHp * 0.01f) * ((100 - level) * 0.1f);
             maxHp += increment;
             currentHp += increment;
+        }
+        public void IncreaseDmg(int level)
+        {
+            attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.01f);
+            playerAttack.updateDamages(attackLevelMultiplier);
         }
     }
 }

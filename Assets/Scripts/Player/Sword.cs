@@ -41,7 +41,7 @@ namespace Player
             {
                 return;
             }
-            
+
             LightAttack();
             AirAttack();
             RangedAttack();
@@ -113,6 +113,16 @@ namespace Player
             DOVirtual.Float(.2f, 1f, 0.6f, duration => _anim.anim.speed = duration);
             col.gameObject.GetComponent<Enemy.Enemy>()
                 .GetHit(_atkArgs.UpdateTransform(PlayerManager.Instance.transform));
+        }
+
+        public void updateDamage(float multiplier)
+        {
+            for (int i = 0; i < lightDamages.Length; i++)
+            {
+                lightDamages[i] *= multiplier;
+            }
+            airDamage *= multiplier;
+            groundDamage *= multiplier;
         }
     }
 }

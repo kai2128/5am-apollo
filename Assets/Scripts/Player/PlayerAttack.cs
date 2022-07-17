@@ -27,7 +27,7 @@ namespace Player
             }
             SwitchSkill();
         }
-        
+
         public void ActiveCurrentSkill()
         {
             skills[currentSkill].SetActive(true);
@@ -40,13 +40,14 @@ namespace Player
         void SwitchSkill()
         {
             if (!Input.GetKeyDown(KeyCode.Q) && !Input.GetKeyDown(KeyCode.E)) return;
-            
+
             skills[currentSkill].SetActive(false);
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 if (--currentSkill < 0)
-                    currentSkill = skills.Length - 1;                    
-            }else if (Input.GetKeyDown(KeyCode.E))
+                    currentSkill = skills.Length - 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
             {
                 if (++currentSkill > skills.Length - 1)
                     currentSkill = 0;
@@ -57,12 +58,19 @@ namespace Player
         private void OnTriggerEnter2D(Collider2D col)
         {
             Sword sd = GetComponentInChildren<Sword>();
-            
-            if(currentSkill == 0)
+
+            if (currentSkill == 0)
                 DOVirtual.Float(.2f, 1f, 0.7f, duration => GetComponentInChildren<Animator>().speed = duration);
-            
+
             if (col.CompareTag("Enemy") && currentSkill == 1)
                 sd.OnHitEnemy(col);
+        }
+
+        public void updateDamages(float multiplier)
+        {
+            Debug.Log(skills[0].transform.Find("Claw").gameObject);
+            skills[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().updateDamage(multiplier);
+            skills[1].GetComponent<Player.Sword>().updateDamage(multiplier);
         }
     }
 }
