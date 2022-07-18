@@ -10,6 +10,7 @@ namespace Enemy
     {
         public GameObject boss;
         public GameObject revealEffect;
+        public GameObject fillBossHealth;
         public PolygonCollider2D confiner;
         public CinemachineVirtualCamera vcam;
 
@@ -59,6 +60,7 @@ namespace Enemy
                 DOVirtual.DelayedCall(2f, () =>
                 {
                     boss.GetComponent<Animator>().enabled = true;
+                    fillBossHealth.SetActive(true);
                 });
                 DOVirtual.DelayedCall(5f, () =>
                 {
