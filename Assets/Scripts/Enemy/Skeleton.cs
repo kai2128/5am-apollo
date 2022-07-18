@@ -28,7 +28,7 @@ namespace Enemy
 
         public float getHitForce;
         private Vector2 _dir;
-        private PolygonCollider2D weaponCol ;
+        private PolygonCollider2D weaponCol;
 
         [SerializeField] private State currentState;
         [Header("Properties")] public float attackDamage = 20f;
@@ -45,7 +45,7 @@ namespace Enemy
         [SerializeField] private Transform groundCheck, wallCheck;
         [SerializeField] private float groundCheckDist, wallCheckDist;
         [SerializeField] bool groundDetected, wallDetected;
-
+        // LevelSystem playerLevel;
         private Vector2 movement;
 
         private new void Start()
@@ -53,6 +53,7 @@ namespace Enemy
             base.Start();
             maxHp = 20;
             currentHp = maxHp;
+            enemyXp = 30;
             weaponCol = GetComponent<PolygonCollider2D>();
             currentState = State.Idle;
         }
@@ -65,7 +66,7 @@ namespace Enemy
             {
                 if (currentState == State.Attack)
                 {
-                    if(weaponCol.IsTouching(col) && col.CompareTag("Player"))
+                    if (weaponCol.IsTouching(col) && col.CompareTag("Player"))
                         col.gameObject.GetComponent<PlayerOnHit>().GetHit(new AttackArguments(attackDamage));
                 }
                 if (currentState is State.Idle or State.Walk)
@@ -91,9 +92,9 @@ namespace Enemy
 
         public override void GetHit(AttackArguments atkArgs)
         {
-            if(currentState == State.Die)
+            if (currentState == State.Die)
                 return;
-            
+
             // while attacking cannot be cancelled / damaged
             if (currentState == State.Attack)
             {
@@ -212,8 +213,10 @@ namespace Enemy
         {
             rb.velocity = _dir * getHitForce;
             timer += Time.deltaTime;
-            if(currentHp <= 0)
+            if (currentHp <= 0)
+            {
                 SwitchState(State.Die);
+            }
             if (timer > 0.3f)
             {
                 if (anim.HasPlayedOver(0.9f))
@@ -281,19 +284,19 @@ namespace Enemy
             transform.LookAtTarget(PlayerManager.Instance.transform);
             Vector2 target = new Vector2(PlayerManager.Instance.transform.position.x, position.y);
             Vector2 newPos = Vector2.MoveTowards(position, target, walkSpeed * 1.2f * Time.fixedDeltaTime);
-            if(groundDetected && !wallDetected)
+            if (groundDetected && !wallDetected)
                 rb.MovePosition(newPos);
-            
+
             if (Vector2.Distance(target, rb.position) <= attackRange)
             {
                 SwitchState(State.Attack);
             }
 
-            if ( Vector2.Distance(target, startingPosition) >= chaseRadius)
+            if (Vector2.Distance(target, startingPosition) >= chaseRadius)
             {
                 if (!transform.IsFacingTarget(startingPosition))
                 {
-                        SwitchState(State.Idle);
+                    SwitchState(State.Idle);
                 }
             }
         }
@@ -331,11 +334,13 @@ namespace Enemy
             if (anim.HasPlayedOver())
             {
                 Destroy(gameObject);
+                DropExperience();
             }
         }
 
         private void ExitDieState()
         {
+
         }
 
         private void SwitchState(State state)

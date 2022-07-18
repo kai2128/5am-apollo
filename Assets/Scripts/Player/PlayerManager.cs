@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerManager: MonoBehaviour
+    public class PlayerManager : MonoBehaviour
     {
         public static PlayerManager Instance { get; private set; }
 
-        [Header("States")] 
+        [Header("States")]
         public bool isInvulnerable = false;
         public bool isAttacking = false;
         [Space]
@@ -20,29 +20,30 @@ namespace Player
         public int comboStep = 1;
         public Vector2 spawnPoint;
 
-        [Header("Properties")] 
+        [Header("Properties")]
         public float maxHp = 20;
         public float currentHp;
-        
-        [HideInInspector] 
-        public PlayerAnimation playerAnim;
-        [HideInInspector] 
-        public Transform playerTrans;
-        [HideInInspector] 
-        public Animator anim;
-        [HideInInspector] 
-        public SpriteRenderer sr;
-        [HideInInspector] 
-        public Rigidbody2D rb;
-        [HideInInspector] 
-        public PlayerCollision playerCol;
-        [HideInInspector] 
-        public PlayerMovement playerMovement;
-        [HideInInspector] 
-        public CapsuleCollider2D col;
-        [HideInInspector] 
-        public PlayerAttack playerAttack;
 
+        [HideInInspector]
+        public PlayerAnimation playerAnim;
+        [HideInInspector]
+        public Transform playerTrans;
+        [HideInInspector]
+        public Animator anim;
+        [HideInInspector]
+        public SpriteRenderer sr;
+        [HideInInspector]
+        public Rigidbody2D rb;
+        [HideInInspector]
+        public PlayerCollision playerCol;
+        [HideInInspector]
+        public PlayerMovement playerMovement;
+        [HideInInspector]
+        public CapsuleCollider2D col;
+        [HideInInspector]
+        public PlayerAttack playerAttack;
+        public LevelSystem playerLevel;
+        public float attackLevelMultiplier = 1.0f;
         public CinemachineVirtualCamera mainCamera;
 
 
@@ -68,6 +69,7 @@ namespace Player
             playerMovement = GetComponent<PlayerMovement>();
             playerCol = GetComponent<PlayerCollision>();
             playerAttack = GetComponent<PlayerAttack>();
+            playerLevel = GetComponent<LevelSystem>();
         }
 
         public void becomeInvulnerable()
@@ -103,7 +105,7 @@ namespace Player
             yield return new WaitForSeconds(after);
             isAttacking = !isAttacking;
         }
-        
+
         public IEnumerator ToggleMovement(float after, bool? flag)
         {
             if (flag == null) flag = !canMove;
@@ -114,6 +116,18 @@ namespace Player
         public void AttackOver()
         {
             isAttacking = false;
+        }
+
+        public void IncreaseHealth(int level)
+        {
+            var increment = (currentHp * 0.01f) * ((100 - level) * 0.1f);
+            maxHp += increment;
+            currentHp += increment;
+        }
+        public void IncreaseDmg(int level)
+        {
+            attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.01f);
+            playerAttack.updateDamages(attackLevelMultiplier);
         }
     }
 }
