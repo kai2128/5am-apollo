@@ -326,9 +326,7 @@ namespace Enemy
 
         private void EnterDieState()
         {
-            playerLevel.GainExperienceFlatRate(enemyXp);
             anim.Play("Die");
-
         }
 
         private void UpdateDieState()
@@ -336,11 +334,13 @@ namespace Enemy
             if (anim.HasPlayedOver())
             {
                 Destroy(gameObject);
+                DropExperience();
             }
         }
 
         private void ExitDieState()
         {
+
         }
 
         private void SwitchState(State state)

@@ -11,7 +11,7 @@ namespace Player
         {
             PlayerManager.Instance.isAttacking = false;
             gameObject.SetActive(false);
-        }
+        }  
 
         private void OnTriggerEnter2D(Collider2D col)
         {

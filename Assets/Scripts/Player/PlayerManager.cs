@@ -42,6 +42,7 @@ namespace Player
         public CapsuleCollider2D col;
         [HideInInspector]
         public PlayerAttack playerAttack;
+        public LevelSystem playerLevel;
         public float attackLevelMultiplier = 1.0f;
         public CinemachineVirtualCamera mainCamera;
 
@@ -68,6 +69,7 @@ namespace Player
             playerMovement = GetComponent<PlayerMovement>();
             playerCol = GetComponent<PlayerCollision>();
             playerAttack = GetComponent<PlayerAttack>();
+            playerLevel = GetComponent<LevelSystem>();
         }
 
         public void becomeInvulnerable()
