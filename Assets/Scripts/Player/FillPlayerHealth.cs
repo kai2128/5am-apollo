@@ -8,8 +8,6 @@ namespace Player
     public class FillPlayerHealth : MonoBehaviour
     {
         public Image fillImage;
-        public GameObject boss;
-        public Canvas canvas;
         private float maxHp;
         private float currentHp;
         private Slider slider;
@@ -46,14 +44,6 @@ namespace Player
             }
 
             slider.value = fillValue;
-
-            //this idk wan put inside which script
-            //display boss health bar
-            if(boss.GetComponent<Animator>().enabled == true)
-            {
-                canvas.enabled=true;
-                canvas.gameObject.SetActive(true);
-            }
         }
     }
 }

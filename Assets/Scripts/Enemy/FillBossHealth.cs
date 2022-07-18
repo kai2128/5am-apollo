@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 namespace Enemy
 {
     public class FillBossHealth : MonoBehaviour
     {
         public Image fillImage;
+        public TextMeshProUGUI bossText;
         public GameObject boss;
         private float maxHp;
         private float currentHp;
@@ -16,14 +17,16 @@ namespace Enemy
         void Awake()
         {
             slider = GetComponent<Slider>();
+            bossText.SetText(boss.GetComponent<Boss1.Boss1>().name);
+            maxHp = boss.GetComponent<Boss1.Boss1>().maxHp;
         }
 
         void Update()
         {
                 // currentHp = boss.currentHp;
                 // maxHp = boss.maxHp;
-                currentHp = 70;
-                maxHp = 100;
+                currentHp = boss.GetComponent<Boss1.Boss1>().currentHp;
+
             
                 if(slider.value <= slider.minValue)
                 {
