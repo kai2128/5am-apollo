@@ -9,6 +9,7 @@ namespace Player
     public class LevelSystem : MonoBehaviour
     {
         public int level;
+        // public float totalXP;
         public float currentXP;
         public float requiredXP;
         private float lerpTimer;
@@ -26,8 +27,8 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            frontXpBar.fillAmount = currentXP / requiredXP;
-            backXpBar.fillAmount = currentXP / requiredXP;
+            frontXpBar.fillAmount = 0f;
+            backXpBar.fillAmount = 0f;
             requiredXP = CalculateRequiredXp();
         }
 
@@ -71,27 +72,14 @@ namespace Player
             return;
         }
 
-        public void GainExperienceScalable(float xpGained, int passedLevel)
-        {
-            if (passedLevel < level)
-            {
-                float multipler = 1 + (level - passedLevel) * 0.1f;
-                currentXP += xpGained * multipler;
-            }
-            else
-            {
-                currentXP += xpGained;
-            }
-            lerpTimer = 0f;
-            delayTimer = 0f;
-        }
         public void LevelUp()
         {
             level++;
+            // FillPlayerXP.Instance.levelUp();
             frontXpBar.fillAmount = 0f;
             backXpBar.fillAmount = 0f;
             currentXP = Mathf.RoundToInt(currentXP - requiredXP);
-            Player.PlayerManager playerManager = PlayerManager.Instance;
+            PlayerManager playerManager = PlayerManager.Instance;
             playerManager.IncreaseHealth(level);
             playerManager.IncreaseDmg(level);
             requiredXP = CalculateRequiredXp();

@@ -126,7 +126,7 @@ namespace Player
         }
         public void IncreaseDmg(int level)
         {
-            attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.01f);
+            attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.1f);
             playerAttack.updateDamages(attackLevelMultiplier);
         }
     }
