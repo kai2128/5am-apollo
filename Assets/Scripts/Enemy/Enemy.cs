@@ -18,7 +18,6 @@ namespace Enemy
 
         public float enemyXp;
         public int enemyLevel;
-        protected LevelSystem playerLevel;
 
         protected void Start()
         {
@@ -26,14 +25,13 @@ namespace Enemy
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             startingPosition = transform.position;
-            playerLevel = PlayerManager.Instance.playerLevel;
         }
 
         public abstract void GetHit(AttackArguments atkArgs);
 
         protected void DropExperience()
         {
-            playerLevel.GainExperienceFlatRate(enemyXp);
+            PlayerManager.Instance.playerLevel.GainExperienceFlatRate(enemyXp);
         }
 
         protected void FlipDirection()

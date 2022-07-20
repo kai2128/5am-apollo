@@ -10,38 +10,26 @@ namespace Player
     {
         public static PlayerManager Instance { get; private set; }
 
-        [Header("States")]
-        public bool isInvulnerable = false;
+        [Header("States")] public bool isInvulnerable = false;
         public bool isAttacking = false;
-        [Space]
-        public bool canMove = true;
+        [Space] public bool canMove = true;
         public bool isDashing = false;
         public bool isDeath = false;
         public int comboStep = 1;
         public Vector2 spawnPoint;
 
-        [Header("Properties")]
-        public float maxHp = 20;
+        [Header("Properties")] public float maxHp = 20;
         public float currentHp;
 
-        [HideInInspector]
-        public PlayerAnimation playerAnim;
-        [HideInInspector]
-        public Transform playerTrans;
-        [HideInInspector]
-        public Animator anim;
-        [HideInInspector]
-        public SpriteRenderer sr;
-        [HideInInspector]
-        public Rigidbody2D rb;
-        [HideInInspector]
-        public PlayerCollision playerCol;
-        [HideInInspector]
-        public PlayerMovement playerMovement;
-        [HideInInspector]
-        public CapsuleCollider2D col;
-        [HideInInspector]
-        public PlayerAttack playerAttack;
+        [HideInInspector] public PlayerAnimation playerAnim;
+        [HideInInspector] public Transform playerTrans;
+        [HideInInspector] public Animator anim;
+        [HideInInspector] public SpriteRenderer sr;
+        [HideInInspector] public Rigidbody2D rb;
+        [HideInInspector] public PlayerCollision playerCol;
+        [HideInInspector] public PlayerMovement playerMovement;
+        [HideInInspector] public CapsuleCollider2D col;
+        [HideInInspector] public PlayerAttack playerAttack;
         public LevelSystem playerLevel;
         public float attackLevelMultiplier = 1.0f;
         public CinemachineVirtualCamera mainCamera;
@@ -72,12 +60,13 @@ namespace Player
             playerLevel = GetComponent<LevelSystem>();
         }
 
-        public void becomeInvulnerable()
+        public void BecomeInvulnerable()
         {
             isInvulnerable = true;
-            DOVirtual.DelayedCall(0.35f, becomeVulnerable, false);
+            DOVirtual.DelayedCall(0.35f, BecomeVulnerable, false);
         }
-        public void becomeVulnerable()
+
+        public void BecomeVulnerable()
         {
             isInvulnerable = false;
         }
@@ -85,13 +74,17 @@ namespace Player
         public void Die()
         {
             anim.enabled = false;
+            canMove = false;
             DOVirtual.DelayedCall(1f, Instance.Respawn);
         }
+
         public void Respawn()
         {
             isDeath = false;
             canMove = true;
             transform.position = spawnPoint;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 1;
             anim.enabled = true;
             sr.enabled = true;
             currentHp = maxHp;
@@ -124,6 +117,7 @@ namespace Player
             maxHp += increment;
             currentHp += increment;
         }
+
         public void IncreaseDmg(int level)
         {
             attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.1f);

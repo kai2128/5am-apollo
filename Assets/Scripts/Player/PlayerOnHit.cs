@@ -23,7 +23,7 @@ namespace Player
 
         public void GetHit(AttackArguments args)
         {
-            if (PlayerManager.Instance.isDeath)
+            if (PlayerManager.Instance.isDeath || PlayerManager.Instance.isInvulnerable)
                 return;
             if (args.damage > 15)
                 anim.SetTrigger("hit");

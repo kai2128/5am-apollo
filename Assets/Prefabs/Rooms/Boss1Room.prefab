@@ -8177,6 +8177,14 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 6771271053533966717}
+    - target: {fileID: 1845555848673260711, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 26.4313
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845555848673260711, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -43.89412
+      objectReference: {fileID: 0}
     - target: {fileID: 1845555848972197720, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8276,6 +8284,34 @@ PrefabInstance:
     - target: {fileID: 1845555849760433259, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332637022474192110, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -26.356348
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332637022474192110, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 23.495789
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332637022474192111, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_margin.z
+      value: -49.165283
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332637022474192111, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 44c77dea7b6672342aa2dc939b5edccd, type: 2}
+    - target: {fileID: 6332637022474192111, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_wordSpacing
+      value: -35.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332637022474192111, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6350771599428371959, guid: 44c77dea7b6672342aa2dc939b5edccd, type: 2}
+    - target: {fileID: 6332637022474192111, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_characterSpacing
+      value: -0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}

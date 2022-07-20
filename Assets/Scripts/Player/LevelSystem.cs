@@ -33,7 +33,7 @@ namespace Player
             frontXpBar.fillAmount = 0f;
             backXpBar.fillAmount = 0f;
             requiredXP = CalculateRequiredXp();
-            LevelText.text = "Level: " + level;
+            LevelText.text = "Level " + level;
         }
 
         // Update is called once per frame
@@ -88,7 +88,7 @@ namespace Player
             playerManager.IncreaseHealth(level);
             playerManager.IncreaseDmg(level);
             requiredXP = CalculateRequiredXp();
-            LevelText.text = "Level: " + level;
+            LevelText.text = "Level " + level;
         }
 
         private int CalculateRequiredXp()
