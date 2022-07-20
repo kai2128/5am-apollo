@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 namespace Player
 {
     public class FillPlayerHealth : MonoBehaviour
@@ -11,6 +11,9 @@ namespace Player
         private float maxHp;
         private float currentHp;
         private Slider slider;
+
+        public TextMeshProUGUI HPText;
+
 
         void Awake()
         {
@@ -21,20 +24,22 @@ namespace Player
         {
             currentHp = PlayerManager.Instance.currentHp;
             maxHp = PlayerManager.Instance.maxHp;
-            
-            if(slider.value <= slider.minValue)
+            HPText.text = Mathf.Round(currentHp) + "/" + Mathf.Round(maxHp);
+
+
+            if (slider.value <= slider.minValue)
             {
                 fillImage.enabled = false;
             }
-            
-            if(slider.value > slider.minValue && !fillImage.enabled)
+
+            if (slider.value > slider.minValue && !fillImage.enabled)
             {
                 fillImage.enabled = true;
             }
-            
+
             float fillValue = currentHp / maxHp;
-            
-            if(fillValue <= slider.maxValue / 3)
+
+            if (fillValue <= slider.maxValue / 3)
             {
                 fillImage.color = Color.yellow;
             }

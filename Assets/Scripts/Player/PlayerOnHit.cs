@@ -13,7 +13,6 @@ namespace Player
         private Rigidbody2D rb;
         private SpriteRenderer sr;
         private CapsuleCollider2D col;
-
         private void Start()
         {
             anim = PlayerManager.Instance.anim;
@@ -24,23 +23,24 @@ namespace Player
 
         public void GetHit(AttackArguments args)
         {
-            if(PlayerManager.Instance.isDeath)
+            if (PlayerManager.Instance.isDeath)
                 return;
-            if(args.damage > 15)
+            if (args.damage > 15)
                 anim.SetTrigger("hit");
             else
                 StartCoroutine(BlinkRed());
             DecreaseHp(args.damage);
         }
-        
-        
-        private IEnumerator BlinkRed() {
+
+
+        private IEnumerator BlinkRed()
+        {
             Color defaultColor = sr.material.color;
-            sr.material.color =  new Color(255, 1, 1);
+            sr.material.color = new Color(255, 1, 1);
             yield return new WaitForSeconds(0.2f);
             sr.material.color = defaultColor;
         }
-        
+
         public void DecreaseHp(float damage)
         {
             ref var currentHp = ref PlayerManager.Instance.currentHp;
@@ -54,6 +54,6 @@ namespace Player
                 PlayerManager.Instance.canMove = false;
             }
         }
-        
+
     }
 }

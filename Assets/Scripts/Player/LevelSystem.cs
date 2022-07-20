@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 namespace Player
 {
     public class LevelSystem : MonoBehaviour
@@ -24,12 +24,16 @@ namespace Player
         public float powerMultiplier = 2;
         [Range(7f, 14f)]
         public float divisionMultiplier = 7;
+
+        public TextMeshProUGUI XPText;
+        public TextMeshProUGUI LevelText;
         // Start is called before the first frame update
         void Start()
         {
             frontXpBar.fillAmount = 0f;
             backXpBar.fillAmount = 0f;
             requiredXP = CalculateRequiredXp();
+            LevelText.text = "Level: " + level;
         }
 
         // Update is called once per frame
@@ -61,6 +65,7 @@ namespace Player
                     frontXpBar.fillAmount = Mathf.Lerp(FPX, backXpBar.fillAmount, percentComplete);
                 }
             }
+            XPText.text = Math.Round(currentXP) + "/" + Math.Round(requiredXP);
         }
 
         public void GainExperienceFlatRate(float xpGained)
@@ -83,6 +88,7 @@ namespace Player
             playerManager.IncreaseHealth(level);
             playerManager.IncreaseDmg(level);
             requiredXP = CalculateRequiredXp();
+            LevelText.text = "Level: " + level;
         }
 
         private int CalculateRequiredXp()
