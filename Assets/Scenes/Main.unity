@@ -6027,6 +6027,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1067389943, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
+      propertyPath: XPText
+      value: 
+      objectReference: {fileID: 1600937921}
+    - target: {fileID: 1067389943, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
+      propertyPath: LevelText
+      value: 
+      objectReference: {fileID: 671513364}
+    - target: {fileID: 1067389943, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
+      propertyPath: backXpBar
+      value: 
+      objectReference: {fileID: 954407780}
+    - target: {fileID: 1067389943, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
+      propertyPath: frontXpBar
+      value: 
+      objectReference: {fileID: 316633036}
+    - target: {fileID: 6724532752222172120, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1106052378}
     - target: {fileID: 7148716943611569209, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6217,33 +6237,6 @@ PolygonCollider2D:
       - {x: 9.211466, y: -7.6779823}
       - {x: 9.185781, y: 2.3577302}
       - {x: -8.421891, y: 2.295461}
---- !u!1 &1067389931 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7148716943611569212, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
-  m_PrefabInstance: {fileID: 491229062}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1067389943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067389931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd8accf47afd004fb1eb58d8e6ef213, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  currentXP: 0
-  requiredXP: 0
-  frontXpBar: {fileID: 316633036}
-  backXpBar: {fileID: 954407780}
-  additionMultiplier: 300
-  powerMultiplier: 2
-  divisionMultiplier: 7
-  XPText: {fileID: 1600937921}
-  LevelText: {fileID: 671513364}
 --- !u!1 &1106052377
 GameObject:
   m_ObjectHideFlags: 0
@@ -6256,7 +6249,7 @@ GameObject:
   - component: {fileID: 1106052378}
   - component: {fileID: 1106052380}
   m_Layer: 0
-  m_Name: CM vcam
+  m_Name: CM main vcam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6291,7 +6284,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5183246, y: 1}
+    m_SensorSize: {x: 1.7771084, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6466,14 +6459,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1130489304, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 881611825818417205, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1476057538323508680, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -6570,32 +6555,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3994282782095030524, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3994282782095030524, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6062658926374734438, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6062658926374734438, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6062658926374734438, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_Color.g
-      value: 0.972549
-      objectReference: {fileID: 0}
-    - target: {fileID: 6062658926374734438, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
-      propertyPath: m_Color.r
-      value: 0.44493735
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1130489304, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
 --- !u!1001 &3183641273358501850
 PrefabInstance:
