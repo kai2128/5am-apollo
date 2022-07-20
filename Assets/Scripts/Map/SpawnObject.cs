@@ -9,9 +9,9 @@ public class SpawnObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            int rand = Random.Range(0, objects.Length);
-            Instantiate(objects[rand], transform.position, Quaternion.identity);
-        
+        int rand = Random.Range(0, objects.Length);
+        GameObject go = Instantiate(objects[rand], transform.position, Quaternion.identity);
+        GameManager.Instance.SetParentToGenerated(go);
     }
 
     // Update is called once per frame

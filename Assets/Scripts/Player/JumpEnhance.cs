@@ -19,6 +19,9 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
+            if(PlayerManager.Instance.isDeath)
+                return;
+            
             if (rb.velocity.y < 0)
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;

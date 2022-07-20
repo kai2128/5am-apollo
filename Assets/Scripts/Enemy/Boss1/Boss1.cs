@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using Class;
+using Player;
 
 namespace Enemy.Boss1
 {
@@ -7,8 +9,10 @@ namespace Enemy.Boss1
     {
         private bool isFlipped;
         private Transform player;
+        public Transform spawnPoint;
 
         public new string name;
+        public float jumpForce = 30f;
 
         // Start is called before the first frame update
         private new void Start()
@@ -27,6 +31,14 @@ namespace Enemy.Boss1
         
         }
 
+        public void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.CompareTag("Player"))
+            {
+                col.gameObject.GetComponent<PlayerOnHit>().GetHit(new AttackArguments(transform,20, 5));
+            }
+        }
+
         public void LookAtPlayer()
         {
             Vector3 flipped = transform.localScale;
@@ -43,6 +55,19 @@ namespace Enemy.Boss1
                 transform.Rotate(0f, 180f,0f);
                 isFlipped = true;
             }
+        }
+
+        public void ResetBoss()
+        {
+            transform.localPosition = spawnPoint.localPosition;
+            currentHp = maxHp;
+            anim.enabled = false;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(spawnPoint.position, 1);
         }
     }
 }

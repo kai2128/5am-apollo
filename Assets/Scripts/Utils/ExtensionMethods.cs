@@ -5,6 +5,14 @@ namespace Utils
 {
     public static class ExtensionMethods
     {
+        public static Transform Clone(this Transform transform)
+        {
+            GameObject go = new GameObject();
+            var pos = transform.position;
+            go.transform.position.Set(pos.x, pos.y, pos.z);
+            return go.transform;
+        }
+        
         public static void LookAtTarget(this Transform transform, Transform target)
         {
             Vector3 localScale = transform.localScale;

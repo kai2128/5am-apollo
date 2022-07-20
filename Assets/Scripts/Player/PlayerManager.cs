@@ -30,9 +30,9 @@ namespace Player
         [HideInInspector] public PlayerMovement playerMovement;
         [HideInInspector] public CapsuleCollider2D col;
         [HideInInspector] public PlayerAttack playerAttack;
+        [HideInInspector] public CinemachineVirtualCamera mainCamera;
         public LevelSystem playerLevel;
         public float attackLevelMultiplier = 1.0f;
-        public CinemachineVirtualCamera mainCamera;
 
 
         private void OnDrawGizmos()
@@ -58,6 +58,7 @@ namespace Player
             playerCol = GetComponent<PlayerCollision>();
             playerAttack = GetComponent<PlayerAttack>();
             playerLevel = GetComponent<LevelSystem>();
+            mainCamera = GameObject.FindGameObjectWithTag("MainCM").GetComponent<CinemachineVirtualCamera>();
         }
 
         public void BecomeInvulnerable()
@@ -80,6 +81,7 @@ namespace Player
 
         public void Respawn()
         {
+            GameManager.Instance.OnPlayerRespawn();
             isDeath = false;
             canMove = true;
             transform.position = spawnPoint;

@@ -35,8 +35,8 @@ namespace Enemy
             if (col.CompareTag("Player"))
             {
                 var orthographicSize = vcam.m_Lens.OrthographicSize;
-                var player = vcam.m_Follow;
                 vcam.gameObject.SetActive(true);
+                vcam.m_Follow = PlayerManager.Instance.transform;
 
                 // enter boss fight
                 revealEffect.GetComponent<Animator>().SetTrigger("reveal");
@@ -64,19 +64,30 @@ namespace Enemy
                 });
                 DOVirtual.DelayedCall(5f, () =>
                 {
-                    vcam.m_Follow = player;
+                    vcam.m_Follow = PlayerManager.Instance.transform;
                     PlayerManager.Instance.canMove = true;
                     vcam.m_Lens.OrthographicSize = orthographicSize;
+                    DOVirtual.Float(100f, 1f, 20f,(float mass) =>
+                    {
+                        boss.GetComponent<Rigidbody2D>().mass = mass;
+                    });
                 });
             }
         }
 
-        // private void OnTriggerExit2D(Collider2D other)
-        // {
-        //     if (other.CompareTag("Player"))
-        //     {
-        //         PlayerManager.Instance.canMove = true;
-        //     }
-        // }
+        public void MoveBossRoomTo(Vector3 pos)
+        {
+            transform.root.gameObject.transform.position = pos;
+        }
+
+        public void ResetBossRoom()
+        {
+            boss.GetComponent<Boss1.Boss1>().ResetBoss();
+            revealEffect.GetComponent<Animator>().Rebind();
+            revealEffect.GetComponent<Animator>().Update(0f);
+            _boxCol.isTrigger = true;
+            vcam.gameObject.SetActive(false);
+            fillBossHealth.SetActive(false);
+        }
     }
 }

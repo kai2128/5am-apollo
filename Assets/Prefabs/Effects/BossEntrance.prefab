@@ -122,9 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
   revealEffect: {fileID: 0}
+  fillBossHealth: {fileID: 0}
   confiner: {fileID: 0}
   vcam: {fileID: 0}
-  cmConfiner: {fileID: 0}
 --- !u!50 &7659877018978431128
 Rigidbody2D:
   serializedVersion: 4

@@ -16,7 +16,7 @@ namespace Enemy
 
         void Awake()
         {
-            slider = GetComponent<Slider>();
+            slider = GetComponentInChildren<Slider>();
             bossText.SetText(boss.GetComponent<Boss1.Boss1>().name);
             maxHp = boss.GetComponent<Boss1.Boss1>().maxHp;
         }
