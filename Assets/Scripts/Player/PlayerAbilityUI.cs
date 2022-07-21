@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerAbility : MonoBehaviour
+public class PlayerAbilityUI : MonoBehaviour
 {
     [Header("Claw")]
     public Image claw;
@@ -34,12 +35,13 @@ public class PlayerAbility : MonoBehaviour
 
     private void Weapon()
     {
-        if (Input.GetKeyDown(ability1))
+        var currentActiveWeapon = PlayerManager.Instance.playerAttack.currentSkill;
+        if (currentActiveWeapon == 0)
         {
             claw.enabled = true;
             sword.enabled = false;
         }
-        else if (Input.GetKeyDown(ability2))
+        else
         {
             claw.enabled = false;
             sword.enabled = true;

@@ -24,15 +24,15 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     private float minY;
     [SerializeField]
+    private bool startGeneration = false;
+    [SerializeField]
     private bool stopGeneration;
 
     public int level;
 
     public Transform pos1;
     public Transform pos2;
-
-    [SerializeField]
-    private bool startGeneration = false;
+    
     private Action OnFinishGeneration;
 
 
@@ -100,11 +100,10 @@ public class LevelGeneration : MonoBehaviour
                 transform.position = newPos;
                 GenerateRandomRoom(2, 5);
                 //spawn minion
-                int randMinionCount = Random.Range(0, minions.Length);
                 Vector2 minionPos = new Vector2(Random.Range(transform.position.x, transform.position.x + 5.0f), Random.Range(minY + 1.0f, minY + 5.0f));
                 if (minions != null || minions.Length != 0)
                 {
-                    Instantiate(minions[randMinionCount], minionPos, Quaternion.identity);
+                    GenerateRandomMinion(minionPos);
                 }
             }
             else
@@ -122,11 +121,10 @@ public class LevelGeneration : MonoBehaviour
                 transform.position = newPos;
                 GenerateRandomRoom(2, 5);
                 //spawn minion
-                int randMinionCount = Random.Range(0, minions.Length);
                 Vector2 minionPos = new Vector2(Random.Range(transform.position.x, transform.position.x + 5.0f), Random.Range(minY + 1.0f, minY + 5.0f));
                 if (minions != null || minions.Length != 0)
                 {
-                    Instantiate(minions[randMinionCount], minionPos, Quaternion.identity);
+                    GenerateRandomMinion(minionPos);
                 }
             }
             else
@@ -134,6 +132,17 @@ public class LevelGeneration : MonoBehaviour
                 stopGeneration = true;
             }
         }
+    }
+
+    private GameObject RandomGameObjects(GameObject[] from)
+    {
+        return from[Random.Range(0, from.Length)];
+    }
+
+    private void GenerateRandomMinion(Vector3 pos)
+    {
+        var go = Instantiate(RandomGameObjects(minions), pos, Quaternion.identity);
+        GameManager.Instance.SetParentToGenerated(go);
     }
 
     private void GenerateRandomRoom(int min, int max)

@@ -914,6 +914,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[0]
+      value: 
+      objectReference: {fileID: 4432475287155740797, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
+    - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[1]
+      value: 
+      objectReference: {fileID: 4432475287155740797, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
+    - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[2]
+      value: 
+      objectReference: {fileID: 4432475287155740797, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
     - target: {fileID: 7787622439511316424, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: m_RootOrder
       value: 8
