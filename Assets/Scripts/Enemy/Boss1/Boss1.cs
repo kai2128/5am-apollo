@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
 using Class;
+using DG.Tweening;
 using Player;
+using Utils;
 
 namespace Enemy.Boss1
 {
@@ -61,6 +63,8 @@ namespace Enemy.Boss1
         {
             transform.localPosition = spawnPoint.localPosition;
             currentHp = maxHp;
+            anim.Rebind();
+            anim.Update(0f);
             anim.enabled = false;
         }
 

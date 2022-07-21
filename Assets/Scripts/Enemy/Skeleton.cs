@@ -48,9 +48,8 @@ namespace Enemy
         // LevelSystem playerLevel;
         private Vector2 movement;
 
-        private new void Start()
+        private void Awake()
         {
-            base.Start();
             maxHp = 20;
             currentHp = maxHp;
             enemyXp = 30;

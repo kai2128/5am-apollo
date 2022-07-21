@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using DG.Tweening;
 using Enemy;
 using UnityEngine;
 using Utils;
@@ -38,11 +39,13 @@ public class GameManager : MonoBehaviour
 
     public void GenerateLevel1()
     {
-        var levelGeneration = level1Generator.GetComponent<LevelGeneration>();
+        var clonedLevelGeneration = Instantiate(level1Generator);
+        var levelGeneration = clonedLevelGeneration.GetComponent<LevelGeneration>();
         levelGeneration.StartGeneration(() =>
         {
             boss1Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.up * 14 + Vector3.left * 2.5f);
             boss1Entrance.ResetBossRoom();
+            Destroy(clonedLevelGeneration);
         });
     }
 
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
     public void OnPlayerRespawn()
     {
         Destroy(generatedGameObject);
-        GenerateLevel1();
+        DOVirtual.DelayedCall(.2f, GenerateLevel1);
     }
 
     // Update is called once per frame

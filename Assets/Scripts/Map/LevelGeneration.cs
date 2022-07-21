@@ -33,9 +33,6 @@ public class LevelGeneration : MonoBehaviour
     private Action OnFinishGeneration;
 
 
-    public Vector3 oriPos1;
-    public Vector3 oriPos2;
-
 
     void Start()
     {
@@ -46,8 +43,6 @@ public class LevelGeneration : MonoBehaviour
     public void StartGeneration(Action finishCallBack = null)
     {
         stopGeneration = false;
-        pos1.position = oriPos1;
-        pos2.position = oriPos2;
         minX = pos1.position.x;
         maxX = pos2.position.x;
         if (level == 1)
