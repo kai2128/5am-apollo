@@ -115,7 +115,7 @@ namespace Player
 
         public void IncreaseHealth(int level)
         {
-            var increment = (currentHp * 0.01f) * ((100 - level) * 0.1f);
+            var increment = (maxHp * 0.01f) * ((100 - level) * 0.1f);
             maxHp += increment;
             currentHp += increment;
         }
