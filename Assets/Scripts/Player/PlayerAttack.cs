@@ -62,13 +62,12 @@ namespace Player
             if (currentSkill == 0)
                 DOVirtual.Float(.2f, 1f, 0.7f, duration => GetComponentInChildren<Animator>().speed = duration);
 
-            if (col.CompareTag("Enemy") && currentSkill == 1)
+            if (col != null && col.CompareTag("Enemy") && currentSkill == 1)
                 sd.OnHitEnemy(col);
         }
 
         public void updateDamages(float multiplier)
         {
-            Debug.Log(skills[0].transform.Find("Claw").gameObject);
             skills[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().updateDamage(multiplier);
             skills[1].GetComponent<Player.Sword>().updateDamage(multiplier);
         }
