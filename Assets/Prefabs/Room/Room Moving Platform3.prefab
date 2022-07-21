@@ -737,6 +737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion Yes_No (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4139580006638995571, guid: 66f11d37ccd07754a9d319c4a98ccaf5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6223774366485244784, guid: 66f11d37ccd07754a9d319c4a98ccaf5, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -798,6 +802,10 @@ PrefabInstance:
     - target: {fileID: 4139580006638995571, guid: 66f11d37ccd07754a9d319c4a98ccaf5, type: 3}
       propertyPath: m_Name
       value: Minion Yes_No
+      objectReference: {fileID: 0}
+    - target: {fileID: 4139580006638995571, guid: 66f11d37ccd07754a9d319c4a98ccaf5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6223774366485244784, guid: 66f11d37ccd07754a9d319c4a98ccaf5, type: 3}
       propertyPath: m_RootOrder

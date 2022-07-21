@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
-    public Transform[] startingPosition;
     public GameObject[] rooms; //0:LeftS, 1:RightS, 2:Hole, 3:Jump, 4:MP
+    public GameObject[] minions; // to call minion that spawn on the map
 
     private int direction;
     public float moveAmount;
 
     private float timeBtwRoom;
-    public float startTimeBtwRoom = 0.25f;
+    public float startTimeBtwRoom = 0.1f;
 
     private float minX;
     private float maxX;
+    private float minY;
     private bool stopGeneration;
 
     public int level;
@@ -25,30 +26,28 @@ public class LevelGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // can change the starting position according to the level position later
-        // int randStartingPos = Random.Range(0, startingPosition.Length);
         minX = pos1.position.x;
         maxX = pos2.position.x;
+        Debug.Log(minX);
+        minY = pos1.position.y;
         if (level == 1)
         {
-            transform.position = startingPosition[0].position;
+            transform.position = pos1.position;
             direction = 1;
             Instantiate(rooms[0], transform.position, Quaternion.identity);
         }
         else {
 
-            transform.position = startingPosition[1].position;
+            transform.position = pos2.position;
             direction = 2;
             Instantiate(rooms[1], transform.position, Quaternion.identity);
         }
-
-    
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timeBtwRoom <= 0 && stopGeneration == false)
+       if (timeBtwRoom <= 0 && stopGeneration == false)
         {
             Move();
             timeBtwRoom = startTimeBtwRoom;
@@ -62,29 +61,43 @@ public class LevelGeneration : MonoBehaviour
 
         if (direction == 1)
         {
+            Debug.Log(transform.position);
             if (transform.position.x < maxX)
-            //if (transform.position.x < pos2.position.x)
             {
                 // Move right 
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = newPos;
-                int rand = Random.Range(2, 5);
-                Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                int randRoom = Random.Range(2, 5);
+                Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
+                //spawn minion
+                int randMinionCount = Random.Range(0, minions.Length);
+                Vector2 minionPos = new Vector2(Random.Range(transform.position.x, transform.position.x + 5.0f), Random.Range(minY + 1.0f, minY + 5.0f));
+                if (minions != null || minions.Length != 0)
+                {
+                    Instantiate(minions[randMinionCount], minionPos, Quaternion.identity);
+                }
             }
             else {
                 stopGeneration = true;
             }
         }
         else if(direction == 2) {
+
+            Debug.Log(transform.position);
             if (transform.position.x > minX) 
-            //if(transform.position.x > pos1.position.x)
             {
-                Debug.Log(pos1.position.x);
                 //Move left
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;
-                int rand = Random.Range(2, 5);
-                Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                int randRoom = Random.Range(2, 5);
+                Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
+                // spawn minion
+                int randMinionCount = Random.Range(0, minions.Length);
+                Vector2 minionPos = new Vector2(Random.Range(transform.position.x,transform.position.x + 5.0f), Random.Range(minY + 1.0f, minY + 5.0f)) ;
+                if (minions != null || minions.Length != 0)
+                {
+                    Instantiate(minions[randMinionCount], minionPos, Quaternion.identity);
+                }
             }
             else
             {
@@ -92,5 +105,4 @@ public class LevelGeneration : MonoBehaviour
             }
         }
     }
-
 }

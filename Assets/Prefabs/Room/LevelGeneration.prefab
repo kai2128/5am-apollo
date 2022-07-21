@@ -46,15 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b5169d41861e441b3d82468d831ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPosition:
-  - {fileID: 6441748024826870992}
-  - {fileID: 6441748023980924489}
   rooms:
   - {fileID: 1260240283007571626, guid: a6afd69476a29e94fb91427269f3f708, type: 3}
   - {fileID: 8499430300419294731, guid: f55d3517535936a449d9e18ae2afb7df, type: 3}
   - {fileID: 5260913523280900486, guid: aa1ed1afcc84df646a4c031e0d3ba58f, type: 3}
   - {fileID: 4308347967079503383, guid: b329e3ad395fd974880e78ab08d11213, type: 3}
   - {fileID: 4927801335361913160, guid: b12df427e88546e468245ddd9c2f1431, type: 3}
+  minions:
+  - {fileID: 4432475287155740797, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
   moveAmount: 10
   startTimeBtwRoom: 0.1
   level: 0
@@ -115,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6441748024826870995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.08, y: -1.01, z: 0.09808937}
+  m_LocalPosition: {x: -15.01, y: -1.01, z: 0.09808937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
