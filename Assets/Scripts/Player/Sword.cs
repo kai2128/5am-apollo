@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Class;
 using DG.Tweening;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Player
 {
@@ -22,7 +26,15 @@ namespace Player
         public float groundForce = 3f;
         public float groundDamage = 8f;
 
+        [Header("Ranged attack")] 
+        public GameObject rangedEffect;
+        public float rangedDamage = 4f;
+        public float rangedForce = 1f;
+        public float rangedSpeed = 1f;
+        public float maximumTravelDistance = 5f;
+        [SerializeField] private List<GameObject> rangedEffectPool = new();
 
+        
         private AttackArguments _atkArgs = new();
 
         // Start is called before the first frame update
@@ -75,12 +87,26 @@ namespace Player
             {
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
+                _atkArgs = new AttackArguments(rangedDamage, rangedForce);
                 _anim.SetTrigger("swordAttackRanged");
                 _movement.rb.velocity = Vector2.zero;
                 _movement.PauseForAnimation();
             }
         }
 
+        public void CreateRangedEffect()
+        {
+            var availableRangedEffect = rangedEffectPool.FirstOrDefault(effect => effect.activeSelf == false);
+            if (!availableRangedEffect)
+            {
+                availableRangedEffect = Instantiate(rangedEffect,
+                    rangedEffect.GetComponent<SwordRangedEffect>().startPos.position, Quaternion.identity);
+                GameManager.Instance.SetParentToGenerated(availableRangedEffect);
+                rangedEffectPool.Add(availableRangedEffect);
+            }
+            availableRangedEffect.SetActive(true);
+        }
+        
         void LightAttack()
         {
             if (_col.onGround && Input.GetButtonDown("Fire1"))
@@ -115,7 +141,7 @@ namespace Player
                 .GetHit(_atkArgs.UpdateTransform(PlayerManager.Instance.transform));
         }
 
-        public void updateDamage(float multiplier)
+        public void UpdateDamage(float multiplier)
         {
             for (int i = 0; i < lightDamages.Length; i++)
             {
@@ -123,6 +149,7 @@ namespace Player
             }
             airDamage *= multiplier;
             groundDamage *= multiplier;
+            airDamage += multiplier;
         }
     }
 }

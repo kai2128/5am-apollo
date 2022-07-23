@@ -55,21 +55,24 @@ namespace Player
             skills[currentSkill].SetActive(true);
         }
 
+        public void CreateSwordEffect()
+        {
+            PlayerManager.Instance.playerSword.CreateRangedEffect();
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Sword sd = GetComponentInChildren<Sword>();
-
             if (currentSkill == 0)
                 DOVirtual.Float(.2f, 1f, 0.7f, duration => GetComponentInChildren<Animator>().speed = duration);
 
             if (col != null && col.CompareTag("Enemy") && currentSkill == 1)
-                sd.OnHitEnemy(col);
+                PlayerManager.Instance.playerSword.OnHitEnemy(col);
         }
 
-        public void updateDamages(float multiplier)
+        public void UpdateDamages(float multiplier)
         {
             skills[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().updateDamage(multiplier);
-            skills[1].GetComponent<Player.Sword>().updateDamage(multiplier);
+            skills[1].GetComponent<Player.Sword>().UpdateDamage(multiplier);
         }
     }
 }

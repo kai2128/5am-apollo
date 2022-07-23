@@ -31,6 +31,7 @@ namespace Player
         [HideInInspector] public CapsuleCollider2D col;
         [HideInInspector] public PlayerAttack playerAttack;
         [HideInInspector] public CinemachineVirtualCamera mainCamera;
+        [HideInInspector] public Sword playerSword;
         public LevelSystem playerLevel;
         public float attackLevelMultiplier = 1.0f;
 
@@ -58,6 +59,7 @@ namespace Player
             playerCol = GetComponent<PlayerCollision>();
             playerAttack = GetComponent<PlayerAttack>();
             playerLevel = GetComponent<LevelSystem>();
+            playerSword = GetComponentInChildren<Sword>();
             mainCamera = GameObject.FindGameObjectWithTag("MainCM").GetComponent<CinemachineVirtualCamera>();
         }
 
@@ -123,7 +125,7 @@ namespace Player
         public void IncreaseDmg(int level)
         {
             attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.1f);
-            playerAttack.updateDamages(attackLevelMultiplier);
+            playerAttack.UpdateDamages(attackLevelMultiplier);
         }
     }
 }

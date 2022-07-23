@@ -26,7 +26,10 @@ namespace Player
             if (PlayerManager.Instance.isDeath || PlayerManager.Instance.isInvulnerable)
                 return;
             if (args.damage > 15)
+            {
                 anim.SetTrigger("hit");
+                PlayerManager.Instance.isAttacking = false;
+            }
             else
                 StartCoroutine(BlinkRed());
             DecreaseHp(args.damage);

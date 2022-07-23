@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1040
+    maxTextureSize: 1170
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -251,8 +251,8 @@ TextureImporter:
       name: Boss_1_Wake_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 480
+        x: 1040
+        y: 560
         width: 130
         height: 80
       alignment: 0
@@ -272,7 +272,7 @@ TextureImporter:
       name: Boss_1_Wake_9
       rect:
         serializedVersion: 2
-        x: 130
+        x: 0
         y: 480
         width: 130
         height: 80
@@ -293,7 +293,7 @@ TextureImporter:
       name: Boss_1_Wake_10
       rect:
         serializedVersion: 2
-        x: 260
+        x: 130
         y: 480
         width: 130
         height: 80
@@ -314,7 +314,7 @@ TextureImporter:
       name: Boss_1_Wake_11
       rect:
         serializedVersion: 2
-        x: 390
+        x: 260
         y: 480
         width: 130
         height: 80
@@ -335,7 +335,7 @@ TextureImporter:
       name: Boss_1_Wake_12
       rect:
         serializedVersion: 2
-        x: 520
+        x: 390
         y: 480
         width: 130
         height: 80
@@ -356,7 +356,7 @@ TextureImporter:
       name: Boss_1_Wake_13
       rect:
         serializedVersion: 2
-        x: 650
+        x: 520
         y: 480
         width: 130
         height: 80
@@ -377,7 +377,7 @@ TextureImporter:
       name: Boss_1_Wake_14
       rect:
         serializedVersion: 2
-        x: 780
+        x: 650
         y: 480
         width: 130
         height: 80
@@ -398,7 +398,7 @@ TextureImporter:
       name: Boss_1_Wake_15
       rect:
         serializedVersion: 2
-        x: 910
+        x: 780
         y: 480
         width: 130
         height: 80
@@ -419,8 +419,8 @@ TextureImporter:
       name: Boss_1_Wake_16
       rect:
         serializedVersion: 2
-        x: 0
-        y: 400
+        x: 910
+        y: 480
         width: 130
         height: 80
       alignment: 0
@@ -437,10 +437,199 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_1_Walk_0
+      name: Boss_1_Stun_0
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 480
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc4252d25e3c65ad0800000000000000
+      internalID: -2713766336371809077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Stun_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dab40a37c50670ee0800000000000000
+      internalID: -1294960417652585555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Stun_2
       rect:
         serializedVersion: 2
         x: 130
+        y: 400
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10118997c22626fd0800000000000000
+      internalID: -2350208112375885567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Stun_3
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 400
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e71fd626b7be23240800000000000000
+      internalID: 4770133870503653758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Recover_0
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 400
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e12e059d7b209270800000000000000
+      internalID: 8255145935341756901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Recover_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0ffb353689c31620800000000000000
+      internalID: 2743758176254689037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Recover_2
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 480
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee6386c21c0f3d70800000000000000
+      internalID: 9024945453053210340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 480
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd9869f1e5ad0750800000000000000
+      internalID: 6272852245967576532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 400
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dfc30aac98db4bb0800000000000000
+      internalID: -4950625197984854057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 650
         y: 400
         width: 130
         height: 80
@@ -461,7 +650,7 @@ TextureImporter:
       name: Boss_1_Walk_1
       rect:
         serializedVersion: 2
-        x: 260
+        x: 780
         y: 400
         width: 130
         height: 80
@@ -482,7 +671,7 @@ TextureImporter:
       name: Boss_1_Walk_2
       rect:
         serializedVersion: 2
-        x: 390
+        x: 910
         y: 400
         width: 130
         height: 80
@@ -503,7 +692,7 @@ TextureImporter:
       name: Boss_1_Walk_3
       rect:
         serializedVersion: 2
-        x: 520
+        x: 1040
         y: 400
         width: 130
         height: 80
@@ -524,8 +713,8 @@ TextureImporter:
       name: Boss_1_Walk_4
       rect:
         serializedVersion: 2
-        x: 650
-        y: 400
+        x: 0
+        y: 320
         width: 130
         height: 80
       alignment: 0
@@ -545,8 +734,8 @@ TextureImporter:
       name: Boss_1_Walk_5
       rect:
         serializedVersion: 2
-        x: 780
-        y: 400
+        x: 130
+        y: 320
         width: 130
         height: 80
       alignment: 0
@@ -566,8 +755,8 @@ TextureImporter:
       name: Boss_1_Walk_6
       rect:
         serializedVersion: 2
-        x: 910
-        y: 400
+        x: 1040
+        y: 480
         width: 130
         height: 80
       alignment: 0
@@ -587,7 +776,7 @@ TextureImporter:
       name: Boss_1_Walk_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 260
         y: 320
         width: 130
         height: 80
@@ -608,7 +797,7 @@ TextureImporter:
       name: Boss_1_Ready_0
       rect:
         serializedVersion: 2
-        x: 130
+        x: 390
         y: 320
         width: 130
         height: 80
@@ -629,7 +818,7 @@ TextureImporter:
       name: Boss_1_Ready_1
       rect:
         serializedVersion: 2
-        x: 130
+        x: 390
         y: 320
         width: 130
         height: 80
@@ -650,7 +839,7 @@ TextureImporter:
       name: Boss_1_Ready_2
       rect:
         serializedVersion: 2
-        x: 130
+        x: 390
         y: 320
         width: 130
         height: 80
@@ -671,7 +860,7 @@ TextureImporter:
       name: Boss_1_Jump_0
       rect:
         serializedVersion: 2
-        x: 260
+        x: 520
         y: 320
         width: 130
         height: 80
@@ -692,7 +881,7 @@ TextureImporter:
       name: Boss_1_Jump_1
       rect:
         serializedVersion: 2
-        x: 390
+        x: 650
         y: 320
         width: 130
         height: 80
@@ -713,7 +902,7 @@ TextureImporter:
       name: Boss_1_Jump_2
       rect:
         serializedVersion: 2
-        x: 520
+        x: 780
         y: 320
         width: 130
         height: 80
@@ -734,7 +923,7 @@ TextureImporter:
       name: Boss_1_Charge_0
       rect:
         serializedVersion: 2
-        x: 650
+        x: 910
         y: 320
         width: 130
         height: 80
@@ -755,7 +944,7 @@ TextureImporter:
       name: Boss_1_Charge_1
       rect:
         serializedVersion: 2
-        x: 780
+        x: 1040
         y: 320
         width: 130
         height: 80
@@ -776,8 +965,8 @@ TextureImporter:
       name: Boss_1_Charge_2
       rect:
         serializedVersion: 2
-        x: 910
-        y: 320
+        x: 0
+        y: 240
         width: 130
         height: 80
       alignment: 0
@@ -797,7 +986,7 @@ TextureImporter:
       name: Boss_1_Attack_1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 130
         y: 240
         width: 130
         height: 80
@@ -818,7 +1007,7 @@ TextureImporter:
       name: Boss_1_Attack_1_1
       rect:
         serializedVersion: 2
-        x: 130
+        x: 390
         y: 320
         width: 130
         height: 80
@@ -839,7 +1028,7 @@ TextureImporter:
       name: Boss_1_Attack_1_2
       rect:
         serializedVersion: 2
-        x: 130
+        x: 260
         y: 240
         width: 130
         height: 80
@@ -860,7 +1049,7 @@ TextureImporter:
       name: Boss_1_Attack_1_3
       rect:
         serializedVersion: 2
-        x: 260
+        x: 390
         y: 240
         width: 130
         height: 80
@@ -881,7 +1070,7 @@ TextureImporter:
       name: Boss_1_Attack_1_4
       rect:
         serializedVersion: 2
-        x: 390
+        x: 520
         y: 240
         width: 130
         height: 80
@@ -902,7 +1091,7 @@ TextureImporter:
       name: Boss_1_Attack_2_0
       rect:
         serializedVersion: 2
-        x: 520
+        x: 650
         y: 240
         width: 130
         height: 80
@@ -923,7 +1112,7 @@ TextureImporter:
       name: Boss_1_Attack_2_1
       rect:
         serializedVersion: 2
-        x: 650
+        x: 780
         y: 240
         width: 130
         height: 80
@@ -944,7 +1133,7 @@ TextureImporter:
       name: Boss_1_Attack_2_2
       rect:
         serializedVersion: 2
-        x: 780
+        x: 910
         y: 240
         width: 130
         height: 80
@@ -965,7 +1154,7 @@ TextureImporter:
       name: Boss_1_Attack_2_3
       rect:
         serializedVersion: 2
-        x: 910
+        x: 1040
         y: 240
         width: 130
         height: 80
@@ -1112,7 +1301,7 @@ TextureImporter:
       name: Boss_1_Attack_3_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 130
         y: 240
         width: 130
         height: 80
@@ -1133,7 +1322,7 @@ TextureImporter:
       name: Boss_1_Attack_3_1
       rect:
         serializedVersion: 2
-        x: 130
+        x: 390
         y: 320
         width: 130
         height: 80
@@ -1154,7 +1343,7 @@ TextureImporter:
       name: Boss_1_Attack_3_2
       rect:
         serializedVersion: 2
-        x: 130
+        x: 260
         y: 240
         width: 130
         height: 80
@@ -1175,7 +1364,7 @@ TextureImporter:
       name: Boss_1_Attack_3_3
       rect:
         serializedVersion: 2
-        x: 260
+        x: 390
         y: 240
         width: 130
         height: 80
@@ -1196,7 +1385,7 @@ TextureImporter:
       name: Boss_1_Attack_3_4
       rect:
         serializedVersion: 2
-        x: 390
+        x: 520
         y: 240
         width: 130
         height: 80
@@ -1259,8 +1448,8 @@ TextureImporter:
       name: Boss_1_Attack_3_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
+        x: 1040
+        y: 160
         width: 130
         height: 80
       alignment: 0
@@ -1280,7 +1469,7 @@ TextureImporter:
       name: Boss_1_Attack_3_8
       rect:
         serializedVersion: 2
-        x: 130
+        x: 0
         y: 80
         width: 130
         height: 80
@@ -1301,7 +1490,7 @@ TextureImporter:
       name: Boss_1_Attack_3_9
       rect:
         serializedVersion: 2
-        x: 260
+        x: 130
         y: 80
         width: 130
         height: 80
@@ -1322,7 +1511,7 @@ TextureImporter:
       name: Boss_1_Attack_4_0
       rect:
         serializedVersion: 2
-        x: 390
+        x: 260
         y: 80
         width: 130
         height: 80
@@ -1343,7 +1532,7 @@ TextureImporter:
       name: Boss_1_Attack_4_1
       rect:
         serializedVersion: 2
-        x: 520
+        x: 390
         y: 80
         width: 130
         height: 80
@@ -1364,7 +1553,7 @@ TextureImporter:
       name: Boss_1_Attack_4_2
       rect:
         serializedVersion: 2
-        x: 650
+        x: 520
         y: 80
         width: 130
         height: 80
@@ -1385,7 +1574,7 @@ TextureImporter:
       name: Boss_1_Attack_4_3
       rect:
         serializedVersion: 2
-        x: 780
+        x: 650
         y: 80
         width: 130
         height: 80
@@ -1406,7 +1595,7 @@ TextureImporter:
       name: Boss_1_Attack_4_4
       rect:
         serializedVersion: 2
-        x: 910
+        x: 780
         y: 80
         width: 130
         height: 80
@@ -1427,8 +1616,8 @@ TextureImporter:
       name: Boss_1_Attack_4_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 910
+        y: 80
         width: 130
         height: 80
       alignment: 0
@@ -1448,8 +1637,8 @@ TextureImporter:
       name: Boss_1_Attack_4_6
       rect:
         serializedVersion: 2
-        x: 130
-        y: 0
+        x: 1040
+        y: 80
         width: 130
         height: 80
       alignment: 0
@@ -1466,32 +1655,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_1_Attack_4_7
-      rect:
-        serializedVersion: 2
-        x: 260
-        y: 0
-        width: 130
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1228791a6cd92200800000000000000
-      internalID: 155898010372940314
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Boss_1_Attack_5_0
       rect:
         serializedVersion: 2
-        x: 390
-        y: 80
+        x: 0
+        y: 0
         width: 130
         height: 80
       alignment: 0
@@ -1511,7 +1679,7 @@ TextureImporter:
       name: Boss_1_Attack_5_1
       rect:
         serializedVersion: 2
-        x: 390
+        x: 130
         y: 0
         width: 130
         height: 80
@@ -1532,7 +1700,7 @@ TextureImporter:
       name: Boss_1_Attack_5_2
       rect:
         serializedVersion: 2
-        x: 520
+        x: 260
         y: 0
         width: 130
         height: 80
@@ -1553,7 +1721,7 @@ TextureImporter:
       name: Boss_1_Attack_5_3
       rect:
         serializedVersion: 2
-        x: 520
+        x: 260
         y: 0
         width: 130
         height: 80
@@ -1574,7 +1742,7 @@ TextureImporter:
       name: Boss_1_Attack_5_4
       rect:
         serializedVersion: 2
-        x: 520
+        x: 260
         y: 0
         width: 130
         height: 80
@@ -1591,6 +1759,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Boss_1_Ranged_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 160
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 240e79cb73c79f230800000000000000
+      internalID: 3673103549926465602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Ranged_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 160
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c3c4592f48cea30800000000000000
+      internalID: 4245914726125288533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Ranged_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 160
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75fec27b0583b4130800000000000000
+      internalID: 3551994650433482583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Ranged_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43a89ec07158def40800000000000000
+      internalID: 5759405832524106292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_1_Ranged_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 80
+        width: 130
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a20c04f214af51a40800000000000000
+      internalID: 5338448091190181930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1602,6 +1875,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Boss_1_Attack_3_7: -8221490456037416869
       Boss_1_Wake_5: 6928767775605105311
       Boss_1_Walk_3: 8621929628256499448
       Boss_1_Attack_3_1: 7388685923652070509
@@ -1610,8 +1884,11 @@ TextureImporter:
       Boss_1_Wake_4: -7549593868097706938
       Boss_1_Attack_1_3: -1797857434972986539
       Boss_1_Wake_9: 4073339533734077791
+      Boss_1_Ranged_Attack_2: 3551994650433482583
       Boss_1_Attack_5_3: 5104030643106123013
       Boss_1_Wake_0: 2172384352384697505
+      Boss_1_Attack_5_0: -2639723058697739014
+      Boss_1_Idle_1: -4950625197984854057
       Boss_1_Jump_1: -4960246088109799529
       Boss_1_Attack_1_0: -7952668652241526822
       Boss_1_Attack_2_1: -5674534527629238809
@@ -1619,36 +1896,45 @@ TextureImporter:
       Boss_1_Attack_2_3: 7919730868830537269
       Boss_1_Charge_0: -3478509518420962522
       Boss_1_Attack_4_6: 6677646805701398377
+      Boss_1_Recover_2: 9024945453053210340
       Boss_1_Jump_2: -5649451486395847863
+      Boss_1_Stun_1: -1294960417652585555
       Boss_1_Wake_7: 5635077412420113412
       Boss_1_Charge_1: -5999314970334780849
+      Boss_1_Stun_0: -2713766336371809077
       Boss_1_Ready_0: -3029972470101798148
       Boss_1_Attack_1_2: -8240942929657295433
+      Boss_1_Ranged_Attack_3: 5759405832524106292
       Boss_1_Attack_3_3: 4235754009936690623
       Boss_1_Walk_1: 7147098514110667883
+      Boss_1_Ranged_Attack_0: 3673103549926465602
       Boss_1_Attack_2_5: 4539636524063311854
       Boss_1_Attack_1_1: 2541478608210865722
       Boss_1_Ready_1: -8570038096895738876
       Boss_1_Attack_4_1: 6500350465052575458
-      Boss_1_Attack_4_7: 155898010372940314
       Boss_1_Attack_3_8: -7230375398467111581
       Boss_1_Attack_3_9: -3892744780844584841
+      Boss_1_Ranged_Attack_1: 4245914726125288533
       Boss_1_Attack_3_4: 629465024189887910
       Boss_1_Wake_8: -7614112418381875122
       Boss_1_Walk_7: -2388130080897904259
       Boss_1_Wake_15: 2439179765786624857
       Boss_1_Walk_6: -6338030813604852786
       Boss_1_Wake_3: -1907683947654549650
+      Boss_1_Recover_1: 2743758176254689037
       Boss_1_Attack_3_2: 6335964383959226062
+      Boss_1_Stun_2: -2350208112375885567
       Boss_1_Wake_11: 5005486489224831519
       Boss_1_Attack_5_2: 6730547719055099295
       Boss_1_Wake_10: -4934580377770785729
       Boss_1_Attack_5_1: 8137974339277116319
       Boss_1_Ready_2: -8427788931562153894
+      Boss_1_Recover_0: 8255145935341756901
       Boss_1_Charge_2: 1960655502418051384
-      Boss_1_Attack_3_0: 4138896244820924497
       Boss_1_Attack_2_2: 2793872176445608061
+      Boss_1_Attack_3_0: 4138896244820924497
       Boss_1_Attack_5_4: 2245031202134806407
+      Boss_1_Ranged_Attack_4: 5338448091190181930
       Boss_1_Wake_1: -7369146190388709297
       Boss_1_Attack_2_7: 2642298416749101223
       Boss_1_Walk_0: -8376421161060015709
@@ -1661,19 +1947,19 @@ TextureImporter:
       Boss_1_Wake_13: -55267553844754130
       Boss_1_Wake_12: -1141416576654014709
       Boss_1_Wake_14: 4412458712744533856
-      Boss_1_Walk_5: -6494914899531753128
+      Boss_1_Stun_3: 4770133870503653758
       Boss_1_Walk_2: 2985339301670674509
-      Boss_1_Attack_2_9: -3710499423206851750
+      Boss_1_Walk_5: -6494914899531753128
       Boss_1_Attack_2_0: -4015730295373002927
       Boss_1_Wake_16: 5664285737639851462
       Boss_1_Walk_4: -2691619891843315521
       Boss_1_Wake_2: 8060241422538596054
       Boss_1_Attack_4_0: 5375125749454151508
       Boss_1_Attack_1_4: 7944723986406505072
-      Boss_1_Attack_5_0: -2639723058697739014
+      Boss_1_Attack_2_9: -3710499423206851750
       Boss_1_Attack_4_5: -4116478171036051289
+      Boss_1_Idle_0: 6272852245967576532
       Boss_1_Attack_3_6: -2311850422816692416
-      Boss_1_Attack_3_7: -8221490456037416869
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -24,10 +24,12 @@ namespace Player
             
             if (rb.velocity.y < 0)
             {
+                // apply fall multiplier when falling
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
             }
             else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
             {
+                // pull player down if jump is not held
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
             }
         }
