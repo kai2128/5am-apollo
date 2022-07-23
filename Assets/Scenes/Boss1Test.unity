@@ -262,7 +262,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0500963, y: 1}
+    m_SensorSize: {x: 1.283237, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -761,10 +761,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 216571833219706575, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.99
-      objectReference: {fileID: 0}
     - target: {fileID: 3183641273299753072, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
       propertyPath: m_Name
       value: Boss1Room
@@ -812,14 +808,6 @@ PrefabInstance:
     - target: {fileID: 3183641273299753073, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107095547975830211, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107095547975830211, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
