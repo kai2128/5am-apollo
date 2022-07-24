@@ -1,37 +1,106 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Class;
 using DG.Tweening;
 using Player;
 using Utils;
+using Random = UnityEngine.Random;
 
 namespace Enemy.Boss1
 {
     public class Boss1 : Enemy
     {
-        [HideInInspector] public static Boss1 Inst { get; private set; }
+        [Serializable]
+        public class Range
+        {
+            public float min;
+            public float max;
+
+            public float GetRange()
+            {
+                return Random.Range(min, max);
+            }
+            public Range(float min, float max)
+            {
+                this.min = min;
+                this.max = max;
+            }
+        }
         
         private bool isFlipped;
         private Transform player;
         public Transform spawnPoint;
 
-        public new string name;
 
         [Header("Properties")]
         public float jumpForce = 30f;
+        public float walkSpeed = 1.5f;
+        public Range idleTimeRange =  new(0.5f, 1f);
+        public Range walkTimeRange =  new(3f, 5f);
+        public float distanceBetweenPlayer;
+        public float currentDistanceBetweenPlayer;
+        
+        public new string name;
         [Header("Attacks")]
-        public float attack1Damage = 20f;
-        public float attack1Force = 1f;
-        public float attack2Damage = 25f;
-        public float attack2Force = 2f;
-        public float attack3Damage = 25f;
-        public float attack3Force = 3f;
-        public float attack4Damage = 25f;
-        public float attack4Force = 15f;
-        public float attack5Damage = 30f;
-        public float attack5Force = 30f;
-        [HideInInspector] public AttackArguments _attackArgs;  
+        public float readyTime = 1f;
+
+        // public float attack1Damage = 20f;
+        // public float attack1Force = 1f;
+        // public float attack1Range = 3f;
+        //
+        // public float attack2Damage = 25f;
+        // public float attack2Force = 2f;
+        // public float attack2Range = 3f;
+        //
+        // public float attack3Damage = 25f;
+        // public float attack3Force = 3f;
+        // public float attack3Range = 3f;
+        //
+        // public float attack4Damage = 25f;
+        // public float attack4Force = 15f;
+        // public float attack4Range = 3f;
+        //
+        // public float attack5Damage = 30f;
+        // public float attack5Force = 30f;
+        // public float attack5Range = 3f;
+
+        public Attack attack1 = new Attack(20f, 1f, 3f, "attack_1",.8f, new Range(.2f,.5f)); // slash
+        public Attack attack2 = new Attack(25f, 2f, 3f, "attack_2",1.5f,new Range(1f,1.8f)); // double slash
+        public Attack attack3 = new Attack(25f, 3f, 3f, "attack_3",1.8f, new Range(1f,1.8f)); // ranged attack
+        public Attack attack4 = new Attack(25f, 3.5f, 3f, "attack_4",2.2f, new Range(.2f,1f)); // ground attack
+        public Attack attack5 = new Attack(15f, 1f, 2f, "attack_5",1.3f, new Range(.7f,1.2f)); // dash attack
+
+        public Attack[] attacks;
+        
+        [Serializable]
+        public class Attack
+        {
+            public float damage;
+            public float force;
+            public float range;
+            public string trigger;
+            public float idlePercentage;
+            public Range readyRange;
+
+            public AttackArguments GetAttackArgs()
+            {
+                return new AttackArguments(damage, force);
+            }
+            
+            public Attack(float damage, float force, float range, string trigger, float idlePercentage, Range readyRange)
+            {
+                this.damage = damage;
+                this.force = force;
+                this.range = range;
+                this.trigger = trigger;
+                this.idlePercentage = idlePercentage;
+                this.readyRange = readyRange;
+            }
+        }
+
+        public Attack currentAttack;
         
         
         [Header("States")]
@@ -43,18 +112,35 @@ namespace Enemy.Boss1
         // Start is called before the first frame update
         private void Awake()
         {
-            Inst = this;
+            attacks = new[]{attack1, attack2, attack3, attack4, attack5};
             player = GameObject.FindGameObjectWithTag("Player").transform;
             currentHp = maxHp;
             name = "Meta Knight";
         }
 
+        public Attack GetAttack()
+        {
+            var attacksInRange = attacks.ToList().FindAll(attack =>  attack.range >= currentDistanceBetweenPlayer);
+            return attacksInRange.Count == 0 ? null : attacksInRange.RandomElement();
+        }
+
+
+        public float[] GetAttackRanges()
+        {
+            return attacks.Select(attack => attack.range).ToArray();
+        }
+
+        public AttackArguments GetAttackArgs(Attack attack)
+        {
+            return attack.GetAttackArgs().UpdateTransform(transform);
+        }
+        
         public override void GetHit(AttackArguments atkArgs)
         {
             if(dead)
                 return;
             
-            if (atkArgs.dir.x != transform.GetFacingDirection().x)
+            if (atkArgs.dir.x == transform.GetFacingDirection().x)
                 return;
             
             currentHp -= atkArgs.damage;
@@ -89,18 +175,20 @@ namespace Enemy.Boss1
         void Update()
         {
             // bind animator
-            anim.SetFloat("tenacity", tenacity);
-            anim.SetFloat("verticalVelocity", rb.velocity.x);
-            anim.SetFloat("horizontalVelocity", rb.velocity.y);
+            // anim.SetFloat("tenacity", tenacity);
+            // anim.SetFloat("verticalVelocity", rb.velocity.x);
+            // anim.SetFloat("horizontalVelocity", rb.velocity.y);
+            distanceBetweenPlayer = Vector2.Distance(player.position, rb.position);
         }
 
         public void OnTriggerEnter2D(Collider2D col)
         {
             if (col.CompareTag("Player"))
             {
+                var attackArgs = GetAttackArgs(currentAttack);
                 if (rageMode)
-                    _attackArgs.damage *= 1.3f;
-                col.gameObject.GetComponent<PlayerOnHit>().GetHit(_attackArgs);
+                    attackArgs.damage *= 1.3f;
+                col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
             }
         }
 

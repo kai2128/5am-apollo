@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -120,6 +121,25 @@ namespace Utils
                 return false;
             
             return anim.GetCurrentPlayTime() >= percentage && !anim.IsInTransition(0);
+        }
+
+        public static void ResetAllTriggers(this Animator anim)
+        {
+            foreach (var trigger in anim.parameters)
+            {
+                if(trigger.type == AnimatorControllerParameterType.Trigger)
+                    anim.ResetTrigger(trigger.name);
+            }
+        }
+        
+        public static T RandomElement<T>(this List<T> list)
+        {
+            return list[Random.Range(0, list.Count)];
+        }
+
+        public static T RandomElement<T>(this T[] array)
+        {
+            return array[Random.Range(0, array.Length)];
         }
     }
 }

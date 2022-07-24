@@ -1,3 +1,5 @@
+using System.Linq;
+using Player;
 using UnityEngine;
 using Utils;
 
@@ -8,9 +10,10 @@ namespace Enemy.Boss1
         private Transform player;
         private Rigidbody2D rb;
         private Boss1 boss;
-    
-        public float speed = 2.5f;
-        public float attackRange = 3f;
+        private float _timer;
+
+        public float[] attackRanges;
+        public float walkTime;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,6 +21,9 @@ namespace Enemy.Boss1
             player = GameObject.FindGameObjectWithTag("Player").transform;
             rb = animator.GetComponent<Rigidbody2D>();
             boss = animator.GetComponent<Boss1>();
+            attackRanges = boss.GetAttackRanges();
+            walkTime = boss.walkTimeRange.GetRange();
+            _timer = 0;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -25,31 +31,26 @@ namespace Enemy.Boss1
         {
             boss.LookAtPlayer();
             Vector2 target = new Vector2(player.position.x,  rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards( rb.position, target, speed * Time.fixedDeltaTime);
+            Vector2 newPos = Vector2.MoveTowards( rb.position, target, boss.walkSpeed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
+            _timer += Time.deltaTime;
 
-            if (Vector2.Distance(player.position, rb.position) <= attackRange)
+            // if (_timer >= walkTime)
+            // {
+            //     animator.SetTrigger("idle");
+            // }
+
+            if (boss.distanceBetweenPlayer <= attackRanges.Min())
             {
-                animator.SetTrigger("attack_1"); 
+                animator.SetTrigger("ready");
+                boss.currentDistanceBetweenPlayer = boss.distanceBetweenPlayer;
             }
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.ResetTrigger("attack_1");   
+            animator.ResetAllTriggers();   
         }
-
-        // OnStateMove is called right after Animator.OnAnimatorMove()
-        //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // Implement code that processes and affects root motion
-        //}
-
-        // OnStateIK is called right after Animator.OnAnimatorIK()
-        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // Implement code that sets up animation IK (inverse kinematics)
-        //}
     }
 }

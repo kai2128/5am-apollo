@@ -8154,7 +8154,7 @@ BoxCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.89, y: -0.12}
@@ -8213,6 +8213,10 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 216571833219706575}
+    - target: {fileID: 1779446358, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
+      propertyPath: m_Mass
+      value: 1500
+      objectReference: {fileID: 0}
     - target: {fileID: 1779446358, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
       propertyPath: m_Interpolate
       value: 1
@@ -8313,7 +8317,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1456722750539665701, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
 --- !u!1 &6771271053533966717 stripped
 GameObject:
