@@ -8,7 +8,7 @@ namespace Enemy
     public abstract class Enemy : MonoBehaviour
     {
         protected SpriteRenderer sr;
-        protected Rigidbody2D rb;
+        public Rigidbody2D rb;
         protected AnimatorStateInfo animInfo;
         protected Animator anim;
         protected Vector3 startingPosition;

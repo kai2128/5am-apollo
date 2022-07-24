@@ -15,6 +15,10 @@ namespace Enemy.Boss1
         public float[] attackRanges;
         public float walkTime;
 
+        public bool willJump;
+        public bool willCharge;
+        public float after;
+
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -24,6 +28,12 @@ namespace Enemy.Boss1
             attackRanges = boss.GetAttackRanges();
             walkTime = boss.walkTimeRange.GetRange();
             _timer = 0;
+
+            willJump = boss.WillJump();
+            willCharge = boss.WillCharge();
+            after = Random.Range(0f, 2.5f);
+
+            boss.currentAttack = null;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -35,11 +45,37 @@ namespace Enemy.Boss1
             rb.MovePosition(newPos);
             _timer += Time.deltaTime;
 
-            // if (_timer >= walkTime)
-            // {
-            //     animator.SetTrigger("idle");
-            // }
+            if (willCharge || willJump)
+            {
+                if (_timer >= after)
+                {
+                    if (willCharge)
+                    {
+                        animator.SetTrigger("charge");
+                        return;
+                    }
+                    
+                    if (willJump)
+                    {
+                        animator.SetTrigger("jump");
+                        return;
+                    }
+                }
+            }
+            
+            
+            if (_timer >= walkTime && !boss.rageMode)
+            {
+                animator.SetTrigger("idle");
+                return;
+            }
 
+            if (boss.distanceBetweenPlayer >= 10 && boss.rageMode)
+            {
+                animator.SetTrigger("charge");
+                return;
+            }
+            
             if (boss.distanceBetweenPlayer <= attackRanges.Min())
             {
                 animator.SetTrigger("ready");

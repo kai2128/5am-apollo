@@ -1,52 +1,54 @@
+using System.Diagnostics;
+using System.Linq;
+using Player;
 using UnityEngine;
 using Utils;
+using Debug = UnityEngine.Debug;
 
 namespace Enemy.Boss1
 {
-    public class Boss1Ready : StateMachineBehaviour
+    public class Boss1Charge : StateMachineBehaviour
     {
-        private Transform player;
         private Boss1 boss;
-        private float _timer;
-        private Boss1.Attack selectedAttack;
-        private float readyTime;
+        public float _timer;
+        public float maxChargeTime;
+        private Rigidbody2D rb;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            boss = animator.GetComponent<Boss1>();
-            selectedAttack = boss.GetAttack();
-            boss.currentAttack = selectedAttack;
-            readyTime = selectedAttack != null ? boss.readyTime : 0;
             _timer = 0;
-            boss.isReady = true;
+            boss = animator.GetComponent<Boss1>();
+            rb = animator.GetComponent<Rigidbody2D>();
+            maxChargeTime = boss.chargeTime;
+            Debug.Log(boss.GetAttackRanges().Min());
         }
 
+        // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            _timer += Time.deltaTime;
             boss.LookAtPlayer();
-            if (selectedAttack == null)
+            Vector2 target = new Vector2(PlayerManager.Instance.rb.position.x,  rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards( rb.position, target, boss.chargeSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+
+            if (_timer >= maxChargeTime)
             {
                 animator.SetTrigger("walk");
                 return;
             }
 
-            _timer += Time.deltaTime;
-            if (_timer >= readyTime)
+            if (boss.distanceBetweenPlayer <= boss.GetAttackRanges().Min())
             {
-                // charge to player if player runs to far away
-                if (boss.distanceBetweenPlayer > 8f)
-                {
-                    selectedAttack = boss.attack5;
-                    boss.currentAttack = boss.attack5;
-                }
-                animator.SetTrigger(selectedAttack.trigger);
+                animator.SetTrigger("ready");
+                boss.currentDistanceBetweenPlayer = boss.distanceBetweenPlayer;
             }
         }
 
+        // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.ResetAllTriggers();
-            boss.isReady = false;
         }
 
         // OnStateMove is called right after Animator.OnAnimatorMove()

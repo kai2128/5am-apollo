@@ -10,8 +10,6 @@ public class Boss1Wake : StateMachineBehaviour
     private Rigidbody2D rb;
     private Boss1 boss;
     
-    public float speed = 2.5f;
-    public float attackRange = 3f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -67,10 +67,6 @@ namespace Enemy
                     vcam.m_Follow = PlayerManager.Instance.transform;
                     PlayerManager.Instance.canMove = true;
                     vcam.m_Lens.OrthographicSize = orthographicSize;
-                    DOVirtual.Float(100f, 1f, 20f,(float mass) =>
-                    {
-                        boss.GetComponent<Rigidbody2D>().mass = mass;
-                    });
                 });
             }
         }

@@ -27,6 +27,15 @@ namespace Enemy.Boss1
             {
                 animator.SetTrigger("walk");
             }
+
+            if (boss.currentAttack == null)
+            {
+                if (boss.distanceBetweenPlayer <= 3f)
+                {
+                    animator.SetTrigger("ready");
+                    boss.currentDistanceBetweenPlayer = boss.distanceBetweenPlayer;
+                }
+            }
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

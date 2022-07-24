@@ -13,5 +13,9 @@ namespace Utils
         {
             return new Vector2(Random.Range(-1f,1f), 0).normalized;
         }
+        public static bool Chances(float percentage)
+        {
+            return Random.value <= percentage;
+        }
     }
 }

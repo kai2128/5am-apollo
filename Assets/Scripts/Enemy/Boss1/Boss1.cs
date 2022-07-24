@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using Class;
 using DG.Tweening;
 using Player;
+using static Utils.Utils;
 using Utils;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Enemy.Boss1
@@ -29,14 +32,15 @@ namespace Enemy.Boss1
             }
         }
         
-        private bool isFlipped;
+        public bool isFlipped;
         private Transform player;
         public Transform spawnPoint;
 
-
         [Header("Properties")]
-        public float jumpForce = 30f;
+        public float jumpForce = 8f;
         public float walkSpeed = 1.5f;
+        public float chargeSpeed = 3f;
+        public float chargeTime = 3f;
         public Range idleTimeRange =  new(0.5f, 1f);
         public Range walkTimeRange =  new(3f, 5f);
         public float distanceBetweenPlayer;
@@ -66,11 +70,11 @@ namespace Enemy.Boss1
         // public float attack5Force = 30f;
         // public float attack5Range = 3f;
 
-        public Attack attack1 = new Attack(20f, 1f, 3f, "attack_1",.8f, new Range(.2f,.5f)); // slash
-        public Attack attack2 = new Attack(25f, 2f, 3f, "attack_2",1.5f,new Range(1f,1.8f)); // double slash
-        public Attack attack3 = new Attack(25f, 3f, 3f, "attack_3",1.8f, new Range(1f,1.8f)); // ranged attack
-        public Attack attack4 = new Attack(25f, 3.5f, 3f, "attack_4",2.2f, new Range(.2f,1f)); // ground attack
-        public Attack attack5 = new Attack(15f, 1f, 2f, "attack_5",1.3f, new Range(.7f,1.2f)); // dash attack
+        public Attack attack1 = new Attack(20f, 1f, 3f, "attack_1",.8f, 35); // slash
+        public Attack attack2 = new Attack(25f, 2f, 3f, "attack_2",1.5f, 25); // double slash
+        public Attack attack3 = new Attack(25f, 3f, 3f, "attack_3",1.8f, 20); // ranged attack
+        public Attack attack4 = new Attack(25f, 3.5f, 3f, "attack_4",2.2f,  10); // ground attack
+        public Attack attack5 = new Attack(15f, 1f, 8f, "attack_5",1.3f, 0); // dash attack
 
         public Attack[] attacks;
         
@@ -82,21 +86,21 @@ namespace Enemy.Boss1
             public float range;
             public string trigger;
             public float idlePercentage;
-            public Range readyRange;
+            public int weight;
 
             public AttackArguments GetAttackArgs()
             {
                 return new AttackArguments(damage, force);
             }
             
-            public Attack(float damage, float force, float range, string trigger, float idlePercentage, Range readyRange)
+            public Attack(float damage, float force, float range, string trigger, float idlePercentage, int weight)
             {
                 this.damage = damage;
                 this.force = force;
                 this.range = range;
                 this.trigger = trigger;
                 this.idlePercentage = idlePercentage;
-                this.readyRange = readyRange;
+                this.weight = weight;
             }
         }
 
@@ -105,8 +109,10 @@ namespace Enemy.Boss1
         
         [Header("States")]
         public float recoverTime = 3f;
-        public float tenacity = 100f;
+        public float tenacity;
+        public float maxTenacity = 50f;
         public bool isStunned = false;
+        public bool isReady = false;
         public bool rageMode = false;
         public bool dead = false;
         // Start is called before the first frame update
@@ -115,13 +121,44 @@ namespace Enemy.Boss1
             attacks = new[]{attack1, attack2, attack3, attack4, attack5};
             player = GameObject.FindGameObjectWithTag("Player").transform;
             currentHp = maxHp;
+            tenacity = maxTenacity;
             name = "Meta Knight";
+        }
+
+        public void EnterRageMode()
+        {
+            rageMode = true;
+            sr.color = new Color(1f, .5f, .5f);
+            currentHp += maxHp * .2f;
+            
+            walkSpeed *= 1.2f;
+            chargeSpeed *= 1.2f;
+            attack1.damage *= 1.2f;
+            attack2.damage *= 1.2f;
+            attack3.damage *= 1.2f;
+            attack4.damage *= 1.2f;
+            attack5.damage *= 1.2f;
+            
+            attack1.weight = 15;
+            attack2.weight = 25;
+            attack3.weight = 25;
+            attack4.weight = 20;
+            attack5.weight = 15;
         }
 
         public Attack GetAttack()
         {
-            var attacksInRange = attacks.ToList().FindAll(attack =>  attack.range >= currentDistanceBetweenPlayer);
-            return attacksInRange.Count == 0 ? null : attacksInRange.RandomElement();
+            int sum = 0;
+            int rand = Random.Range(0, 100);
+            foreach (var atk in attacks)
+            {
+                sum += atk.weight;
+                if (rand <= sum)
+                {
+                    return atk;
+                }
+            }
+            return null;
         }
 
 
@@ -134,22 +171,50 @@ namespace Enemy.Boss1
         {
             return attack.GetAttackArgs().UpdateTransform(transform);
         }
+
+        public bool WillJump()
+        {
+            if (distanceBetweenPlayer >= 10f && PlayerManager.Instance.rb.velocity.y != 0)
+            {
+                return Chances(.7f);
+            }
+            return Chances(.2f);
+        }
+
+        public bool WillCharge()
+        {
+            if (distanceBetweenPlayer >= 15f && rageMode)
+            {
+                return Chances(.8f);
+            }
+            return Chances(.05f);
+        }
+
+        public float GetFacingFloat()
+        {
+            return isFlipped ? -1 : 1;
+        }
         
         public override void GetHit(AttackArguments atkArgs)
         {
             if(dead)
                 return;
             
-            if (atkArgs.dir.x == transform.GetFacingDirection().x)
+            ReduceTenacity(atkArgs); // still able to reduce tenacity if attack from behind
+            // cannot damage boss if attack from behind
+            if (atkArgs.facing == GetFacingFloat())
                 return;
+
+            // reduce 50% damage if getting hit in ready state
+            if (isReady)
+                atkArgs.damage /= .5f;
             
             currentHp -= atkArgs.damage;
             StartCoroutine(BlinkWhite());
-            ReduceTenacity(atkArgs);
 
             if (currentHp / maxHp < .4 && !rageMode)
             {
-                rageMode = true;
+                EnterRageMode();
             }
 
             if (currentHp <= 0)
@@ -175,9 +240,8 @@ namespace Enemy.Boss1
         void Update()
         {
             // bind animator
-            // anim.SetFloat("tenacity", tenacity);
-            // anim.SetFloat("verticalVelocity", rb.velocity.x);
-            // anim.SetFloat("horizontalVelocity", rb.velocity.y);
+            anim.SetFloat("tenacity", tenacity);
+            anim.SetFloat("verticalVelocity", rb.velocity.y);
             distanceBetweenPlayer = Vector2.Distance(player.position, rb.position);
         }
 
@@ -186,8 +250,6 @@ namespace Enemy.Boss1
             if (col.CompareTag("Player"))
             {
                 var attackArgs = GetAttackArgs(currentAttack);
-                if (rageMode)
-                    attackArgs.damage *= 1.3f;
                 col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
             }
         }

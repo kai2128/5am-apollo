@@ -7811,7 +7811,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -8213,9 +8213,9 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 216571833219706575}
-    - target: {fileID: 1779446358, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
-      propertyPath: m_Mass
-      value: 1500
+    - target: {fileID: 1779446356, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
+      propertyPath: maxTenacity
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1779446358, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
       propertyPath: m_Interpolate
