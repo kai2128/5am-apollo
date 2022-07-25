@@ -23,11 +23,11 @@ namespace Player
             float y = Input.GetAxis("Vertical");
             transform.eulerAngles = new Vector3(x, y, 0);
 
-            if (Input.GetButtonDown("Fire1") && !PlayerManager.Instance.isDashing)
+            if (Input.GetButtonDown("Fire1") && !PlayerManager.Instance.isDashing && !PlayerManager.Instance.isAttacking)
             {
                 PlayerManager.Instance.isAttacking = true;
                 playerAnim.SetTrigger("claw");
-                StartCoroutine(playerMovement.PauseMovement(playerAnim.GetCurrentStateTime() + 0.5f));
+                StartCoroutine(playerMovement.ZeroGravity(playerAnim.GetCurrentStateTime() + 0.5f));
                 playerMovement.MoveForward(clawForwardForce);
                 ClawEffect();
             }

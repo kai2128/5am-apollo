@@ -42,15 +42,20 @@ namespace Player
 
         public IEnumerator PauseMovement(float time)
         {
-            // var oldVel = rb.velocity;
-            // var oldGravity = rb.gravityScale;
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
             PlayerManager.Instance.canMove = false;
 
             yield return new WaitForSeconds(time);
             PlayerManager.Instance.canMove = true;
-            // rb.velocity = oldVel;
+            rb.gravityScale = 1;
+        }
+
+        public IEnumerator ZeroGravity(float time)
+        {
+            rb.gravityScale = 0;
+            rb.velocity = Vector2.zero;
+            yield return new WaitForSeconds(time);
             rb.gravityScale = 1;
         }
 
