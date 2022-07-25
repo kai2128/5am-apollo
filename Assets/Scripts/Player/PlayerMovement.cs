@@ -20,7 +20,6 @@ namespace Player
 
         [Header("Dash")] public bool canDash = true;
         public float dashSpeed = 10;
-        public float dashCooldown = 0.2f;
         public float dashTime = 0.4f;
 
         // Start is called before the first frame update
@@ -115,7 +114,8 @@ namespace Player
             rb.velocity = Vector2.zero;
             float originalGravity = rb.gravityScale;
             yield return new WaitForSeconds(0.1f);
-
+            canDash = true;
+            
             rb.gravityScale = 0.0001f;
             rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
 
@@ -123,8 +123,6 @@ namespace Player
             yield return new WaitForSeconds(dashTime);
             rb.gravityScale = originalGravity;
             PlayerManager.Instance.isDashing = false;
-            yield return new WaitForSeconds(dashCooldown);
-            canDash = true;
         }
     }
 }
