@@ -20,7 +20,6 @@ namespace Enemy.Boss1
             boss = animator.GetComponent<Boss1>();
             rb = animator.GetComponent<Rigidbody2D>();
             maxChargeTime = boss.chargeTime;
-            Debug.Log(boss.GetAttackRanges().Min());
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -38,7 +37,7 @@ namespace Enemy.Boss1
                 return;
             }
 
-            if (boss.distanceBetweenPlayer <= boss.GetAttackRanges().Min())
+            if (boss.distanceBetweenPlayer <= Random.Range(2f, 5f))
             {
                 animator.SetTrigger("ready");
                 boss.currentDistanceBetweenPlayer = boss.distanceBetweenPlayer;

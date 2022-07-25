@@ -13,7 +13,7 @@ namespace Enemy.Boss1
         {
             boss = animator.GetComponent<Boss1>();
             attack = boss.attack5;
-            boss.rb.velocity = new Vector2(boss.GetFacingFloat() * attack.force * 15f, 0);
+            boss.rb.velocity = new Vector2(boss.GetFacingFloat() * attack.force * 10f, 0);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -40,8 +40,8 @@ namespace Enemy.Boss1
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             boss.LookAtPlayer();
-            Vector2 target = new Vector2(player.position.x,  rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards( rb.position, target, boss.walkSpeed * Time.fixedDeltaTime);
+            Vector2 target = new Vector2(player.position.x, rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, boss.walkSpeed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
             _timer += Time.deltaTime;
 
@@ -51,10 +51,17 @@ namespace Enemy.Boss1
                 {
                     if (willCharge)
                     {
+                        if (boss.rageMode && Utils.Utils.Chances(.5f))
+                        {
+                            boss.currentAttack = boss.attack5;
+                            animator.SetTrigger(boss.attack5.trigger);
+                            return;
+                        }
+
                         animator.SetTrigger("charge");
                         return;
                     }
-                    
+
                     if (willJump)
                     {
                         animator.SetTrigger("jump");
@@ -62,11 +69,17 @@ namespace Enemy.Boss1
                     }
                 }
             }
-            
-            
+
+
             if (_timer >= walkTime && !boss.rageMode)
             {
                 animator.SetTrigger("idle");
+                return;
+            }
+
+            if (_timer >= walkTime && boss.rageMode)
+            {
+                animator.SetTrigger("ready");
                 return;
             }
 
@@ -75,8 +88,8 @@ namespace Enemy.Boss1
                 animator.SetTrigger("charge");
                 return;
             }
-            
-            if (boss.distanceBetweenPlayer <= attackRanges.Min())
+
+            if (boss.distanceBetweenPlayer <= Random.Range(5f, 10f))
             {
                 animator.SetTrigger("ready");
                 boss.currentDistanceBetweenPlayer = boss.distanceBetweenPlayer;
@@ -86,7 +99,7 @@ namespace Enemy.Boss1
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.ResetAllTriggers();   
+            animator.ResetAllTriggers();
         }
     }
 }

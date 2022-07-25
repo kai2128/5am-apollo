@@ -1,3 +1,5 @@
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 
@@ -19,6 +21,8 @@ namespace Enemy.Boss1
             readyTime = selectedAttack != null ? boss.readyTime : 0;
             _timer = 0;
             boss.isReady = true;
+            if(selectedAttack != null)
+                boss.attackHint.HintAttack(selectedAttack.hint);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

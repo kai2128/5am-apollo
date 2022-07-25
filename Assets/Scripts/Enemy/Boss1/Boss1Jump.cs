@@ -8,14 +8,12 @@ namespace Enemy.Boss1
     public class Boss1Jump : StateMachineBehaviour
     {
         private Boss1 boss;
-        private float _timer;
         private Rigidbody2D rb;
 
         public bool willAttack = false;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _timer = 0;
             boss = animator.GetComponent<Boss1>();
             rb = animator.GetComponent<Rigidbody2D>();
             float jumpDirection = boss.GetFacingFloat();
@@ -30,7 +28,7 @@ namespace Enemy.Boss1
             
             // only will attack in mid air in rage mode
             if(boss.rageMode)
-                willAttack = Chances(.5f);
+                willAttack = Chances(.4f);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -40,7 +38,7 @@ namespace Enemy.Boss1
 
             if (willAttack)
             {
-                if (rb.velocity.y <= 0.1 && boss.distanceBetweenPlayer <= 3f)
+                if (rb.velocity.y <= 0.1)
                 {
                     boss.currentAttack = boss.attack4;
                     animator.SetTrigger("attack_4");

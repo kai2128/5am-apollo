@@ -1,21 +1,22 @@
-using DG.Tweening;
 using UnityEngine;
 
 namespace Enemy.Boss1
 {
-    public class Boss1Stun : StateMachineBehaviour
+    public class Boss1Entrance : StateMachineBehaviour
     {
-        private Boss1 boss;
+        // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            boss = animator.GetComponent<Boss1>();
-
-            DOVirtual.Float(boss.tenacity, boss.maxTenacity, boss.recoverTime, recovered =>
-            {
-                boss.tenacity = recovered;
-            });    
+            Boss1 boss = animator.GetComponent<Boss1>();
+            Rigidbody2D rb = animator.GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector2( 5f, boss.jumpForce);            
         }
+
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+        //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    
+        //}
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
