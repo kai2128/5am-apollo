@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -130,6 +131,17 @@ namespace Utils
                 if(trigger.type == AnimatorControllerParameterType.Trigger)
                     anim.ResetTrigger(trigger.name);
             }
+        }
+
+        public static void BlinkWhite(this SpriteRenderer sr, float duration = .2f)
+        {
+            var oriColor = sr.material.color;
+            sr.material.color = new Color(255f, 255f, 255f);
+            if(sr != null)
+                DOVirtual.Color(sr.material.color, new Color(1f, 1f, 1f), duration, (Color color) =>
+                {
+                    sr.material.color = color;
+                });
         }
         
         public static T RandomElement<T>(this List<T> list)

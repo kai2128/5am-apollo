@@ -30,6 +30,16 @@ namespace Class
                 force = frc;
         }
 
+        public Vector2 PushBackwardForce(Transform otherTransform)
+        {
+            if (transform.position.x > otherTransform.position.x)
+            {
+                return Vector2.left * force;
+            }
+
+            return Vector2.right * force;
+        }
+
         public void Reset()
         {
             damage = 0;

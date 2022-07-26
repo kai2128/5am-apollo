@@ -10,28 +10,12 @@ using static Utils.Utils;
 using Utils;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
+using Range = Class.Range;
 
 namespace Enemy.Boss1
 {
     public class Boss1 : Enemy
     {
-        [Serializable]
-        public class Range
-        {
-            public float min;
-            public float max;
-
-            public float GetRange()
-            {
-                return Random.Range(min, max);
-            }
-            public Range(float min, float max)
-            {
-                this.min = min;
-                this.max = max;
-            }
-        }
-        
         public bool isFlipped;
         private Transform player;
         public Transform spawnPoint;

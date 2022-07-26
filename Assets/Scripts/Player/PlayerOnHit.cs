@@ -32,6 +32,8 @@ namespace Player
             }
             else
                 StartCoroutine(BlinkRed());
+
+            rb.AddForce(args.PushBackwardForce(transform));
             DecreaseHp(args.damage);
         }
 
