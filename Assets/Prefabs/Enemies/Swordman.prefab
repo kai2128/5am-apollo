@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4650034631846147887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 877408672086453061}
+  - component: {fileID: 6910997469662564872}
+  m_Layer: 8
+  m_Name: DetectArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &877408672086453061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650034631846147887}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4983344, y: 0.30071497, z: -0.007739619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5401509230624458820}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &6910997469662564872
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650034631846147887}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.69, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.43, y: 0.6399416}
+      - {x: 0.16273671, y: 0.09717059}
+      - {x: -0.7502547, y: 0.10129073}
+      - {x: -0.7816629, y: -0.7190023}
+      - {x: 0.1554144, y: -0.73980314}
+      - {x: 3.43, y: -1.0929093}
 --- !u!1 &5527985289199104235
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,8 +76,8 @@ GameObject:
   - component: {fileID: 5597558143644466144}
   - component: {fileID: 1961782788}
   - component: {fileID: 1961782787}
-  - component: {fileID: 1961782786}
-  m_Layer: 0
+  - component: {fileID: 6314769599817689671}
+  m_Layer: 8
   m_Name: Swordman
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -30,9 +93,10 @@ Transform:
   m_GameObject: {fileID: 5527985289199104235}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.62, y: 0.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 877408672086453061}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,7 +219,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3964628, y: 0.89527005}
   m_EdgeRadius: 0
---- !u!114 &1961782786
+--- !u!114 &6314769599817689671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,6 +228,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 5527985289199104235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc7472af6eae3e4b91aec3c8e3c683c, type: 3}
+  m_Script: {fileID: 11500000, guid: 55633f67b15dc5e4cb181da782b6b0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  currentHp: 0
+  maxHp: 0
+  enemyXp: 0
+  enemyLevel: 0
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  currentState: 0
+  timer: 0
+  blockTimer: 0
+  distanceBetweenPlayer: 0
+  attackCooldownTime: 0.8
+  attackCooldown: 0
+  dashAttackCooldownTime: 3
+  dashCooldown: 0
+  runSpeed: 8
+  dashForce: 15
+  foundPlayer: 0
+  idleTimer: 1
+  chaseRange: 15

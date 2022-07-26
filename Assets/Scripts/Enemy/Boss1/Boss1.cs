@@ -201,7 +201,7 @@ namespace Enemy.Boss1
                 atkArgs.damage /= .5f;
             
             currentHp -= atkArgs.damage;
-            StartCoroutine(BlinkWhite());
+            sr.BlinkWhite();
 
             if (currentHp / maxHp < .4 && !rageMode)
             {
@@ -219,14 +219,6 @@ namespace Enemy.Boss1
             tenacity -= atkArgs.damage;
         }
         
-        private IEnumerator BlinkWhite()
-        {
-            Color defaultColor = sr.material.color;
-            sr.material.color = new Color(255, 255, 255);
-            yield return new WaitForSeconds(0.2f);
-            sr.material.color = defaultColor;
-        }
-
         // Update is called once per frame
         void Update()
         {
