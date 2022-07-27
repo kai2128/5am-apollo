@@ -21,8 +21,10 @@ namespace Enemy.Boss1
             readyTime = selectedAttack != null ? boss.readyTime : 0;
             _timer = 0;
             boss.isReady = true;
-            if(selectedAttack != null)
+            if (selectedAttack != null)
+            {
                 boss.attackHint.HintAttack(selectedAttack.hint);
+            }
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

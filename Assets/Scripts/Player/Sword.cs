@@ -5,6 +5,8 @@ using System.Linq;
 using Class;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using Utils;
 using Debug = UnityEngine.Debug;
 
 namespace Player
@@ -74,7 +76,7 @@ namespace Player
             {
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
-                _atkArgs = new AttackArguments(groundDamage, groundForce);
+                _atkArgs = new AttackArguments(groundDamage, groundForce * .5f);
                 _anim.SetTrigger("swordAttackGround");
                 _movement.PauseForAnimation();
                 _movement.MoveToGround(groundForce);
@@ -116,7 +118,7 @@ namespace Player
                 if (PlayerManager.Instance.comboStep > 3)
                     PlayerManager.Instance.comboStep = 1;
                 _timer = interval;
-                _atkArgs = new AttackArguments(lightDamages[PlayerManager.Instance.comboStep - 1]);
+                _atkArgs = new AttackArguments(lightDamages[PlayerManager.Instance.comboStep - 1], 1f * PlayerManager.Instance.comboStep);
                 _anim.SetTrigger("swordAttack1");
                 _movement.PauseForAnimation();
                 _movement.MoveForward(forwardForces[PlayerManager.Instance.comboStep - 1]);
@@ -136,9 +138,16 @@ namespace Player
 
         public void OnHitEnemy(Collider2D col)
         {
-            DOVirtual.Float(.2f, 1f, 0.6f, duration => _anim.anim.speed = duration);
+            DOVirtual.Float(.2f, 1f, 1.8f, duration => _anim.anim.speed = duration);
             col.gameObject.GetComponent<Enemy.Enemy>()
                 .GetHit(_atkArgs.UpdateTransform(PlayerManager.Instance.transform));
+        }
+
+        public void DestroyTree(GameObject tree)
+        {
+            var tilemapRenderer = tree.GetComponentInChildren<TilemapRenderer>();
+            tilemapRenderer.BlinkColor(new Color(255f, 255f,255f), 1f);
+            DOVirtual.DelayedCall(0.5f, () => Destroy(tree.gameObject));
         }
 
         public void UpdateDamage(float multiplier)

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using Class;
-using DG.Tweening;
 using UnityEngine;
 using Utils;
 
 namespace Player
 {
-    public class PlayerOnHit : MonoBehaviour
+    public class PlayerOnHit : MonoBehaviour, IHittable
     {
         private Animator anim;
         private Rigidbody2D rb;
@@ -31,20 +30,15 @@ namespace Player
                 PlayerManager.Instance.isAttacking = false;
             }
             else
-                StartCoroutine(BlinkRed());
-
-            rb.AddForce(args.PushBackwardForce(transform));
+            {
+                sr.BlinkRed();
+            }
+            
+            StartCoroutine(PlayerManager.Instance.playerMovement.PauseMovement(.2f));
+            rb.velocity += args.PushBackwardForce(transform);
             DecreaseHp(args.damage);
         }
 
-
-        private IEnumerator BlinkRed()
-        {
-            Color defaultColor = sr.material.color;
-            sr.material.color = new Color(255, 1, 1);
-            yield return new WaitForSeconds(0.2f);
-            sr.material.color = defaultColor;
-        }
 
         public void DecreaseHp(float damage)
         {
@@ -54,7 +48,7 @@ namespace Player
             {
                 rb.AddForce(Vector2.down);
                 PlayerManager.Instance.playerAnim.SetTrigger("die");
-                StartCoroutine(BlinkRed());
+                sr.BlinkRed();
                 PlayerManager.Instance.isDeath = true;
                 PlayerManager.Instance.canMove = false;
             }

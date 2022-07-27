@@ -26,12 +26,11 @@ namespace Enemy
             Die,
         }
 
-        public float getHitForce;
-        private Vector2 _dir;
         private PolygonCollider2D weaponCol;
 
         [SerializeField] private State currentState;
-        [Header("Properties")] public float attackDamage = 20f;
+        [Header("Properties")] 
+        public AttackArguments atkArgs = new AttackArguments(20f, 3f);
         public float attackRange;
         public float walkSpeed = 1.5f;
         public float idleTime = 1.5f;
@@ -39,7 +38,6 @@ namespace Enemy
         [Header("Roam")] public float chaseRadius = 15f;
         public float walkRadius = 10f;
 
-        public LayerMask playerLayer;
         public LayerMask groundLayer;
         [SerializeField] private float timer;
         [SerializeField] private Transform groundCheck, wallCheck;
@@ -48,8 +46,9 @@ namespace Enemy
         // LevelSystem playerLevel;
         private Vector2 movement;
 
-        private void Awake()
+        private new void Start()
         {
+            base.Start();
             maxHp = 20;
             currentHp = maxHp;
             enemyXp = 30;
@@ -66,7 +65,7 @@ namespace Enemy
                 if (currentState == State.Attack)
                 {
                     if (weaponCol.IsTouching(col) && col.CompareTag("Player"))
-                        col.gameObject.GetComponent<PlayerOnHit>().GetHit(new AttackArguments(attackDamage));
+                        col.gameObject.GetComponent<PlayerOnHit>().GetHit(atkArgs.UpdateTransform(transform));
                 }
                 if (currentState is State.Idle or State.Walk)
                 {
@@ -89,7 +88,7 @@ namespace Enemy
             }
         }
 
-        public override void GetHit(AttackArguments atkArgs)
+        public override void GetHit(AttackArguments getHitBy)
         {
             if (currentState == State.Die)
                 return;
@@ -98,11 +97,11 @@ namespace Enemy
             if (currentState == State.Attack)
             {
                 // only can attack from behind if skeleton is attacking
-                if (atkArgs.dir.x != transform.GetFacingDirection().x)
+                if (getHitBy.dir.x != transform.GetFacingDirection().x)
                     return;
             }
 
-            getHitArgs = atkArgs;
+            getHitArgs = getHitBy;
             SwitchState(State.Hit);
         }
 
@@ -137,8 +136,6 @@ namespace Enemy
 
         private void OnDrawGizmos()
         {
-            Start();
-
             // terrain check
             var groundPos = groundCheck.position;
             Gizmos.DrawLine(groundPos, new Vector2(groundPos.x, groundPos.y - groundCheckDist));
@@ -202,15 +199,13 @@ namespace Enemy
         {
             currentHp -= getHitArgs.damage;
             transform.LookAtTarget(getHitArgs.transform);
-            getHitForce = getHitArgs.force;
-            _dir = transform.GetOppositeDirection();
+            rb.velocity = getHitArgs.PushBackwardForce(transform);
             anim.Play("Hit");
             DOVirtual.Float(.2f, 1f, 0.4f, duration => anim.speed = duration);
         }
 
         private void UpdateHitState()
         {
-            rb.velocity = _dir * getHitForce;
             timer += Time.deltaTime;
             if (currentHp <= 0)
             {

@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using Utils;
 
 namespace Player
 {
@@ -67,6 +69,11 @@ namespace Player
 
             if (col != null && col.CompareTag("Enemy") && currentSkill == 1)
                 PlayerManager.Instance.playerSword.OnHitEnemy(col);
+            
+            if (col.CompareTag("BlockingTree")  && currentSkill == 1)
+            {
+                PlayerManager.Instance.playerSword.DestroyTree(col.gameObject);
+            }
         }
 
         public void UpdateDamages(float multiplier)

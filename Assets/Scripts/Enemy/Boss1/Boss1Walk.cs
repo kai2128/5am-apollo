@@ -89,7 +89,7 @@ namespace Enemy.Boss1
                 return;
             }
 
-            if (boss.distanceBetweenPlayer <= Random.Range(5f, 10f))
+            if (boss.distanceBetweenPlayer <= boss.GetAttackRanges().Min())
             {
                 animator.SetTrigger("ready");
                 boss.currentDistanceBetweenPlayer = boss.distanceBetweenPlayer;

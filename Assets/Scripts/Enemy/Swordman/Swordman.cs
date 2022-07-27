@@ -27,16 +27,16 @@ namespace Enemy.Swordman
         public float blockTimer;
         public float distanceBetweenPlayer;
         public AttackArguments currentAttack;
-        public AttackArguments lightAttack = new AttackArguments(15f, 3f);
-        private float attackRange = 2f;
-        public float attackCooldownTime = .8f;
+        public AttackArguments lightAttack = new AttackArguments(15f, 4f);
+        private float attackRange = 1.5f;
+        public float attackCooldownTime = .3f;
         public bool attackCooldown = false;
 
-        public AttackArguments dashAttack = new AttackArguments(25f, 8f);
+        public AttackArguments dashAttack = new AttackArguments(25f, 0f);
         public float dashAttackCooldownTime = 4.5f;
         public bool dashCooldown = false;
 
-        public float runSpeed = 4f;
+        public float runSpeed = 2f;
         public float dashForce = 15f;
         public bool foundPlayer = false;
         public float idleTimer = 1f;
@@ -62,14 +62,17 @@ namespace Enemy.Swordman
             currentHp = maxHp;
         }
 
-        public override void GetHit(AttackArguments atkArgs)
+        public override void GetHit(AttackArguments getHitBy)
         {
             if (currentState is State.Block or State.Death)
                 return;
 
+            bool getHitFromBehind = getHitBy.facing == transform.GetFacingFloat();
             sr.BlinkWhite();
-            currentHp -= atkArgs.damage;
-            rb.velocity = atkArgs.PushBackwardForce(transform);
+            
+            // double damage if hit from behind
+            currentHp -= getHitFromBehind ? getHitBy.damage * 2 : getHitBy.damage; 
+            rb.velocity = getHitBy.PushBackwardForce(transform);
             if (currentState is State.Idle && currentState != State.Death)
             {
                 SwitchState(State.Block);
@@ -77,7 +80,7 @@ namespace Enemy.Swordman
 
 
             // can kill directly if attack from behind without being noticed
-            if (currentHp <= 0 || (atkArgs.facing == transform.GetFacingFloat() && !foundPlayer))
+            if (currentHp <= 0 || (getHitFromBehind && !foundPlayer))
                 SwitchState(State.Death);
         }
 
@@ -147,18 +150,16 @@ namespace Enemy.Swordman
             transform.LookAtTarget(PlayerManager.Instance.transform);
             rb.velocity = new Vector2(transform.GetFacingFloat() * runSpeed, 0);
 
-            if (!dashCooldown && distanceBetweenPlayer >= attackRange)
+            if (!dashCooldown && distanceBetweenPlayer >= attackRange + 3f)
             {
                 SwitchState(State.DashAttack);
                 return;
             }
 
-            if (distanceBetweenPlayer <= attackRange)
+            if (distanceBetweenPlayer <= attackRange )
             {
                 if (!attackCooldown)
                     SwitchState(State.Attack);
-                else
-                    SwitchState(State.Block);
             }
 
             if (distanceBetweenPlayer >= chaseRange)
@@ -176,7 +177,7 @@ namespace Enemy.Swordman
             Vector2 pos = transform.position;
             pos += transform.GetFacingDirection() * .5f;
             Collider2D col = Physics2D.OverlapCircle(pos, .75f, playerMask);
-            if(col != null)
+            if (col != null)
                 col.GetComponent<PlayerOnHit>().GetHit(currentAttack.UpdateTransform(transform));
         }
 
@@ -186,7 +187,7 @@ namespace Enemy.Swordman
             pos += transform.GetFacingDirection() * .5f;
             Gizmos.DrawWireSphere(pos, .75f);
         }
-        
+
 
         private void EnterAttackState()
         {
@@ -211,7 +212,7 @@ namespace Enemy.Swordman
 
         private void ExitAttackState()
         {
-            idleTimer = .8f;
+            idleTimer = .7f;
         }
 
         public float chaseRange = 15f;

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using DG.Tweening;
 using Player;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Utils;
 using Debug = UnityEngine.Debug;
 
@@ -60,6 +61,13 @@ public class SwordRangedEffect : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             _sword.OnHitEnemy(col);
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (col.CompareTag("BlockingTree"))
+        {
+            PlayerManager.Instance.playerSword.DestroyTree(col.gameObject);
             gameObject.SetActive(false);
         }
     }

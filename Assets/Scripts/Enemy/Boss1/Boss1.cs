@@ -35,8 +35,8 @@ namespace Enemy.Boss1
         [Header("Attacks")]
         public float readyTime = 1f;
 
-        public Attack attack1 = new Attack(20f, 1f, 4f, "attack_1",.8f, 35, AttackHint.AttackType.Normal); // slash
-        public Attack attack2 = new Attack(25f, 2f, 5f, "attack_2",1.5f, 25, AttackHint.AttackType.Medium); // double slash
+        public Attack attack1 = new Attack(20f, 1f, 3f, "attack_1",.8f, 35, AttackHint.AttackType.Normal); // slash
+        public Attack attack2 = new Attack(25f, 2f, 4f, "attack_2",1.5f, 25, AttackHint.AttackType.Medium); // double slash
         public Attack attack3 = new Attack(25f, 3f, 7f, "attack_3",1.8f, 20, AttackHint.AttackType.Danger); // ranged attack
         public Attack attack4 = new Attack(25f, 3.5f, 6f, "attack_4",2.2f,  10, AttackHint.AttackType.Special); // ground attack
         public Attack attack5 = new Attack(15f, 1f, 8f, "attack_5",1.3f, 0, AttackHint.AttackType.Danger); // dash attack
@@ -186,21 +186,21 @@ namespace Enemy.Boss1
             return isFlipped ? -1 : 1;
         }
         
-        public override void GetHit(AttackArguments atkArgs)
+        public override void GetHit(AttackArguments getHitBy)
         {
             if(dead)
                 return;
-            
-            ReduceTenacity(atkArgs); // still able to reduce tenacity if attack from behind
-            // cannot damage boss if attack from behind
-            if (atkArgs.facing == GetFacingFloat())
-                return;
 
+            ReduceTenacity(getHitBy); // still able to reduce tenacity if attack from behind
+            // cannot damage boss if attack from behind
+            if (getHitBy.facing == GetFacingFloat())
+                return;
+            float damage = getHitBy.damage;
             // reduce 50% damage if getting hit in ready state
             if (isReady)
-                atkArgs.damage /= .5f;
+                damage *= .5f;
             
-            currentHp -= atkArgs.damage;
+            currentHp -= damage;
             sr.BlinkWhite();
 
             if (currentHp / maxHp < .4 && !rageMode)

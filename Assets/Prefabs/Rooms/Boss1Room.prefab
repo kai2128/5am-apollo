@@ -8119,9 +8119,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 3183641273299753073}
     m_Modifications:
     - target: {fileID: 1779446356, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
+      propertyPath: maxHp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1779446356, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 216571833219706575}
+    - target: {fileID: 1779446356, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
+      propertyPath: maxTenacity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 462073525202785849, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8

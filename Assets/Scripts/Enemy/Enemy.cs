@@ -5,7 +5,7 @@ using Player;
 
 namespace Enemy
 {
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : MonoBehaviour, IHittable
     {
         protected SpriteRenderer sr;
         public Rigidbody2D rb;
@@ -27,8 +27,6 @@ namespace Enemy
             startingPosition = transform.position;
         }
 
-        public abstract void GetHit(AttackArguments atkArgs);
-
         protected void DropExperience()
         {
             PlayerManager.Instance.playerLevel.GainExperienceFlatRate(enemyXp);
@@ -40,5 +38,6 @@ namespace Enemy
             localScale.x *= -1;
             transform.localScale = localScale;
         }
+        public abstract void GetHit(AttackArguments getHitBy);
     }
 }

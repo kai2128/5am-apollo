@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json;
+using UnityEngine;
 namespace Class
 {
     public class AttackArguments
@@ -50,6 +51,8 @@ namespace Class
         {
             return SetTransform(trans).Refresh();
         }
+
+
         public AttackArguments SetTransform(Transform trans)
         {
             transform = trans;
