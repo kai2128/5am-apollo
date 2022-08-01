@@ -9,14 +9,14 @@ namespace Player
 {
     public class PlayerAttack : MonoBehaviour
     {
-        public GameObject[] skills;
-        public int currentSkill = 0;
+        public GameObject[] weapons;
+        public int currentWeapon = 0;
 
         // Start is called before the first frame update
         void Start()
         {
-            DisableAllSKill();
-            ActiveCurrentSkill();
+            DisableAllWeapon();
+            ActiveCurrentWeapon();
         }
 
         // Update is called once per frame
@@ -24,37 +24,32 @@ namespace Player
         {
             if (PlayerManager.Instance.isDeath)
             {
-                DisableAllSKill();
+                DisableAllWeapon();
                 return;
             }
-            SwitchSkill();
+            SwitchWeapon();
         }
 
-        public void ActiveCurrentSkill()
+        public void ActiveCurrentWeapon()
         {
-            skills[currentSkill].SetActive(true);
+            weapons[currentWeapon].SetActive(true);
         }
-        void DisableAllSKill()
+        void DisableAllWeapon()
         {
-            skills.ToList().ForEach(skill => skill.SetActive(false));
+            weapons.ToList().ForEach(skill => skill.SetActive(false));
         }
 
-        void SwitchSkill()
+        void SwitchWeapon()
         {
-            if (!Input.GetKeyDown(KeyCode.Q) && !Input.GetKeyDown(KeyCode.E)) return;
+            if (!Input.GetKeyDown(KeyCode.Q)) return;
 
-            skills[currentSkill].SetActive(false);
+            weapons[currentWeapon].SetActive(false);
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                if (--currentSkill < 0)
-                    currentSkill = skills.Length - 1;
+                if (--currentWeapon < 0)
+                    currentWeapon = weapons.Length - 1;
             }
-            else if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (++currentSkill > skills.Length - 1)
-                    currentSkill = 0;
-            }
-            skills[currentSkill].SetActive(true);
+            weapons[currentWeapon].SetActive(true);
         }
 
         public void CreateSwordEffect()
@@ -64,13 +59,13 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (currentSkill == 0)
+            if (currentWeapon == 0)
                 DOVirtual.Float(.2f, 1f, 0.7f, duration => GetComponentInChildren<Animator>().speed = duration);
 
-            if (col != null && col.CompareTag("Enemy") && currentSkill == 1)
+            if (col != null && col.CompareTag("Enemy") && currentWeapon == 1)
                 PlayerManager.Instance.playerSword.OnHitEnemy(col);
             
-            if (col.CompareTag("BlockingTree")  && currentSkill == 1)
+            if (col.CompareTag("BlockingTree")  && currentWeapon == 1)
             {
                 PlayerManager.Instance.playerSword.DestroyTree(col.gameObject);
             }
@@ -78,8 +73,8 @@ namespace Player
 
         public void UpdateDamages(float multiplier)
         {
-            skills[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().updateDamage(multiplier);
-            skills[1].GetComponent<Player.Sword>().UpdateDamage(multiplier);
+            weapons[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().updateDamage(multiplier);
+            weapons[1].GetComponent<Player.Sword>().UpdateDamage(multiplier);
         }
     }
 }

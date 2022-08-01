@@ -502,10 +502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2700e2cecf889a4e9f977c12c02cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills:
+  weapons:
   - {fileID: 1203679457}
   - {fileID: 2488566603993709486}
-  currentSkill: 0
+  currentWeapon: 0
 --- !u!114 &1363603100
 MonoBehaviour:
   m_ObjectHideFlags: 0

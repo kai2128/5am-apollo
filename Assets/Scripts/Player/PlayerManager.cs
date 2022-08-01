@@ -92,7 +92,7 @@ namespace Player
             anim.enabled = true;
             sr.enabled = true;
             currentHp = maxHp;
-            playerAttack.ActiveCurrentSkill();
+            playerAttack.ActiveCurrentWeapon();
             mainCamera.MoveToTopOfPrioritySubqueue();
         }
 

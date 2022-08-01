@@ -35,7 +35,7 @@ public class PlayerAbilityUI : MonoBehaviour
 
     private void Weapon()
     {
-        var currentActiveWeapon = PlayerManager.Instance.playerAttack.currentSkill;
+        var currentActiveWeapon = PlayerManager.Instance.playerAttack.currentWeapon;
         if (currentActiveWeapon == 0)
         {
             claw.enabled = true;
