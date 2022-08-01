@@ -15,13 +15,13 @@ GameObject:
   - component: {fileID: 6832817655951633901}
   - component: {fileID: 6832817655951633878}
   - component: {fileID: 6832817655951633879}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Froggie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6832817655951633897
 Transform:
   m_ObjectHideFlags: 0

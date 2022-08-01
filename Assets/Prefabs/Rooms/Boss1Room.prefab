@@ -8202,9 +8202,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6675637082830602527, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8203012030720215952, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
       propertyPath: m_Name
       value: Boss_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203012030720215952, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dfa2acb27f40c449903af431eef5273, type: 3}
