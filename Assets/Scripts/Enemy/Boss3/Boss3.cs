@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Class;
 namespace Enemy.Boss3
@@ -7,12 +8,31 @@ namespace Enemy.Boss3
     public class Boss3 : Enemy
     {
         public Transform player;
+        public GameObject laserArea;
         public bool isFlipped = false;
         public float distanceBetweenPlayer;
+
+        public Attack melee = new Attack("Melee", 4f);
+        public Attack laser = new Attack("Laser", 5f);
+
+        public Attack[] attacks;
+
+        public Attack currentAttack;
         // Start is called before the first frame update
+
+        public class Attack
+        {
+            public string trigger;
+            public float attackRange;
+            public Attack(string trigger, float attackRange)
+            {
+                this.trigger = trigger;
+                this.attackRange = attackRange;
+            }
+        }
         void Awake()
         {
-
+            attacks = new[] { melee, laser };
         }
 
         // Update is called once per frame
@@ -40,10 +60,29 @@ namespace Enemy.Boss3
             }
 
         }
+
+        public Attack GetAttack()
+        {
+            return attacks[1];
+        }
+
+        public float[] GetAttackRanges()
+        {
+            return attacks.Select(attack => attack.attackRange).ToArray();
+        }
         public override void GetHit(AttackArguments getHitBy)
         {
 
         }
+
+        // public void LaserEffect()
+        // {
+        //     Laser laser = laserArea.GetComponentInChildren<Laser>();
+        //     laser.gameObject.SetActive(true);
+        //     // Debug.Log(laser.gameObject);
+        // }
+
+
     }
 
 }

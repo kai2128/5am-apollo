@@ -5,46 +5,28 @@ using Utils;
 using System.Linq;
 namespace Enemy.Boss3
 {
-    public class Boss3_move : StateMachineBehaviour
+    public class Boss3_Ready : StateMachineBehaviour
     {
-        Transform player;
-        Rigidbody2D rb;
-        Boss3 boss;
-
-        public float speed = 2.5f;
-        public float attackRange = 4f;
-
-
+        private Boss3 boss;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            rb = animator.GetComponent<Rigidbody2D>();
             boss = animator.GetComponent<Boss3>();
+            boss.currentAttack = boss.GetAttack();
+            animator.SetTrigger(boss.currentAttack.trigger);
+
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            boss.LookAtPlayer();
-            Vector2 target = new Vector2(player.position.x, rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
-            // attackRange = 4f;
-            if (boss.distanceBetweenPlayer <= boss.GetAttackRanges().Min())
-            {
-                // animator.SetTrigger("Melee");
-                // animator.SetTrigger("Laser");
-                animator.SetTrigger("Ready");
-            }
 
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            // animator.ResetTrigger("Melee");
-
+            animator.ResetAllTriggers();
         }
 
         // OnStateMove is called right after Animator.OnAnimatorMove()
