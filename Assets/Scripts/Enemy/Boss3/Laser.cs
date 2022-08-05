@@ -8,7 +8,7 @@ namespace Enemy.Boss3
     {
         Collider2D col;
         // public LineRenderer laserTail;
-        public Transform player;
+        // public Transform player;
         public Transform boss;
         public GameObject lineTail;
 
@@ -22,13 +22,20 @@ namespace Enemy.Boss3
         // Update is called once per frame
         void Update()
         {
-
-
+            // if (gameObject.activeSelf)
+            // {
+            //     LaserEffect();
+            // }
         }
 
         public void LaserEffect()
         {
             lineTail.SetActive(true);
+        }
+        public void EndLaserEffect()
+        {
+            gameObject.SetActive(false);
+            lineTail.SetActive(false);
         }
 
     }

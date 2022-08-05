@@ -8,12 +8,16 @@ namespace Enemy.Boss3
     public class Boss3 : Enemy
     {
         public Transform player;
-        public GameObject laserArea;
+        // public GameObject laserArea;
         public bool isFlipped = false;
         public float distanceBetweenPlayer;
 
-        public Attack melee = new Attack("Melee", 4f);
-        public Attack laser = new Attack("Laser", 5f);
+        public float moveSpeed = 10f;
+
+        public bool rageMode = false;
+
+        public Attack melee = new Attack("Melee", 4f, 80);
+        public Attack laser = new Attack("Laser", 20f, 20);
 
         public Attack[] attacks;
 
@@ -24,10 +28,12 @@ namespace Enemy.Boss3
         {
             public string trigger;
             public float attackRange;
-            public Attack(string trigger, float attackRange)
+            public int weight;
+            public Attack(string trigger, float attackRange, int weight)
             {
                 this.trigger = trigger;
                 this.attackRange = attackRange;
+                this.weight = weight;
             }
         }
         void Awake()
@@ -39,6 +45,7 @@ namespace Enemy.Boss3
         void Update()
         {
             distanceBetweenPlayer = Vector2.Distance(player.transform.position, rb.position);
+
         }
 
         public void LookAtPlayer()
@@ -63,7 +70,18 @@ namespace Enemy.Boss3
 
         public Attack GetAttack()
         {
-            return attacks[1];
+            int sum = 0;
+            int rand = Random.Range(0, 100);
+            foreach (var atk in attacks)
+            {
+                sum += atk.weight;
+                if (rand <= sum)
+                {
+                    return atk;
+                }
+            }
+            return null;
+
         }
 
         public float[] GetAttackRanges()
@@ -74,15 +92,6 @@ namespace Enemy.Boss3
         {
 
         }
-
-        // public void LaserEffect()
-        // {
-        //     Laser laser = laserArea.GetComponentInChildren<Laser>();
-        //     laser.gameObject.SetActive(true);
-        //     // Debug.Log(laser.gameObject);
-        // }
-
-
     }
 
 }
