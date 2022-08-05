@@ -16,13 +16,13 @@ public class LaserTail : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Player"))
-        {
-            // var attackArgs = GetAttackArgs(currentAttack);
-            // col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
-            Debug.Log("Hit Player");
-        }
-    }
+    // public void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.CompareTag("Player"))
+    //     {
+    //         // var attackArgs = GetAttackArgs(currentAttack);
+    //         // col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
+    //         Debug.Log("Hit Player");
+    //     }
+    // }
 }

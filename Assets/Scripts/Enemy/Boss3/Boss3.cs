@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Class;
+using Player;
+using static Utils.Utils;
+using Utils;
 namespace Enemy.Boss3
 {
     public class Boss3 : Enemy
     {
+        public new string name;
         public Transform player;
         // public GameObject laserArea;
         public bool isFlipped = false;
@@ -15,9 +19,9 @@ namespace Enemy.Boss3
         public float moveSpeed = 10f;
 
         public bool rageMode = false;
-
-        public Attack melee = new Attack("Melee", 4f, 80);
-        public Attack laser = new Attack("Laser", 20f, 20);
+        public bool isImmune = false;
+        public Attack melee = new Attack(10f, 1f, "Melee", 1.2f, 80);
+        public Attack laser = new Attack(50f, 1f, "Laser", 20f, 20);
 
         public Attack[] attacks;
 
@@ -26,19 +30,30 @@ namespace Enemy.Boss3
 
         public class Attack
         {
+            public float damage;
+            public float force;
             public string trigger;
             public float attackRange;
             public int weight;
-            public Attack(string trigger, float attackRange, int weight)
+            public Attack(float damage, float force, string trigger, float attackRange, int weight)
             {
+                this.damage = damage;
+                this.force = force;
                 this.trigger = trigger;
                 this.attackRange = attackRange;
                 this.weight = weight;
+            }
+
+            public AttackArguments GetAttackArgs()
+            {
+                return new AttackArguments(damage, force);
             }
         }
         void Awake()
         {
             attacks = new[] { melee, laser };
+            name = "Mecha Golem";
+            currentHp = maxHp;
         }
 
         // Update is called once per frame
@@ -84,13 +99,41 @@ namespace Enemy.Boss3
 
         }
 
+        public AttackArguments GetAttackArgs(Attack attack)
+        {
+            return attack.GetAttackArgs().UpdateTransform(transform);
+        }
+
         public float[] GetAttackRanges()
         {
             return attacks.Select(attack => attack.attackRange).ToArray();
         }
         public override void GetHit(AttackArguments getHitBy)
         {
+            if (isImmune)
+            {
+                return;
+            }
+            float damage = getHitBy.damage;
+            currentHp -= damage;
+            Debug.Log(currentHp);
+            sr.BlinkWhite();
 
+            if (currentHp <= 0)
+            {
+                anim.Play("immune");
+                rageMode = true;
+                isImmune = true;
+            }
+        }
+
+        public void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.CompareTag("Player"))
+            {
+                var attackArgs = GetAttackArgs(currentAttack);
+                col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
+            }
         }
     }
 

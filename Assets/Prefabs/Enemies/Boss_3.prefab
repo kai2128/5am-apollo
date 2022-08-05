@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ef541c65296b0468524dcee2db262c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4537086272770213271}
   boss: {fileID: 0}
   lineTail: {fileID: 0}
 --- !u!1 &274120884001088765
@@ -167,6 +166,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db2cb839a48f994bb257bb9aa3d175c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2441113067774457647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8147317977389394011}
+  m_Layer: 9
+  m_Name: MeleeArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8147317977389394011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441113067774457647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1778100192457295561}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5636596037758566696
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,10 +227,11 @@ Transform:
   m_GameObject: {fileID: 5636596037758566696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.731922, y: 0.6635775, z: 1}
+  m_LocalScale: {x: 0.73, y: 0.66, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3821342097980381695}
+  - {fileID: 8147317977389394011}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -273,10 +304,12 @@ MonoBehaviour:
   maxHp: 0
   enemyXp: 0
   enemyLevel: 0
+  name: 
   player: {fileID: 0}
-  laserArea: {fileID: 0}
   isFlipped: 0
   distanceBetweenPlayer: 0
+  moveSpeed: 10
+  rageMode: 0
 --- !u!50 &2247985951944787370
 Rigidbody2D:
   serializedVersion: 4

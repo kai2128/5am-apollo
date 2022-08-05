@@ -30,6 +30,7 @@ namespace Enemy.Boss3
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, boss.moveSpeed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
             // attackRange = 4f;
+            Debug.Log(boss.GetAttackRanges().Min());
             if (boss.distanceBetweenPlayer <= boss.GetAttackRanges().Min())
             {
                 animator.SetTrigger("Ready");
