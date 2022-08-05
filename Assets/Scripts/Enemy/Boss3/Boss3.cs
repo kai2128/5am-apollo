@@ -116,12 +116,12 @@ namespace Enemy.Boss3
             }
             float damage = getHitBy.damage;
             currentHp -= damage;
-            Debug.Log(currentHp);
             sr.BlinkWhite();
 
             if (currentHp <= 0)
             {
-                anim.Play("immune");
+                anim.SetBool("isImmune", true);
+
                 rageMode = true;
                 isImmune = true;
             }
@@ -134,6 +134,20 @@ namespace Enemy.Boss3
                 var attackArgs = GetAttackArgs(currentAttack);
                 col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
             }
+        }
+
+        public void StopEnlarge()
+        {
+            transform.localScale = new Vector3(4, 3, 1);
+            Debug.Log(transform.localScale);
+            isImmune = false;
+            EnterRageMode();
+        }
+
+        public void EnterRageMode()
+        {
+            maxHp = 500;
+            currentHp = 500;
         }
     }
 
