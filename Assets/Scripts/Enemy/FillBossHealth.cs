@@ -17,41 +17,42 @@ namespace Enemy
         void Awake()
         {
             slider = GetComponentInChildren<Slider>();
-            bossText.SetText(boss.GetComponent<Boss1.Boss1>().name);
-            maxHp = boss.GetComponent<Boss1.Boss1>().maxHp;
+            bossText.SetText(boss.GetComponent<Boss3.Boss3>().name);
+            maxHp = boss.GetComponent<Boss3.Boss3>().maxHp;
         }
 
         void Update()
         {
-                // currentHp = boss.currentHp;
-                // maxHp = boss.maxHp;
-                currentHp = boss.GetComponent<Boss1.Boss1>().currentHp;
 
-            
-                if(slider.value <= slider.minValue)
-                {
-                    fillImage.enabled = false;
-                }
-                
-                if(slider.value > slider.minValue && !fillImage.enabled)
-                {
-                    fillImage.enabled = true;
-                }
-                
-                float fillValue = currentHp / maxHp;
-                
-                if(fillValue <= slider.maxValue / 3)
-                {
-                    fillImage.color = Color.yellow;
-                }
-                else
-                {
-                    fillImage.color = Color.red;
-                }
+            currentHp = boss.GetComponent<Boss3.Boss3>().currentHp;
+            maxHp = boss.GetComponent<Boss3.Boss3>().maxHp;
 
-                slider.value = fillValue;
-            
+            if (slider.value <= slider.minValue)
+            {
+                fillImage.enabled = false;
+            }
+
+            if (slider.value > slider.minValue && !fillImage.enabled)
+            {
+                fillImage.enabled = true;
+            }
+
+            float fillValue = currentHp / maxHp;
+
+            if (fillValue <= slider.maxValue / 3)
+            {
+                fillImage.color = Color.yellow;
+            }
+            else
+            {
+                fillImage.color = Color.red;
+            }
+
+            slider.value = fillValue;
+
         }
+
+
     }
 }
 

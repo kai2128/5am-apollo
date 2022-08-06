@@ -18,7 +18,7 @@ namespace Enemy.Boss3
 
         public float moveSpeed = 10f;
 
-        public bool rageMode = false;
+
         public bool isImmune = false;
         public Attack melee = new Attack(10f, 1f, "Melee", 1.2f, 80);
         public Attack laser = new Attack(50f, 1f, "Laser", 20f, 20);
@@ -26,7 +26,21 @@ namespace Enemy.Boss3
         public Attack[] attacks;
 
         public Attack currentAttack;
-        // Start is called before the first frame update
+
+        [Header("Giant Boss")]
+
+        public Boss3LeftShoulder leftShoulder;
+        public Boss3RightShoulder rightShoulder;
+        public Boss3Head head;
+
+        public bool isAttackedHead;
+        public bool isAttackedLeftShoulder;
+        public bool isAttackedRightShoulder;
+
+        public float weaknessRadius;
+        public bool rageMode = false;
+        public bool isEnlarge = false;
+
 
         public class Attack
         {
@@ -54,12 +68,19 @@ namespace Enemy.Boss3
             attacks = new[] { melee, laser };
             name = "Mecha Golem";
             currentHp = maxHp;
+
         }
 
         // Update is called once per frame
         void Update()
         {
             distanceBetweenPlayer = Vector2.Distance(player.transform.position, rb.position);
+            // if (isEnlarge)
+            // {
+            //     isAttackedHead = Physics2D.OverlapCircle(weakness_head.position, weaknessRadius, playerLayer);
+            //     isAttackedLeftShoulder = Physics2D.OverlapCircle(weakness_leftshoulder.position, weaknessRadius, playerLayer);
+            //     isAttackedRightShoulder = Physics2D.OverlapCircle(weakness_rightshoulder.position, weaknessRadius, playerLayer);
+            // }
 
         }
 
@@ -82,6 +103,8 @@ namespace Enemy.Boss3
             }
 
         }
+
+
 
         public Attack GetAttack()
         {
@@ -114,41 +137,85 @@ namespace Enemy.Boss3
             {
                 return;
             }
-            float damage = getHitBy.damage;
-            currentHp -= damage;
-            sr.BlinkWhite();
-
-            if (currentHp <= 0)
+            if (!isEnlarge)
             {
-                anim.SetBool("isImmune", true);
 
-                rageMode = true;
-                isImmune = true;
+                float damage = getHitBy.damage;
+                currentHp -= damage;
+                sr.BlinkWhite();
+
+                if (currentHp <= 0)
+                {
+                    anim.SetBool("isImmune", true);
+
+                    rageMode = true;
+
+                    isImmune = true;
+                }
             }
+
+
         }
+
 
         public void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.CompareTag("Player"))
+            if (isEnlarge)
             {
-                var attackArgs = GetAttackArgs(currentAttack);
-                col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
+
             }
+            else
+            {
+                if (col.CompareTag("Player"))
+                {
+                    var attackArgs = GetAttackArgs(currentAttack);
+                    col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
+                }
+            }
+
+
+
         }
 
         public void StopEnlarge()
         {
+            //change the real scale 
             transform.localScale = new Vector3(4, 3, 1);
+
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<CapsuleCollider2D>().enabled = true;
+
+
             Debug.Log(transform.localScale);
             isImmune = false;
-            EnterRageMode();
+            isEnlarge = true;
+            EnterGiantMode();
         }
 
-        public void EnterRageMode()
+        public void EnterGiantMode()
         {
             maxHp = 500;
             currentHp = 500;
+            leftShoulder.UpdateCurrentHp(maxHp);
+            rightShoulder.UpdateCurrentHp(maxHp);
+            head.UpdateCurrentHp(maxHp);
         }
+        // public void EnterRageMode(){
+
+        // }
+
+        // private void OnDrawGizmosSelected()
+        // {
+        //     // if (isEnlarge)
+        //     // {
+        //     //     Gizmos.color = Color.cyan;
+        //     //     Gizmos.DrawWireSphere(weakness_head.position, weaknessRadius);
+        //     //     Gizmos.DrawWireSphere(weakness_leftshoulder.position, weaknessRadius);
+        //     //     Gizmos.DrawWireSphere(weakness_rightshoulder.position, weaknessRadius);
+        //     // }
+
+
+        // }
     }
 
 }

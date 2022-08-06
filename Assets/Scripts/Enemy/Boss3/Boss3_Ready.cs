@@ -13,9 +13,14 @@ namespace Enemy.Boss3
         {
             boss = animator.GetComponent<Boss3>();
             boss.currentAttack = boss.GetAttack();
+
             if (boss.currentAttack == null)
             {
-                animator.SetTrigger("Move");
+                if (!boss.isEnlarge)
+                {
+                    animator.SetTrigger("Move");
+                }
+
             }
             else
             {
