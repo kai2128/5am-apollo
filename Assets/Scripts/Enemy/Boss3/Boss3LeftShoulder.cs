@@ -22,9 +22,12 @@ namespace Enemy.Boss3
 
         }
 
-        public void UpdateCurrentHp(float hp)
+        public void Show(float hp)
         {
-            currentHp = hp / 3;
+            currentHp = hp / 3; //update hp hold by this weakness point with new max hp of boss
+            sr.enabled = true;
+            anim.enabled = true;
+
         }
 
         public override void GetHit(AttackArguments getHitBy)

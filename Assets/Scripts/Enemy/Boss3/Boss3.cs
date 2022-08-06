@@ -196,9 +196,16 @@ namespace Enemy.Boss3
         {
             maxHp = 500;
             currentHp = 500;
-            leftShoulder.UpdateCurrentHp(maxHp);
-            rightShoulder.UpdateCurrentHp(maxHp);
-            head.UpdateCurrentHp(maxHp);
+            ShowWeaknessPoints();
+
+        }
+
+        public void ShowWeaknessPoints()
+        {
+            leftShoulder.Show(maxHp);
+            rightShoulder.Show(maxHp);
+            head.Show(maxHp);
+
         }
         // public void EnterRageMode(){
 
