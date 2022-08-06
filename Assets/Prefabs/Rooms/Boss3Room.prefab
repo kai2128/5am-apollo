@@ -1412,6 +1412,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4268499565677665729, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5636596037758566696, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: m_Name
       value: Boss_3
@@ -1423,6 +1427,10 @@ PrefabInstance:
     - target: {fileID: 5681016161640959434, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233160652498383911, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7662901736719158151, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: boss
@@ -1504,6 +1512,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.65, y: 0.39}
   m_EdgeRadius: 0
+--- !u!114 &1677267806054907136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5731654502063250965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb0e5d9b7392f7459094d75ff38c1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8442000086648727300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1778100192457295561, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
