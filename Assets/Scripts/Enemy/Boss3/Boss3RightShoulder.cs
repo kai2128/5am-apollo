@@ -39,15 +39,20 @@ namespace Enemy.Boss3
                 return;
             }
 
-            float damage = getHitBy.damage;
-            currentHp -= damage;
-            boss.currentHp -= damage;
-            SpriteRenderer bossSR = boss.gameObject.GetComponent<SpriteRenderer>();
-            bossSR.BlinkWhite();
+            if (currentHp > 0)
+            {
+                float damage = getHitBy.damage;
+                currentHp -= damage;
+                boss.currentHp -= damage;
+                SpriteRenderer bossSR = boss.gameObject.GetComponent<SpriteRenderer>();
+                bossSR.BlinkWhite();
+            }
 
             if (currentHp <= 0)
             {
                 Debug.Log("HP Emptied");
+                sr.enabled = false;
+                anim.enabled = false;
             }
 
 

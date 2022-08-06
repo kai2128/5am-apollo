@@ -235,6 +235,7 @@ MonoBehaviour:
   enemyXp: 0
   enemyLevel: 0
   boss: {fileID: 85870833931730423}
+  weaknessPoint: {fileID: 1946778972154617792}
 --- !u!212 &4268499565677665729
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -479,6 +480,7 @@ MonoBehaviour:
   enemyXp: 0
   enemyLevel: 0
   boss: {fileID: 85870833931730423}
+  weaknessPoint: {fileID: 2852678983556675710}
 --- !u!1 &4992841382781876576
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +622,7 @@ MonoBehaviour:
   enemyXp: 0
   enemyLevel: 0
   boss: {fileID: 85870833931730423}
+  weaknessPoint: {fileID: 4992841382781876576}
 --- !u!1 &5636596037758566696
 GameObject:
   m_ObjectHideFlags: 0
