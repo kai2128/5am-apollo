@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject level1Generator;
     public BossEntrance boss1Entrance;
 
+    public GameObject level4Generator;
+    public Boss4Entrance boss4Entrance;
+
     [HideInInspector]
     public GameObject generatedGameObject;
 
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         GenerateLevel1();
+        GenerateLevel4();
     }
 
     public void GenerateLevel1()
@@ -49,9 +53,22 @@ public class GameManager : MonoBehaviour
         });
     }
 
+    public void GenerateLevel4()
+    {
+        var clonedLevelGeneration = Instantiate(level4Generator);
+        var levelGeneration = clonedLevelGeneration.GetComponent<LevelGeneration>();
+        levelGeneration.StartGeneration(() =>
+        {
+            boss4Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.up * 30.6f + Vector3.left * 20.01f);
+            boss4Entrance.ResetBossRoom();
+            Destroy(clonedLevelGeneration);
+        });
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere( level1Generator.GetComponent<LevelGeneration>().pos2.position, 1);
+        Gizmos.DrawWireSphere( level4Generator.GetComponent<LevelGeneration>().pos2.position, 1);
     }
 
     [ContextMenu("test")]
@@ -59,6 +76,7 @@ public class GameManager : MonoBehaviour
     {
         Destroy(generatedGameObject);
         DOVirtual.DelayedCall(.2f, GenerateLevel1);
+        DOVirtual.DelayedCall(.2f, GenerateLevel4);
     }
 
     // Update is called once per frame

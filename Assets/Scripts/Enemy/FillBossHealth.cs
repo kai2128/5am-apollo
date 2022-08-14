@@ -17,15 +17,15 @@ namespace Enemy
         void Awake()
         {
             slider = GetComponentInChildren<Slider>();
-            bossText.SetText(boss.GetComponent<Boss1.Boss1>().name);
-            maxHp = boss.GetComponent<Boss1.Boss1>().maxHp;
+            bossText.SetText(boss.GetComponent<Enemy>().enemyName);
+            maxHp = boss.GetComponent<Enemy>().maxHp;
         }
 
         void Update()
         {
                 // currentHp = boss.currentHp;
                 // maxHp = boss.maxHp;
-                currentHp = boss.GetComponent<Boss1.Boss1>().currentHp;
+                currentHp = boss.GetComponent<Enemy>().currentHp;
 
             
                 if(slider.value <= slider.minValue)

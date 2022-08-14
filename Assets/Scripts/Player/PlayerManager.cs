@@ -3,7 +3,8 @@ using System.Collections;
 using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 namespace Player
 {
     public class PlayerManager : MonoBehaviour
@@ -34,7 +35,14 @@ namespace Player
         [HideInInspector] public Sword playerSword;
         public LevelSystem playerLevel;
         public float attackLevelMultiplier = 1.0f;
+        public TextMeshProUGUI statusText;
 
+        public void SetStatusMessage(string msg, float duration = 4f)
+        {
+            statusText.text = msg;
+            statusText.DOFade(1, 0.5f).SetEase(Ease.OutQuint);
+            statusText.DOFade(0, duration).SetEase(Ease.InQuint);
+        }
 
         private void OnDrawGizmos()
         {

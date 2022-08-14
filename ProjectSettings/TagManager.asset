@@ -9,6 +9,7 @@ TagManager:
   - MainCM
   - Platform
   - BlockingTree
+  - effect
   layers:
   - Default
   - TransparentFX
