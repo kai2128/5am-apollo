@@ -41,7 +41,9 @@ namespace Enemy.Boss3
         public bool rageMode = false;
         public bool isEnlarge = false;
 
-
+        // Projectiele
+        public ProjectileBehavior ProjectilePrefab;
+        public Transform LaunchArmProjectileOffset;
         public class Attack
         {
             public float damage;
@@ -188,7 +190,8 @@ namespace Enemy.Boss3
 
             Debug.Log(transform.localScale);
             isImmune = false;
-            isEnlarge = true;
+            // isEnlarge = true;
+            anim.SetBool("isEnlarge", true);
             EnterGiantMode();
         }
 
@@ -206,6 +209,11 @@ namespace Enemy.Boss3
             rightShoulder.Show(maxHp);
             head.Show(maxHp);
 
+        }
+
+        public void ShootArmProjectile()
+        {
+            Instantiate(ProjectilePrefab, LaunchArmProjectileOffset.position, transform.rotation);
         }
         // public void EnterRageMode(){
 
