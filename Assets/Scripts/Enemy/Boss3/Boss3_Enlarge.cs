@@ -22,7 +22,7 @@ namespace Enemy.Boss3
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetBool("isEnlarge", false);
+            // animator.SetBool("isEnlarge", false);
             boss.StopEnlarge();
         }
 

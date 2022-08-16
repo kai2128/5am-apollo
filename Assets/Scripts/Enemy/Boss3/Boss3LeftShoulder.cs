@@ -39,11 +39,18 @@ namespace Enemy.Boss3
 
             if (currentHp > 0)
             {
+                boss.GetComponent<Animator>().ResetAllTriggers();
                 float damage = getHitBy.damage;
                 currentHp -= damage;
                 boss.currentHp -= damage;
                 SpriteRenderer bossSR = boss.gameObject.GetComponent<SpriteRenderer>();
                 bossSR.BlinkWhite();
+                if (boss.isEnlarge)
+                {
+                    boss.GetComponent<Animator>().SetTrigger("Immune");
+
+                }
+
             }
 
             if (currentHp <= 0)

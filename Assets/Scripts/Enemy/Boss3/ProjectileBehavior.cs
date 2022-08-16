@@ -38,7 +38,7 @@ public class ProjectileBehavior : MonoBehaviour
         transform.rotation = LookAtTarget(movePosition - transform.position);
         transform.position = movePosition;
         // transform.position += transform.right * Time.deltaTime * speed;
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 2f);
     }
 
     public static Quaternion LookAtTarget(Vector2 rotation)

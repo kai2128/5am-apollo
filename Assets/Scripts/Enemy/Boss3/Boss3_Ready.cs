@@ -14,26 +14,32 @@ namespace Enemy.Boss3
             boss = animator.GetComponent<Boss3>();
             boss.currentAttack = boss.GetAttack();
 
-            if (boss.currentAttack == null)
-            {
-                if (!boss.isEnlarge)
-                {
-                    animator.SetTrigger("Move");
-                }
-
-            }
-            else
-            {
-                animator.SetTrigger(boss.currentAttack.trigger);
-            }
-
-
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             boss.LookAtPlayer();
+            if (boss.currentAttack == null)
+            {
+                if (boss.isEnlarge)
+                {
+                    Debug.Log("Now is idle");
+                    animator.SetTrigger("Idle");
+                }
+                else
+                {
+                    animator.SetTrigger("Walk");
+                }
+
+
+            }
+            else
+            {
+
+                animator.SetTrigger(boss.currentAttack.trigger);
+
+            }
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -16,6 +16,7 @@ namespace Enemy.Boss3
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+
             timer = 0;
             boss = animator.GetComponent<Boss3>();
             idleTime = 0.5f;
@@ -33,8 +34,17 @@ namespace Enemy.Boss3
             timer += Time.deltaTime;
             if (timer >= idleTime)
             {
-                animator.SetTrigger("Move");
+                if (boss.isEnlarge)
+                {
+                    animator.SetTrigger("Ready");
+                }
+                else
+                {
+                    animator.SetTrigger("Move");
+                }
+
             }
+
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

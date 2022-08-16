@@ -46,6 +46,8 @@ namespace Enemy.Boss3
                 boss.currentHp -= damage;
                 SpriteRenderer bossSR = boss.gameObject.GetComponent<SpriteRenderer>();
                 bossSR.BlinkWhite();
+                boss.GetComponent<Animator>().ResetAllTriggers(); //interrupt all attacks 
+                boss.GetComponent<Animator>().SetTrigger("Laser");
             }
 
             if (currentHp <= 0)

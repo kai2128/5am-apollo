@@ -10,24 +10,28 @@ namespace Enemy.Boss3
 {
     public class Boss3 : Enemy
     {
+        [Header("Boss3 Common")]
         public new string name;
         public Transform player;
         // public GameObject laserArea;
         public bool isFlipped = false;
         public float distanceBetweenPlayer;
-
         public float moveSpeed = 10f;
-
 
         public bool isImmune = false;
         public Attack melee = new Attack(10f, 1f, "Melee", 1.2f, 80);
         public Attack laser = new Attack(50f, 1f, "Laser", 20f, 20);
+        public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 20);
 
         public Attack[] attacks;
 
         public Attack currentAttack;
+        [Header("Mini Boss")]
+        public Attack[] miniBossAttacks;
+
 
         [Header("Giant Boss")]
+        public Attack[] giantBossAttacks;
 
         public Boss3LeftShoulder leftShoulder;
         public Boss3RightShoulder rightShoulder;
@@ -40,10 +44,12 @@ namespace Enemy.Boss3
         public float weaknessRadius;
         public bool rageMode = false;
         public bool isEnlarge = false;
+        public bool goingEnlarge = false;
 
         // Projectiele
         public ProjectileBehavior ProjectilePrefab;
         public Transform LaunchArmProjectileOffset;
+
         public class Attack
         {
             public float damage;
@@ -67,7 +73,9 @@ namespace Enemy.Boss3
         }
         void Awake()
         {
-            attacks = new[] { melee, laser };
+            miniBossAttacks = new[] { melee, laser };
+            giantBossAttacks = new[] { shoot };
+            attacks = miniBossAttacks; // mini boss attacks
             name = "Mecha Golem";
             currentHp = maxHp;
 
@@ -110,10 +118,20 @@ namespace Enemy.Boss3
 
         public Attack GetAttack()
         {
+            //just in case
+            if (isEnlarge)
+            {
+                attacks = giantBossAttacks;
+            }
+            else
+            {
+                attacks = miniBossAttacks;
+            }
             int sum = 0;
             int rand = Random.Range(0, 100);
             foreach (var atk in attacks)
             {
+                Debug.Log(atk.trigger);
                 sum += atk.weight;
                 if (rand <= sum)
                 {
@@ -148,11 +166,13 @@ namespace Enemy.Boss3
 
                 if (currentHp <= 0)
                 {
-                    anim.SetBool("isImmune", true);
-
-                    rageMode = true;
-
+                    attacks = giantBossAttacks; //set attacks of boss to giant boss
+                    anim.SetTrigger("Immune");
+                    // rageMode = true;
                     isImmune = true;
+                    goingEnlarge = true;
+                    isEnlarge = true; // set to isEnlarge boss mode
+
                 }
             }
 
@@ -181,17 +201,17 @@ namespace Enemy.Boss3
 
         public void StopEnlarge()
         {
+
             //change the real scale 
             transform.localScale = new Vector3(4, 3, 1);
 
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = true;
-
-
             Debug.Log(transform.localScale);
             isImmune = false;
+            goingEnlarge = false;
             // isEnlarge = true;
-            anim.SetBool("isEnlarge", true);
+
             EnterGiantMode();
         }
 
@@ -200,6 +220,7 @@ namespace Enemy.Boss3
             maxHp = 500;
             currentHp = 500;
             ShowWeaknessPoints();
+
 
         }
 
@@ -215,6 +236,8 @@ namespace Enemy.Boss3
         {
             Instantiate(ProjectilePrefab, LaunchArmProjectileOffset.position, transform.rotation);
         }
+
+
         // public void EnterRageMode(){
 
         // }
