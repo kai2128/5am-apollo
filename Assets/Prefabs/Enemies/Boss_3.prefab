@@ -232,6 +232,7 @@ MonoBehaviour:
   rb: {fileID: 2247985951944787370}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
   boss: {fileID: 85870833931730423}
@@ -476,6 +477,7 @@ MonoBehaviour:
   rb: {fileID: 2247985951944787370}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
   boss: {fileID: 85870833931730423}
@@ -617,6 +619,7 @@ MonoBehaviour:
   rb: {fileID: 2247985951944787370}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
   boss: {fileID: 85870833931730423}
@@ -761,13 +764,14 @@ MonoBehaviour:
   rb: {fileID: 2247985951944787370}
   currentHp: 0
   maxHp: 100
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
-  name: Mecha Golem
   player: {fileID: 0}
   isFlipped: 0
   distanceBetweenPlayer: 0
   moveSpeed: 10
+  armour: 0
   isImmune: 0
   leftShoulder: {fileID: 8058627553613626441}
   rightShoulder: {fileID: 466368032734836769}
@@ -778,8 +782,13 @@ MonoBehaviour:
   weaknessRadius: 0.8
   rageMode: 0
   isEnlarge: 0
+  goingEnlarge: 0
+  isAttacking: 0
+  SpawnProjectilesCooldown: 20
+  timer: 0
   ProjectilePrefab: {fileID: 1406452147775793678, guid: 3e83eda359e6c5b45879465b617e916e, type: 3}
   LaunchArmProjectileOffset: {fileID: 768502243413015317}
+  ProjectileSpawnPoint1: {fileID: 0}
 --- !u!50 &2247985951944787370
 Rigidbody2D:
   serializedVersion: 4

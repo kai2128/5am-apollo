@@ -10,8 +10,8 @@ namespace Enemy
         public Image fillImage;
         public TextMeshProUGUI bossText;
         public GameObject boss;
-        private float maxHp;
-        private float currentHp;
+        public float maxHp;
+        public float currentHp;
         private Slider slider;
 
         void Awake()
@@ -30,7 +30,7 @@ namespace Enemy
             // currentHp = boss.currentHp;
             // maxHp = boss.maxHp;
             currentHp = boss.GetComponent<Enemy>().currentHp;
-
+            maxHp = boss.GetComponent<Enemy>().maxHp;
 
             if (slider.value <= slider.minValue)
             {

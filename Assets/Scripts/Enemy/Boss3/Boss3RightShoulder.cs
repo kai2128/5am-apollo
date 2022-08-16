@@ -20,6 +20,21 @@ namespace Enemy.Boss3
         // Update is called once per frame
         void Update()
         {
+            if (boss.isEnlarge)
+            {
+                if (boss.isAttacking)
+                {
+                    sr.enabled = false;
+                    anim.enabled = false;
+
+                }
+                else
+                {
+
+                    sr.enabled = true;
+                    anim.enabled = true;
+                }
+            }
 
         }
 
@@ -38,17 +53,17 @@ namespace Enemy.Boss3
             {
                 return;
             }
-
+            if (boss.isAttacking)
+            {
+                return;
+            }
             if (currentHp > 0)
             {
                 boss.GetComponent<Animator>().ResetAllTriggers();
                 boss.GetHit(getHitBy); //deduct boss damage
                 float damage = getHitBy.damage;
                 currentHp -= damage; //deduct hp hold for this weakness point
-                if (boss.isEnlarge)
-                {
-                    boss.GetComponent<Animator>().SetTrigger("Immune");
-                }
+
             }
 
             if (currentHp <= 0)

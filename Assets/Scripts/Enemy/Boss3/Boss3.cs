@@ -26,6 +26,7 @@ namespace Enemy.Boss3
         public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 20);
         public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 20);
         public Attack[] attacks;
+        public bool isdead = false;
 
         public Attack currentAttack;
         [Header("Mini Boss")]
@@ -46,12 +47,19 @@ namespace Enemy.Boss3
         public float weaknessRadius;
         public bool rageMode = false;
         public bool isEnlarge = false;
-        public bool goingEnlarge = false;
 
+        public bool goingEnlarge = false;
+        public bool isAttacking = false;
+        public float SpawnProjectilesCooldown = 10f;
+        public int NumberOfSpawns = 0;
+        public float timer = 0f;
         // Projectiele
         public ProjectileBehavior ProjectilePrefab;
+        public BombProjectileBehavior bombPrefab;
         public Transform LaunchArmProjectileOffset;
-
+        public Transform ProjectileSpawnPoint1;
+        public Transform ProjectileSpawnPoint2;
+        public Transform ProjectileSpawnPoint3;
         public class Attack
         {
             public float damage;
@@ -79,7 +87,9 @@ namespace Enemy.Boss3
             giantBossAttacks = new[] { shoot, shield_cast };
             attacks = miniBossAttacks; // mini boss attacks
             enemyName = "Mecha Golem";
+            maxHp = 20;
             currentHp = maxHp;
+            enemyXp = 200;
 
         }
 
@@ -87,12 +97,17 @@ namespace Enemy.Boss3
         void Update()
         {
             distanceBetweenPlayer = Vector2.Distance(player.transform.position, rb.position);
-            // if (isEnlarge)
-            // {
-            //     isAttackedHead = Physics2D.OverlapCircle(weakness_head.position, weaknessRadius, playerLayer);
-            //     isAttackedLeftShoulder = Physics2D.OverlapCircle(weakness_leftshoulder.position, weaknessRadius, playerLayer);
-            //     isAttackedRightShoulder = Physics2D.OverlapCircle(weakness_rightshoulder.position, weaknessRadius, playerLayer);
-            // }
+            if (rageMode && !isdead)
+            {
+                timer += Time.deltaTime;
+                if (distanceBetweenPlayer < 10f && timer >= SpawnProjectilesCooldown)
+                {
+                    anim.Play("glow");
+                    SpawnProjectiles();
+                    timer = 0;
+                }
+            }
+
 
         }
 
@@ -177,6 +192,23 @@ namespace Enemy.Boss3
 
                 }
             }
+            else
+            {
+                if (currentHp < (maxHp / 3) && !rageMode)
+                {
+                    rageMode = true;
+                    SpawnProjectiles();
+                }
+                if (currentHp <= 0)
+                {
+                    anim.Play("death");
+                    isdead = true;
+                    leftShoulder.gameObject.SetActive(false);
+                    rightShoulder.gameObject.SetActive(false);
+                    head.gameObject.SetActive(false);
+
+                }
+            }
 
 
         }
@@ -222,8 +254,6 @@ namespace Enemy.Boss3
             maxHp = 500;
             currentHp = 500;
             ShowWeaknessPoints();
-
-
         }
 
         public void ShowWeaknessPoints()
@@ -237,6 +267,27 @@ namespace Enemy.Boss3
         public void ShootArmProjectile()
         {
             Instantiate(ProjectilePrefab, LaunchArmProjectileOffset.position, transform.rotation);
+        }
+
+        public void SpawnProjectiles()
+        {
+            NumberOfSpawns = Random.Range(1, 4);
+
+            Invoke("SpawnBomb", 1f);//call spawn bomb method with 1 sec  delay;
+
+        }
+
+        private void SpawnBomb()
+        {
+            //to spawn the bomb x number of spawns
+            if (NumberOfSpawns <= 0)
+            {
+                return;
+            }
+
+            Instantiate(bombPrefab, ProjectileSpawnPoint1.position, transform.rotation);
+            NumberOfSpawns--;
+            Invoke("SpawnBomb", 1f);
         }
 
         public void OnSheildCast()

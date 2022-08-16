@@ -9,11 +9,9 @@ TagManager:
   - MainCM
   - Platform
   - BlockingTree
-<<<<<<< HEAD
-  - LaunchProjectilePoint
-=======
   - effect
->>>>>>> origin/master
+  - LaunchProjectilePoint
+  - SpawnProjectilePoint
   layers:
   - Default
   - TransparentFX

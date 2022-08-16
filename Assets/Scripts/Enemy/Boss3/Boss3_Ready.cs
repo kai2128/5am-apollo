@@ -22,6 +22,7 @@ namespace Enemy.Boss3
             boss.LookAtPlayer();
             if (boss.currentAttack == null)
             {
+                boss.isAttacking = false;
                 if (boss.isEnlarge)
                 {
                     Debug.Log("Now is idle");
@@ -37,6 +38,10 @@ namespace Enemy.Boss3
             else
             {
 
+                if (boss.currentAttack.trigger != "Sheild")
+                {
+                    boss.isAttacking = true;
+                }
                 animator.SetTrigger(boss.currentAttack.trigger);
 
             }
