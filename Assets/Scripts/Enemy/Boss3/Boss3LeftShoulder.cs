@@ -19,21 +19,7 @@ namespace Enemy.Boss3
         // Update is called once per frame
         void Update()
         {
-            if (boss.isEnlarge)
-            {
-                if (boss.isAttacking)
-                {
-                    sr.enabled = false;
-                    anim.enabled = false;
 
-                }
-                else
-                {
-
-                    sr.enabled = true;
-                    anim.enabled = true;
-                }
-            }
 
         }
 

@@ -22,9 +22,10 @@ namespace Enemy.Boss3
 
         public bool isImmune = false;
         public Attack melee = new Attack(10f, 1f, "Melee", 1.2f, 80);
-        public Attack laser = new Attack(50f, 1f, "Laser", 20f, 20);
+        public Attack laser = new Attack(30f, 1f, "Laser", 20f, 20);
         public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 20);
         public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 20);
+
         public Attack[] attacks;
         public bool isdead = false;
 
@@ -80,6 +81,11 @@ namespace Enemy.Boss3
             {
                 return new AttackArguments(damage, force);
             }
+
+            public void SetWeight(int weight)
+            {
+                this.weight = weight;
+            }
         }
         void Awake()
         {
@@ -87,9 +93,9 @@ namespace Enemy.Boss3
             giantBossAttacks = new[] { shoot, shield_cast };
             attacks = miniBossAttacks; // mini boss attacks
             enemyName = "Mecha Golem";
-            maxHp = 20;
+            maxHp = 100;
             currentHp = maxHp;
-            enemyXp = 200;
+            enemyXp = 100;
 
         }
 
@@ -148,7 +154,7 @@ namespace Enemy.Boss3
             int rand = Random.Range(0, 100);
             foreach (var atk in attacks)
             {
-                Debug.Log(atk.trigger);
+
                 sum += atk.weight;
                 if (rand <= sum)
                 {
@@ -176,7 +182,7 @@ namespace Enemy.Boss3
             }
             float damage = getHitBy.damage * (1 - armour);
             currentHp -= damage;
-            Debug.Log("Damaged:" + damage);
+
             sr.BlinkWhite();
             if (!isEnlarge)
             {
@@ -206,7 +212,7 @@ namespace Enemy.Boss3
                     leftShoulder.gameObject.SetActive(false);
                     rightShoulder.gameObject.SetActive(false);
                     head.gameObject.SetActive(false);
-
+                    DropExperience();
                 }
             }
 
@@ -222,9 +228,10 @@ namespace Enemy.Boss3
             }
             else
             {
-                if (col.CompareTag("Player"))
+                if (col.CompareTag("Player") && currentAttack.trigger != "Laser")
                 {
                     var attackArgs = GetAttackArgs(currentAttack);
+                    Debug.Log("OnTrigger" + currentAttack.trigger);
                     col.gameObject.GetComponent<PlayerOnHit>().GetHit(attackArgs);
                 }
             }
@@ -241,7 +248,7 @@ namespace Enemy.Boss3
 
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = true;
-            Debug.Log(transform.localScale);
+
             isImmune = false;
             goingEnlarge = false;
             // isEnlarge = true;
@@ -251,8 +258,8 @@ namespace Enemy.Boss3
 
         public void EnterGiantMode()
         {
-            maxHp = 500;
-            currentHp = 500;
+            maxHp = 200;
+            currentHp = 200;
             ShowWeaknessPoints();
         }
 

@@ -41,11 +41,12 @@ namespace Enemy.Boss3
 
             if (currentHp > 0)
             {
-                boss.GetComponent<Animator>().ResetAllTriggers(); //interrupt all attacks
+
                 boss.GetHit(getHitBy); //deduct boss damage
                 float damage = getHitBy.damage;
                 currentHp -= damage; //deduct hp hold for this weakness point 
                 boss.GetComponent<Animator>().SetTrigger("Laser");
+
             }
 
             if (currentHp <= 0)
