@@ -31,7 +31,6 @@ namespace Enemy.Boss1
         public Range walkTimeRange =  new(3f, 5f);
         public float distanceBetweenPlayer;
         public float currentDistanceBetweenPlayer;
-        public new string name;
         [Header("Attacks")]
         public float readyTime = 1f;
 
@@ -89,7 +88,7 @@ namespace Enemy.Boss1
             player = GameObject.FindGameObjectWithTag("Player").transform;
             currentHp = maxHp;
             tenacity = maxTenacity;
-            name = "Meta Knight";
+            enemyName = "Meta Knight";
             attackHint = GetComponentInChildren<AttackHint>(true);
         }
 

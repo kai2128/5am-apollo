@@ -7968,7 +7968,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771084, y: 1}
+    m_SensorSize: {x: 1.9177593, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8324,6 +8324,22 @@ PrefabInstance:
     - target: {fileID: 1845555848972197724, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
       propertyPath: m_Name
       value: bossCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845555848972197724, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845555849668023873, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845555849760433259, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845555849760433259, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}

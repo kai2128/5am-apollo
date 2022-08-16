@@ -11,7 +11,7 @@ namespace Enemy.Boss3
     public class Boss3 : Enemy
     {
         [Header("Boss3 Common")]
-        public new string name;
+
         public Transform player;
         // public GameObject laserArea;
         public bool isFlipped = false;
@@ -78,7 +78,7 @@ namespace Enemy.Boss3
             miniBossAttacks = new[] { melee, laser };
             giantBossAttacks = new[] { shoot, shield_cast };
             attacks = miniBossAttacks; // mini boss attacks
-            name = "Mecha Golem";
+            enemyName = "Mecha Golem";
             currentHp = maxHp;
 
         }

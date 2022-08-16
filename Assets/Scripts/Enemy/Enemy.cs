@@ -12,9 +12,9 @@ namespace Enemy
         protected AnimatorStateInfo animInfo;
         protected Animator anim;
         protected Vector3 startingPosition;
-
         public float currentHp;
         public float maxHp;
+        public string enemyName;
 
         public float enemyXp;
         public int enemyLevel;
