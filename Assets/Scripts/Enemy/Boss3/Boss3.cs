@@ -18,11 +18,13 @@ namespace Enemy.Boss3
         public float distanceBetweenPlayer;
         public float moveSpeed = 10f;
 
+        public float armour = 0;
+
         public bool isImmune = false;
         public Attack melee = new Attack(10f, 1f, "Melee", 1.2f, 80);
         public Attack laser = new Attack(50f, 1f, "Laser", 20f, 20);
         public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 20);
-
+        public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 20);
         public Attack[] attacks;
 
         public Attack currentAttack;
@@ -74,7 +76,7 @@ namespace Enemy.Boss3
         void Awake()
         {
             miniBossAttacks = new[] { melee, laser };
-            giantBossAttacks = new[] { shoot };
+            giantBossAttacks = new[] { shoot, shield_cast };
             attacks = miniBossAttacks; // mini boss attacks
             name = "Mecha Golem";
             currentHp = maxHp;
@@ -157,12 +159,12 @@ namespace Enemy.Boss3
             {
                 return;
             }
+            float damage = getHitBy.damage * (1 - armour);
+            currentHp -= damage;
+            Debug.Log("Damaged:" + damage);
+            sr.BlinkWhite();
             if (!isEnlarge)
             {
-
-                float damage = getHitBy.damage;
-                currentHp -= damage;
-                sr.BlinkWhite();
 
                 if (currentHp <= 0)
                 {
@@ -235,6 +237,18 @@ namespace Enemy.Boss3
         public void ShootArmProjectile()
         {
             Instantiate(ProjectilePrefab, LaunchArmProjectileOffset.position, transform.rotation);
+        }
+
+        public void OnSheildCast()
+        {
+            armour = 0.5f; //armour = 30%
+            StartCoroutine(ResetSheild());
+        }
+
+        IEnumerator ResetSheild()
+        {
+            yield return new WaitForSeconds(5);
+            armour = 0; //reset armour to zero
         }
 
 

@@ -42,11 +42,9 @@ namespace Enemy.Boss3
             if (currentHp > 0)
             {
                 boss.GetComponent<Animator>().ResetAllTriggers();
+                boss.GetHit(getHitBy); //deduct boss damage
                 float damage = getHitBy.damage;
-                currentHp -= damage;
-                boss.currentHp -= damage;
-                SpriteRenderer bossSR = boss.gameObject.GetComponent<SpriteRenderer>();
-                bossSR.BlinkWhite();
+                currentHp -= damage; //deduct hp hold for this weakness point
                 if (boss.isEnlarge)
                 {
                     boss.GetComponent<Animator>().SetTrigger("Immune");
