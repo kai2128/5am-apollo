@@ -135,5 +135,55 @@ namespace Player
             attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.1f);
             playerAttack.UpdateDamages(attackLevelMultiplier);
         }
+
+        public void GrowDmg(bool growed)
+        {
+            if (growed)
+            {
+                playerAttack.UpdateDamages(1.3f);//increase ori damage by 30%
+            }
+            else
+            {
+                playerAttack.ResetDamages(1.3f);
+            }
+
+        }
+
+        public void ShrinkDmg(bool shrinked)
+        {
+            if (shrinked)
+            {
+                playerAttack.UpdateDamages(0.7f);//decrease ori damage by 30%
+            }
+            else
+            {
+                playerAttack.ResetDamages(0.7f);
+            }
+
+        }
+
+        public void GrowMovementSpeed(bool growed)
+        {
+            if (growed)
+            {
+                playerMovement.UpdateSpeed(0.5f);//decrease speed by 30%
+            }
+            else
+            {
+                playerMovement.ResetSpeed(0.5f);
+            }
+        }
+
+        public void ShrinkMovementSpeed(bool shrinked)
+        {
+            if (shrinked)
+            {
+                playerMovement.UpdateSpeed(1.5f);//increase speed by 30%
+            }
+            else
+            {
+                playerMovement.ResetSpeed(1.5f);
+            }
+        }
     }
 }

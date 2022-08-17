@@ -71,12 +71,12 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            if(!PlayerManager.Instance.canMove || PlayerManager.Instance.isDeath)
+            if (!PlayerManager.Instance.canMove || PlayerManager.Instance.isDeath)
                 return;
-            
+
             if (Input.GetButtonDown("Dash") && canDash)
                 StartCoroutine(Dash());
-            
+
             if (PlayerManager.Instance.isAttacking)
                 return;
 
@@ -102,11 +102,25 @@ namespace Player
 
         public void Walk(Vector2 des)
         {
-            if(PlayerManager.Instance.isDashing)
-                if(des.x == 0)
+            if (PlayerManager.Instance.isDashing)
+                if (des.x == 0)
                     return;
-            
+
             rb.velocity = new Vector2(des.x * speed, rb.velocity.y);
+        }
+
+        public void UpdateSpeed(float multiplier)
+        {
+            speed *= multiplier;
+            jumpVelocity *= multiplier;
+            dashSpeed *= multiplier;
+        }
+
+        public void ResetSpeed(float multiplier)
+        {
+            speed /= multiplier;
+            jumpVelocity /= multiplier;
+            dashSpeed /= multiplier;
         }
 
         private IEnumerator Dash()
@@ -120,7 +134,7 @@ namespace Player
             float originalGravity = rb.gravityScale;
             yield return new WaitForSeconds(0.1f);
             canDash = true;
-            
+
             rb.gravityScale = 0.0001f;
             rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
 
@@ -129,5 +143,7 @@ namespace Player
             rb.gravityScale = originalGravity;
             PlayerManager.Instance.isDashing = false;
         }
+
+
     }
 }

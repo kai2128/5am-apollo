@@ -9,7 +9,7 @@ namespace Player
         private PlayerCollision col;
         [HideInInspector]
         public SpriteRenderer sr;
-    
+
         // Start is called before the first frame update
         void Start()
         {
@@ -24,7 +24,7 @@ namespace Player
             anim.SetBool("onGround", col.onGround);
             anim.SetBool("isAttacking", PlayerManager.Instance.isAttacking);
             anim.SetBool("isDashing", PlayerManager.Instance.isDashing);
-            
+
             anim.SetInteger("comboStep", PlayerManager.Instance.comboStep);
         }
 
@@ -42,13 +42,13 @@ namespace Player
 
         public void FlipDirection(float side)
         {
-            var facing = side switch
+            if (side == 0)
             {
-                > 0 => 1,
-                < 0 => -1,
-                _ => transform.localScale.x 
-            };
-            transform.localScale = new Vector3(facing, 1, 1) ;
+                return;
+            }
+            var facing = side > 0 ? 1 : -1;
+
+            transform.localScale = new Vector3(facing * Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
         }
 
         public float GetCurrentStateTime(int layer = 0)

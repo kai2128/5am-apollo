@@ -64,8 +64,8 @@ namespace Player
 
             if (col != null && col.CompareTag("Enemy") && currentWeapon == 1)
                 PlayerManager.Instance.playerSword.OnHitEnemy(col);
-            
-            if (col.CompareTag("BlockingTree")  && currentWeapon == 1)
+
+            if (col.CompareTag("BlockingTree") && currentWeapon == 1)
             {
                 PlayerManager.Instance.playerSword.DestroyTree(col.gameObject);
             }
@@ -75,6 +75,12 @@ namespace Player
         {
             weapons[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().updateDamage(multiplier);
             weapons[1].GetComponent<Player.Sword>().UpdateDamage(multiplier);
+        }
+
+        public void ResetDamages(float multiplier)
+        {
+            weapons[0].transform.Find("Claw").gameObject.GetComponent<Player.Claw>().resetDamage(multiplier);
+            weapons[1].GetComponent<Player.Sword>().resetDamage(multiplier);
         }
     }
 }

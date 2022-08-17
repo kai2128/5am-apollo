@@ -28,7 +28,7 @@ namespace Player
         public float groundForce = 3f;
         public float groundDamage = 8f;
 
-        [Header("Ranged attack")] 
+        [Header("Ranged attack")]
         public GameObject rangedEffect;
         public float rangedDamage = 4f;
         public float rangedForce = 1f;
@@ -36,7 +36,7 @@ namespace Player
         public float maximumTravelDistance = 5f;
         [SerializeField] private List<GameObject> rangedEffectPool = new();
 
-        
+
         private AttackArguments _atkArgs = new();
 
         // Start is called before the first frame update
@@ -108,7 +108,7 @@ namespace Player
             }
             availableRangedEffect.SetActive(true);
         }
-        
+
         void LightAttack()
         {
             if (_col.onGround && Input.GetButtonDown("Fire1"))
@@ -146,7 +146,7 @@ namespace Player
         public void DestroyTree(GameObject tree)
         {
             var tilemapRenderer = tree.GetComponentInChildren<TilemapRenderer>();
-            tilemapRenderer.BlinkColor(new Color(255f, 255f,255f), 1f);
+            tilemapRenderer.BlinkColor(new Color(255f, 255f, 255f), 1f);
             DOVirtual.DelayedCall(0.5f, () => Destroy(tree.gameObject));
         }
 
@@ -158,7 +158,18 @@ namespace Player
             }
             airDamage *= multiplier;
             groundDamage *= multiplier;
-            airDamage += multiplier;
+            // airDamage += multiplier;
+        }
+
+        public void resetDamage(float multiplier)
+        {
+            for (int i = 0; i < lightDamages.Length; i++)
+            {
+                lightDamages[i] /= multiplier;
+            }
+            airDamage /= multiplier;
+            groundDamage /= multiplier;
+            // airDamage += multiplier;
         }
     }
 }

@@ -24,9 +24,9 @@ namespace Player
             if (col.CompareTag("BlockingTree"))
             {
                 var tilemapRenderer = col.gameObject.GetComponentInChildren<TilemapRenderer>();
-                tilemapRenderer.BlinkColor(new Color(1.5f, 1.5f,1.5f));
+                tilemapRenderer.BlinkColor(new Color(1.5f, 1.5f, 1.5f));
             }
-            
+
             if (col.CompareTag("Enemy"))
             {
                 if (previousHit == null)
@@ -36,7 +36,7 @@ namespace Player
                 }
                 else if (previousHit == col.gameObject)
                 {
-                    if(damageCounter <= maxCounter) damageCounter++;
+                    if (damageCounter <= maxCounter) damageCounter++;
                     clawArgs.damage = originalClawDamage * Mathf.Pow(1.25f, damageCounter / 1.8f);
                 }
                 else
@@ -53,6 +53,11 @@ namespace Player
         public void updateDamage(float multiplier)
         {
             originalClawDamage *= multiplier;
+        }
+
+        public void resetDamage(float multiplier)
+        {
+            originalClawDamage /= multiplier;
         }
     }
 }
