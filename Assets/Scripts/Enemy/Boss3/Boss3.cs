@@ -30,6 +30,7 @@ namespace Enemy.Boss3
         public bool isdead = false;
         public bool canFlip = true;
         public Attack currentAttack;
+        public Transform spawnPoint;
         [Header("Mini Boss")]
         public Attack[] miniBossAttacks;
 
@@ -313,7 +314,14 @@ namespace Enemy.Boss3
             yield return new WaitForSeconds(5);
             armour = 0; //reset armour to zero
         }
-
+        public void ResetBoss()
+        {
+            transform.localPosition = spawnPoint.localPosition;
+            currentHp = maxHp;
+            anim.Rebind();
+            anim.Update(0f);
+            anim.enabled = false;
+        }
 
         // public void EnterRageMode(){
 

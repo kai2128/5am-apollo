@@ -14,11 +14,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject level1Generator;
     public BossEntrance boss1Entrance;
-
-    public GameObject level4Generator;
-    public Boss4Entrance boss4Entrance;
     public GameObject level2Generator;
     public Boss2Entrance boss2Entrance;
+
+    public GameObject level3Generator;
+    public Enemy.Boss3.Boss3Entrance boss3Entrance;
+    public GameObject level4Generator;
+    public Boss4Entrance boss4Entrance;
 
     [HideInInspector]
     public GameObject generatedGameObject;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         GenerateLevel1();
         GenerateLevel2();
+        GenerateLevel3();
         GenerateLevel4();
     }
 
@@ -67,6 +70,18 @@ public class GameManager : MonoBehaviour
             Destroy(clonedLevelGeneration);
         });
     }
+    public void GenerateLevel3()
+    {
+        var clonedLevelGeneration = Instantiate(level3Generator);
+        var levelGeneration = clonedLevelGeneration.GetComponent<LevelGeneration>();
+        levelGeneration.StartGeneration(() =>
+        {
+            boss3Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.down * 11f + Vector3.right * 4.5f);
+            boss3Entrance.ResetBossRoom();
+            Destroy(clonedLevelGeneration);
+        });
+    }
+
 
     public void GenerateLevel4()
     {
@@ -84,6 +99,7 @@ public class GameManager : MonoBehaviour
     {
         Gizmos.DrawWireSphere(level1Generator.GetComponent<LevelGeneration>().pos2.position, 1);
         Gizmos.DrawWireSphere(level2Generator.GetComponent<LevelGeneration>().pos2.position, 1);
+        Gizmos.DrawWireSphere(level3Generator.GetComponent<LevelGeneration>().pos2.position, 1);
         Gizmos.DrawWireSphere(level4Generator.GetComponent<LevelGeneration>().pos2.position, 1);
     }
 
@@ -93,6 +109,7 @@ public class GameManager : MonoBehaviour
         Destroy(generatedGameObject);
         DOVirtual.DelayedCall(.2f, GenerateLevel1);
         DOVirtual.DelayedCall(.2f, GenerateLevel2);
+        DOVirtual.DelayedCall(.2f, GenerateLevel3);
         DOVirtual.DelayedCall(.2f, GenerateLevel4);
     }
 

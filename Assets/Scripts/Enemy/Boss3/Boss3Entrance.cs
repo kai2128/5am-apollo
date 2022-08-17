@@ -4,7 +4,7 @@ using DG.Tweening;
 using Player;
 using UnityEngine;
 
-namespace Enemy
+namespace Enemy.Boss3
 {
     public class Boss3Entrance : MonoBehaviour
     {
@@ -88,7 +88,7 @@ namespace Enemy
 
         public void ResetBossRoom()
         {
-            boss.GetComponent<Boss_4>().ResetBoss();
+            boss.GetComponent<Boss3>().ResetBoss();
             revealEffect.GetComponent<Animator>().Rebind();
             revealEffect.GetComponent<Animator>().Update(0f);
             _boxCol.isTrigger = true;

@@ -50,10 +50,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level1Generator: {fileID: 2873817468290489964}
   boss1Entrance: {fileID: 0}
-  level4Generator: {fileID: 4647415757846420476}
-  boss4Entrance: {fileID: 0}
   level2Generator: {fileID: 1582045804325477554}
   boss2Entrance: {fileID: 0}
+  level3Generator: {fileID: 0}
+  boss3Entrance: {fileID: 0}
+  level4Generator: {fileID: 4647415757846420476}
+  boss4Entrance: {fileID: 0}
   generatedGameObject: {fileID: 0}
 --- !u!1001 &832067079374514856
 PrefabInstance:
@@ -341,11 +343,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3201427507745097022, guid: 6bf3658e3dc4b734f88a61c4f0853925, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.39
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3201427507745097022, guid: 6bf3658e3dc4b734f88a61c4f0853925, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.79
+      value: 13.1
       objectReference: {fileID: 0}
     - target: {fileID: 3201427507885536452, guid: 6bf3658e3dc4b734f88a61c4f0853925, type: 3}
       propertyPath: m_Name
@@ -405,11 +407,11 @@ PrefabInstance:
       objectReference: {fileID: 4432475287155740797, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
     - target: {fileID: 3201427508609918887, guid: 6bf3658e3dc4b734f88a61c4f0853925, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.57
+      value: 61
       objectReference: {fileID: 0}
     - target: {fileID: 3201427508609918887, guid: 6bf3658e3dc4b734f88a61c4f0853925, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.88
+      value: 13.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf3658e3dc4b734f88a61c4f0853925, type: 3}
