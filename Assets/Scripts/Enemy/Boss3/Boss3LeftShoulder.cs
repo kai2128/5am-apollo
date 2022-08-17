@@ -25,7 +25,8 @@ namespace Enemy.Boss3
 
         public void Show(float hp)
         {
-            currentHp = hp / 3; //update hp hold by this weakness point with new max hp of boss
+            // currentHp = hp / 3; //update hp hold by this weakness point with new max hp of boss
+            currentHp = hp;
             sr.enabled = true;
             anim.enabled = true;
 
@@ -41,11 +42,9 @@ namespace Enemy.Boss3
             if (currentHp > 0)
             {
                 boss.GetComponent<Animator>().ResetAllTriggers();
-                boss.GetHit(getHitBy); //deduct boss damage
-                float damage = getHitBy.damage;
+                boss.GetHitFromWeakness(getHitBy); //deduct boss damage
+                float damage = getHitBy.damage * (1 - boss.armour);
                 currentHp -= damage; //deduct hp hold for this weakness point
-
-
             }
 
             if (currentHp <= 0)
@@ -53,6 +52,7 @@ namespace Enemy.Boss3
                 Debug.Log("HP Emptied");
                 sr.enabled = false;
                 anim.enabled = false;
+                gameObject.SetActive(false);
             }
 
 

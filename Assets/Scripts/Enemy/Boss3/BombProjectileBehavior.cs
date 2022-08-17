@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Class;
+using Player;
 public class BombProjectileBehavior : MonoBehaviour
 {
     public float speed = 8f;
@@ -14,13 +15,15 @@ public class BombProjectileBehavior : MonoBehaviour
     private float baseY;
     private float height;
 
+    private AttackArguments attack;
+
     // Start is called before the first frame update
     void Start()
     {
         launchArmPoint = GameObject.FindGameObjectWithTag("SpawnProjectilePoint");
         Debug.Log(launchArmPoint.transform.position);
         target = GameObject.FindGameObjectWithTag("Player");
-
+        attack = new AttackArguments(10f, 1f);
 
     }
 
@@ -38,7 +41,7 @@ public class BombProjectileBehavior : MonoBehaviour
         transform.rotation = LookAtTarget(movePosition - transform.position);
         transform.position = movePosition;
         // transform.position += transform.right * Time.deltaTime * speed;
-        Destroy(gameObject, 4f);
+        Destroy(gameObject, 8f);
     }
 
     public static Quaternion LookAtTarget(Vector2 rotation)
@@ -53,6 +56,7 @@ public class BombProjectileBehavior : MonoBehaviour
         if (collision.gameObject.name.Equals("Player"))
         {
             Debug.Log("Hit");
+            collision.gameObject.GetComponent<PlayerOnHit>().GetHit(attack);
             Destroy(gameObject);
         }
         // Destroy(gameObject);

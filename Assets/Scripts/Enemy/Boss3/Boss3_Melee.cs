@@ -24,7 +24,7 @@ namespace Enemy.Boss3
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             //charge to player if player far away
-            if (boss.distanceBetweenPlayer > 1.2f)
+            if (boss.distanceBetweenPlayer > 2f)
             {
                 boss.LookAtPlayer();
                 Vector2 target = new Vector2(boss.player.position.x, rb.position.y);

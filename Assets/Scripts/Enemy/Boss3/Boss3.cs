@@ -21,14 +21,14 @@ namespace Enemy.Boss3
         public float armour = 0;
 
         public bool isImmune = false;
-        public Attack melee = new Attack(10f, 1f, "Melee", 1.2f, 80);
+        public Attack melee = new Attack(10f, 1f, "Melee", 2f, 80);
         public Attack laser = new Attack(30f, 1f, "Laser", 20f, 20);
         public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 20);
         public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 20);
 
         public Attack[] attacks;
         public bool isdead = false;
-
+        public bool canFlip = true;
         public Attack currentAttack;
         [Header("Mini Boss")]
         public Attack[] miniBossAttacks;
@@ -90,7 +90,7 @@ namespace Enemy.Boss3
         void Awake()
         {
             miniBossAttacks = new[] { melee, laser };
-            giantBossAttacks = new[] { shoot, shield_cast };
+            giantBossAttacks = new[] { shoot, shield_cast, laser };
             attacks = miniBossAttacks; // mini boss attacks
             enemyName = "Mecha Golem";
             maxHp = 100;
@@ -113,8 +113,6 @@ namespace Enemy.Boss3
                     timer = 0;
                 }
             }
-
-
         }
 
         public void LookAtPlayer()
@@ -176,13 +174,13 @@ namespace Enemy.Boss3
         }
         public override void GetHit(AttackArguments getHitBy)
         {
-            if (isImmune)
+            if (isImmune || isEnlarge)
             {
                 return;
             }
+
             float damage = getHitBy.damage * (1 - armour);
             currentHp -= damage;
-
             sr.BlinkWhite();
             if (!isEnlarge)
             {
@@ -190,36 +188,43 @@ namespace Enemy.Boss3
                 if (currentHp <= 0)
                 {
                     attacks = giantBossAttacks; //set attacks of boss to giant boss
-                    anim.SetTrigger("Immune");
-                    // rageMode = true;
                     isImmune = true;
                     goingEnlarge = true;
+
+                    anim.SetTrigger("Immune");
+                    // rageMode = true;
                     isEnlarge = true; // set to isEnlarge boss mode
-
                 }
             }
-            else
-            {
-                if (currentHp < (maxHp / 3) && !rageMode)
-                {
-                    rageMode = true;
-                    SpawnProjectiles();
-                }
-                if (currentHp <= 0)
-                {
-                    anim.Play("death");
-                    isdead = true;
-                    leftShoulder.gameObject.SetActive(false);
-                    rightShoulder.gameObject.SetActive(false);
-                    head.gameObject.SetActive(false);
-                    DropExperience();
-                }
-            }
-
-
         }
 
+        public void GetHitFromWeakness(AttackArguments getHitBy)
+        {
+            if (isImmune)
+            {
+                return;
+            }
 
+            float damage = getHitBy.damage * (1 - armour);
+            currentHp -= damage;
+            sr.BlinkWhite();
+
+            if (currentHp < (maxHp / 3) && !rageMode)
+            {
+                rageMode = true;
+                SpawnProjectiles();
+            }
+            if (currentHp <= 0)
+            {
+                anim.Play("death");
+                isdead = true;
+                leftShoulder.gameObject.SetActive(false);
+                rightShoulder.gameObject.SetActive(false);
+                head.gameObject.SetActive(false);
+                DropExperience();
+            }
+
+        }
         public void OnTriggerEnter2D(Collider2D col)
         {
             if (isEnlarge)
@@ -258,16 +263,16 @@ namespace Enemy.Boss3
 
         public void EnterGiantMode()
         {
-            maxHp = 200;
-            currentHp = 200;
+            maxHp = 100;
+            currentHp = 100;
             ShowWeaknessPoints();
         }
 
         public void ShowWeaknessPoints()
         {
-            leftShoulder.Show(maxHp);
-            rightShoulder.Show(maxHp);
-            head.Show(maxHp);
+            leftShoulder.Show(30);
+            rightShoulder.Show(30);
+            head.Show(40);
 
         }
 

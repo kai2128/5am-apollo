@@ -19,13 +19,16 @@ namespace Enemy.Boss3
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            boss.LookAtPlayer();
+            if (boss.canFlip)
+            {
+                boss.LookAtPlayer();
+            }
+
             if (boss.currentAttack == null)
             {
                 boss.isAttacking = false;
                 if (boss.isEnlarge)
                 {
-                    Debug.Log("Now is idle");
                     animator.SetTrigger("Idle");
                 }
                 else
