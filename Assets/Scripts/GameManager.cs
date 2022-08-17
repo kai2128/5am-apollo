@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject level4Generator;
     public Boss4Entrance boss4Entrance;
+    public GameObject level2Generator;
+    public Boss2Entrance boss2Entrance;
 
     [HideInInspector]
     public GameObject generatedGameObject;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         GenerateLevel1();
+        GenerateLevel2();
         GenerateLevel4();
     }
 
@@ -49,6 +52,18 @@ public class GameManager : MonoBehaviour
         {
             boss1Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.up * 14 + Vector3.left * 2.5f);
             boss1Entrance.ResetBossRoom();
+            Destroy(clonedLevelGeneration);
+        });
+    }
+
+    public void GenerateLevel2()
+    {
+        var clonedLevelGeneration = Instantiate(level2Generator);
+        var levelGeneration = clonedLevelGeneration.GetComponent<LevelGeneration>();
+        levelGeneration.StartGeneration(() =>
+        {
+            boss2Entrance.MoveBossRoomTo(levelGeneration.pos1.transform.position + Vector3.up * 14 + Vector3.right * 60.01f);
+            boss2Entrance.ResetBossRoom();
             Destroy(clonedLevelGeneration);
         });
     }
@@ -67,8 +82,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere( level1Generator.GetComponent<LevelGeneration>().pos2.position, 1);
-        Gizmos.DrawWireSphere( level4Generator.GetComponent<LevelGeneration>().pos2.position, 1);
+        Gizmos.DrawWireSphere(level1Generator.GetComponent<LevelGeneration>().pos2.position, 1);
+        Gizmos.DrawWireSphere(level2Generator.GetComponent<LevelGeneration>().pos2.position, 1);
+        Gizmos.DrawWireSphere(level4Generator.GetComponent<LevelGeneration>().pos2.position, 1);
     }
 
     [ContextMenu("test")]
@@ -76,12 +92,13 @@ public class GameManager : MonoBehaviour
     {
         Destroy(generatedGameObject);
         DOVirtual.DelayedCall(.2f, GenerateLevel1);
+        DOVirtual.DelayedCall(.2f, GenerateLevel2);
         DOVirtual.DelayedCall(.2f, GenerateLevel4);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
