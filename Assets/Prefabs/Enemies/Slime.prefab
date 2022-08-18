@@ -171,6 +171,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
   currentState: 0

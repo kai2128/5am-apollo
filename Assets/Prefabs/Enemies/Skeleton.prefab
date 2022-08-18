@@ -213,8 +213,10 @@ MonoBehaviour:
   walkSpeed: 2
   idleTime: 1.5
   walkTime: 5
+  reacted: 0
   chaseRadius: 6.9
   walkRadius: 4.26
+  chasePosition: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128

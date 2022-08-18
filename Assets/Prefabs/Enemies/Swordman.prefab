@@ -83,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5401509230624458820
 Transform:
   m_ObjectHideFlags: 0
@@ -234,14 +234,15 @@ MonoBehaviour:
   rb: {fileID: 0}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
   enemyMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   playerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   currentState: 0
   timer: 0
   blockTimer: 0
