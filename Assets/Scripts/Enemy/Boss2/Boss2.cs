@@ -21,18 +21,18 @@ namespace Enemy.Boss2
         /// private Rigidbody2D rb;
         public float chaseSpeed = 2.5f;
         public float returnSpeed = 5.0f;
-        public Range idleTimeRange = new(0.5f, 1f);
-        public Range flyTimeRange = new(3f, 5f);
+        // public Range idleTimeRange = new(0.5f, 1f);
+        // public Range flyTimeRange = new(3f, 5f);
         public float distanceBetweenPlayer;
-        public float currentDistanceBetweenPlayer;
+        // public float currentDistanceBetweenPlayer;
 
 
         [Header("Attacks")]
         public float readyTime = 0.5f;
 
-        public Attack attack1 = new Attack(15f, 5f, 3f, "Chase", .8f, 60, 2f); // Chase and attack
-        public Attack attack2 = new Attack(15f, 2f, 4f, "Fireball", 1.5f, 40, 5f); // Fireball 
-        public Attack attack3 = new Attack(15f, 3f, 7f, "UpAndDown", 1.8f, 0, 10f); // Attack up and down
+        public Attack attack1 = new Attack(10f, 5f, 3f, "Chase", .8f, 60, 2f); // Chase and attack
+        public Attack attack2 = new Attack(10f, 2f, 4f, "Fireball", 1.5f, 40, 5f); // Fireball 
+        public Attack attack3 = new Attack(10f, 3f, 7f, "UpAndDown", 1.8f, 0, 10f); // Attack up and down
         public Attack[] attacks;
 
         public class Attack
@@ -65,11 +65,12 @@ namespace Enemy.Boss2
 
         [Header("States")]
         public float recoverTime = 3f;
-        public float tenacity;
-        public float maxTenacity = 50f;
+        // public float tenacity;
+        // public float maxTenacity = 50f;
         public bool isReady = false;
         public bool readyAttack = false;
         public bool rageMode = false;
+        public bool isRageHit = false;
         public bool dead = false;
 
         //ground check
@@ -84,7 +85,7 @@ namespace Enemy.Boss2
         public Transform[] attackPoint;
         public bool chase;
         public bool allowChase;
-        public float attackUDSpeed = 2.5f;
+        public float attackUDSpeed = 2f;
         public Vector2 attackUDDirection;
 
         private PolygonCollider2D bossCollider;
@@ -96,7 +97,7 @@ namespace Enemy.Boss2
             maxHp = 120;
             player = GameObject.FindGameObjectWithTag("Player").transform;
             currentHp = maxHp;
-            tenacity = maxTenacity;
+            //  tenacity = maxTenacity;
             enemyName = "Flying Talbot";
             attackUDDirection.Normalize();
             bossCollider = transform.GetComponent<PolygonCollider2D>();
@@ -169,10 +170,10 @@ namespace Enemy.Boss2
             if (dead)
                 return;
 
-            ReduceTenacity(getHitBy); // still able to reduce tenacity if attack from behind
+            //ReduceTenacity(getHitBy); // still able to reduce tenacity if attack from behind
             // cannot damage boss if attack from behind
-            if (getHitBy.facing == GetFacingFloat())
-                return;
+            // if (getHitBy.facing == GetFacingFloat())
+            //    return;
             float damage = getHitBy.damage;
             // reduce 50% damage if getting hit in ready state
             if (isReady)
@@ -182,10 +183,11 @@ namespace Enemy.Boss2
             sr.BlinkWhite();
             if (rageMode)
             {
-                sr.material.color = Color.red;
+                //sr.material.color = Color.red;
+                isRageHit = true;
             }
 
-            if (currentHp / maxHp < .4 && !rageMode)
+            if (currentHp / maxHp < 0.4 && !rageMode)
             {
 
                 EnterRageMode();
@@ -199,10 +201,10 @@ namespace Enemy.Boss2
             }
         }
 
-        private void ReduceTenacity(AttackArguments atkArgs)
-        {
-            tenacity -= atkArgs.damage;
-        }
+        // private void ReduceTenacity(AttackArguments atkArgs)
+        // {
+        //     tenacity -= atkArgs.damage;
+        // }
 
 
 
@@ -232,37 +234,44 @@ namespace Enemy.Boss2
 
         }
 
-        // public void LookAtPlayer()
-        // {
-        //     Vector3 flipped = transform.localScale;
-        //     flipped.z *= -1f;
+        public void LookAtPlayer()
+        {
+            Vector3 flipped = transform.localScale;
+            flipped.z *= -1f;
 
-        //     if (transform.position.x < player.position.x && isFlipped)
-        //     {
-        //         transform.localScale = flipped;
-        //         transform.Rotate(0f, 180f, 0f);
-        //         isFlipped = false;
-        //     }
-        //     else if (transform.position.x > player.position.x && !isFlipped)
-        //     {
-        //         transform.localScale = flipped;
-        //         transform.Rotate(0f, 180f, 0f);
-        //         isFlipped = true;
-        //     }
-        // }
-        // public void LookAtPoint()
-        // {
+            if (transform.position.x > player.position.x && isFlipped)
+            {
+                transform.localScale = flipped;
+                transform.Rotate(0f, 180f, 0f);
+                isFlipped = false;
+            }
+            else if (transform.position.x < player.position.x && !isFlipped)
+            {
+                transform.localScale = flipped;
+                transform.Rotate(0f, 180f, 0f);
+                isFlipped = true;
+            }
+        }
+        public void LookAtPoint()
+        {
 
-        //     if (transform.position.x < startingPoint.position.x && isFlipped)
-        //     {
-        //         transform.rotation = Quaternion.Euler(0, 0, 0);
-        //     }
-        //     else
-        //     {
-        //         transform.rotation = Quaternion.Euler(0, 180, 0);
-        //     }
+            Vector3 flipped = transform.localScale;
+            flipped.z *= -1f;
 
-        // }
+            if (transform.position.x > player.position.x && isFlipped)
+            {
+                transform.localScale = flipped;
+                transform.Rotate(0f, 180f, 0f);
+                isFlipped = false;
+            }
+            else if (transform.position.x < player.position.x && !isFlipped)
+            {
+                transform.localScale = flipped;
+                transform.Rotate(0f, 180f, 0f);
+                isFlipped = true;
+            }
+
+        }
 
         public void ReturnStartPosition()
         {
@@ -295,7 +304,7 @@ namespace Enemy.Boss2
                 // }
 
 
-                // LookAtPlayer();
+                LookAtPlayer();
                 // move towards player
                 Vector2 newPos = Vector2.MoveTowards(rb.position, player.transform.position, chaseSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(newPos);
@@ -384,7 +393,7 @@ namespace Enemy.Boss2
         {
             transform.position = startingPosition;
             currentHp = maxHp;
-            tenacity = maxTenacity;
+            // tenacity = maxTenacity;
             ExitRageMode();
             anim.Rebind();
             anim.Update(0f);
