@@ -215,7 +215,12 @@ namespace Enemy.Boss1
         }
         private void ReduceTenacity(AttackArguments atkArgs)
         {
-            tenacity -= atkArgs.damage;
+            float rate = 0.08f;
+            if (atkArgs.damage > 15)
+                rate += 0.02f;
+            if (tenacity < 20f)
+                rate += 0.08f;
+            tenacity -= maxTenacity * rate;
         }
         
         // Update is called once per frame
