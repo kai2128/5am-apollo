@@ -103,7 +103,6 @@ namespace Player
             {
                 availableRangedEffect = Instantiate(rangedEffect,
                     rangedEffect.GetComponent<SwordRangedEffect>().startPos.position, Quaternion.identity);
-                GameManager.Instance.SetParentToGenerated(availableRangedEffect);
                 rangedEffectPool.Add(availableRangedEffect);
             }
             availableRangedEffect.SetActive(true);

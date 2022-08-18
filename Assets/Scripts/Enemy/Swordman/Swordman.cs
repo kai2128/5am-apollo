@@ -178,7 +178,7 @@ namespace Enemy.Swordman
             pos += transform.GetFacingDirection() * .5f;
             Collider2D col = Physics2D.OverlapCircle(pos, .75f, playerMask);
             if (col != null)
-                col.GetComponent<PlayerOnHit>().GetHit(currentAttack.UpdateTransform(transform));
+                col.GetComponent<IHittable>().GetHit(currentAttack.UpdateTransform(transform));
         }
 
         void OnDrawGizmos()
