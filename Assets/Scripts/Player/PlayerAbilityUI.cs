@@ -42,6 +42,13 @@ public class PlayerAbilityUI : MonoBehaviour
         Shrink();
     }
 
+    public void ResetCooldown()
+    {
+        isCooldown3 = false;
+        isCooldown4 = false;
+        PlayerManager.Instance.transform.localScale = new Vector3(1, 1, 1);
+    }
+
     private void Weapon()
     {
         var currentActiveWeapon = PlayerManager.Instance.playerAttack.currentWeapon;

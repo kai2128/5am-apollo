@@ -16,21 +16,32 @@ public class Boss4Timer : MonoBehaviour
     {
         endTime = 60;
         timer = endTime;
+        PlayerManager.Instance.OnPlayerRespawn += ResetLevel4Timer;
     }
 
     void Update()
     {
+        if(!isTimerStarted)
+            return;
+        
         if (isTimerStarted)
         {
             timer -= Time.deltaTime;
             canvasTimer.SetText("Time left:"+timer.ToString("0.00"));
         }
 
-        if (timer <0)
+        if (timer < 0)
         {
-            isTimerStarted = false;
-            PlayerManager.Instance.GetComponent<PlayerOnHit>().GetHit(new AttackArguments(99999f, 0).UpdateTransform(transform));
+            ResetLevel4Timer(); 
+            PlayerManager.Instance.GetComponent<PlayerOnHit>().GetHit(new AttackArguments(PlayerManager.Instance.currentHp).UpdateTransform(transform));
         }
+    }
+
+    public void ResetLevel4Timer()
+    {
+        isTimerStarted = false;
+        timer = endTime;
+        canvasTimer.SetText("");
     }
 
     private void OnTriggerEnter2D(Collider2D col)

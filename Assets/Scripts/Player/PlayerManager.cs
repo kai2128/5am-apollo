@@ -36,6 +36,9 @@ namespace Player
         public LevelSystem playerLevel;
         public float attackLevelMultiplier = 1.0f;
         public TextMeshProUGUI statusText;
+        public PlayerAbilityUI playerAbilityUI;
+        public PlayerGrowShrink playerGrowShrink;
+        public Action OnPlayerRespawn;
 
         public void SetStatusMessage(string msg, float duration = 4f)
         {
@@ -43,7 +46,7 @@ namespace Player
             statusText.DOFade(1, 0.5f).SetEase(Ease.OutQuint);
             statusText.DOFade(0, duration).SetEase(Ease.InQuint);
         }
-
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
@@ -69,6 +72,8 @@ namespace Player
             playerLevel = GetComponent<LevelSystem>();
             playerSword = GetComponentInChildren<Sword>();
             mainCamera = GameObject.FindGameObjectWithTag("MainCM").GetComponent<CinemachineVirtualCamera>();
+            playerAbilityUI = GetComponentInChildren<PlayerAbilityUI>();
+            playerGrowShrink = GetComponent<PlayerGrowShrink>();
         }
 
         public void BecomeInvulnerable()
@@ -100,7 +105,10 @@ namespace Player
             anim.enabled = true;
             sr.enabled = true;
             currentHp = maxHp;
+            playerAbilityUI.ResetCooldown();
+            playerGrowShrink.ResetGrowShrink();
             playerAttack.ActiveCurrentWeapon();
+            OnPlayerRespawn();
             mainCamera.MoveToTopOfPrioritySubqueue();
         }
 
