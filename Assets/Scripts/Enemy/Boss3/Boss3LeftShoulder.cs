@@ -13,7 +13,7 @@ namespace Enemy.Boss3
         // Start is called before the first frame update
         void Awake()
         {
-            currentHp = boss.maxHp / 3;
+
         }
 
         // Update is called once per frame
@@ -47,7 +47,7 @@ namespace Enemy.Boss3
                 currentHp -= damage; //deduct hp hold for this weakness point
             }
 
-            if (currentHp <= 0)
+            if (currentHp <= 0 && boss.isEnlarge)
             {
                 Debug.Log("HP Emptied");
                 sr.enabled = false;

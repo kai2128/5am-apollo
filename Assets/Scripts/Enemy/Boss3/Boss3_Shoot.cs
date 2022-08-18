@@ -24,7 +24,7 @@ namespace Enemy.Boss3
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            boss.isAttacking = false;
+            boss.isShooting = false;
             animator.ResetAllTriggers();
         }
 

@@ -22,7 +22,7 @@ namespace Enemy.Boss3
         {
             if (boss.isEnlarge)
             {
-                if (boss.isAttacking)
+                if (boss.isShooting)
                 {
                     sr.enabled = false;
                     anim.enabled = false;
@@ -54,7 +54,7 @@ namespace Enemy.Boss3
             {
                 return;
             }
-            if (boss.isAttacking)
+            if (boss.isShooting)
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace Enemy.Boss3
 
             }
 
-            if (currentHp <= 0)
+            if (currentHp <= 0 && boss.isEnlarge)
             {
                 Debug.Log("HP Emptied");
                 sr.enabled = false;

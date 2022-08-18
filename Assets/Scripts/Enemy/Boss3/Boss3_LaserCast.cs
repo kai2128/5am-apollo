@@ -25,7 +25,7 @@ namespace Enemy.Boss3
         {
             LaserArea laserArea = animator.transform.GetChild(0).GetComponent<LaserArea>();
             laserArea.transform.GetChild(0).gameObject.SetActive(true);
-            boss.isAttacking = false;
+            // boss.isAttacking = false;
             animator.ResetAllTriggers();
         }
 

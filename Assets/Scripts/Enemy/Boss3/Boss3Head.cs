@@ -26,6 +26,7 @@ namespace Enemy.Boss3
         public void Show(float hp)
         {
             // currentHp = hp / 3; //update hp hold by this weakness point with new max hp of boss
+
             currentHp = hp;
             sr.enabled = true;
             anim.enabled = true;
@@ -50,7 +51,7 @@ namespace Enemy.Boss3
 
             }
 
-            if (currentHp <= 0)
+            if (currentHp <= 0 && boss.isEnlarge)
             {
                 Debug.Log("HP Emptied");
                 sr.enabled = false;

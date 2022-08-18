@@ -185,7 +185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5495543488497035514
 Transform:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4343599140523582580
 Transform:
   m_ObjectHideFlags: 0
@@ -527,7 +527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &234279252617361469
 Transform:
   m_ObjectHideFlags: 0
@@ -674,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5459195997985988765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.707, y: -0.594, z: 0}
+  m_LocalPosition: {x: 0.81, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -801,6 +801,8 @@ MonoBehaviour:
   armour: 0
   isImmune: 0
   isdead: 0
+  canFlip: 1
+  spawnPoint: {fileID: 0}
   leftShoulder: {fileID: 8058627553613626441}
   rightShoulder: {fileID: 466368032734836769}
   head: {fileID: 1199504067417735054}
@@ -811,7 +813,7 @@ MonoBehaviour:
   rageMode: 0
   isEnlarge: 0
   goingEnlarge: 0
-  isAttacking: 0
+  isShooting: 0
   SpawnProjectilesCooldown: 20
   NumberOfSpawns: 0
   timer: 0

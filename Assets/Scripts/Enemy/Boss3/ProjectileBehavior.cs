@@ -27,6 +27,7 @@ namespace Enemy.Boss3
             launchArmPoint = GameObject.FindGameObjectWithTag("LaunchProjectilePoint");
 
             target = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log(target.transform.position);
             boss3 = GameObject.Find("Boss_3").GetComponent<Boss3>();
             attack = boss3.shoot.GetAttackArgs().UpdateTransform(boss3.transform);
             Debug.Log("attack" + attack);
@@ -39,10 +40,10 @@ namespace Enemy.Boss3
             targetX = target.transform.position.x;
             dist = targetX - launchArmPointX;
             nextX = Mathf.MoveTowards(transform.position.x, target.transform.position.x, speed * Time.deltaTime);
-            baseY = Mathf.Lerp(Mathf.Abs(launchArmPoint.transform.position.y), Mathf.Abs(target.transform.position.y), (nextX - launchArmPointX) / dist);
-
+            baseY = Mathf.Lerp(launchArmPoint.transform.position.y, target.transform.position.y, (nextX - launchArmPointX) / dist);
+            Debug.Log(nextX);
             // height = 2 * (nextX - launchArmPointX) * (nextX - targetX) / (-0.25f * dist * dist);
-            Vector3 movePosition = new Vector3(nextX, -baseY, transform.position.z);
+            Vector3 movePosition = new Vector3(nextX, baseY, transform.position.z);
             transform.rotation = LookAtTarget(movePosition - transform.position);
             transform.position = movePosition;
             // transform.position += transform.right * Time.deltaTime * speed;

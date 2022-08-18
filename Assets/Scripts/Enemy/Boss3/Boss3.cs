@@ -6,6 +6,7 @@ using Class;
 using Player;
 using static Utils.Utils;
 using Utils;
+using DG.Tweening;
 namespace Enemy.Boss3
 {
     public class Boss3 : Enemy
@@ -23,8 +24,8 @@ namespace Enemy.Boss3
         public bool isImmune = false;
         public Attack melee = new Attack(10f, 1f, "Melee", 2f, 80);
         public Attack laser = new Attack(30f, 1f, "Laser", 20f, 20);
-        public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 20);
-        public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 20);
+        public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 50);
+        public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 10);
 
         public Attack[] attacks;
         public bool isdead = false;
@@ -51,7 +52,7 @@ namespace Enemy.Boss3
         public bool isEnlarge = false;
 
         public bool goingEnlarge = false;
-        public bool isAttacking = false;
+        public bool isShooting = false;
         public float SpawnProjectilesCooldown = 10f;
         public int NumberOfSpawns = 0;
         public float timer = 0f;
@@ -210,7 +211,7 @@ namespace Enemy.Boss3
             currentHp -= damage;
             sr.BlinkWhite();
 
-            if (currentHp < (maxHp / 3) && !rageMode)
+            if (currentHp < (maxHp / 3) && !rageMode && isEnlarge)
             {
                 rageMode = true;
                 SpawnProjectiles();
@@ -219,9 +220,9 @@ namespace Enemy.Boss3
             {
                 anim.Play("death");
                 isdead = true;
-                leftShoulder.gameObject.SetActive(false);
-                rightShoulder.gameObject.SetActive(false);
-                head.gameObject.SetActive(false);
+                // leftShoulder.gameObject.SetActive(false);
+                // rightShoulder.gameObject.SetActive(false);
+                // head.gameObject.SetActive(false);
                 DropExperience();
             }
 
@@ -266,6 +267,7 @@ namespace Enemy.Boss3
         {
             maxHp = 100;
             currentHp = 100;
+            canFlip = true; //just in case
             ShowWeaknessPoints();
         }
 
@@ -285,7 +287,10 @@ namespace Enemy.Boss3
         public void SpawnProjectiles()
         {
             NumberOfSpawns = Random.Range(1, 4);
-
+            DOVirtual.Color(sr.color, new Color(255, 0, 0), 5f, (Color color) =>
+                {
+                    sr.color = color;
+                });
             Invoke("SpawnBomb", 1f);//call spawn bomb method with 1 sec  delay;
 
         }

@@ -26,14 +26,14 @@ namespace Enemy.Boss3
 
             if (boss.currentAttack == null)
             {
-                boss.isAttacking = false;
+                boss.isShooting = false;
                 if (boss.isEnlarge)
                 {
                     animator.SetTrigger("Idle");
                 }
                 else
                 {
-                    animator.SetTrigger("Walk");
+                    animator.SetTrigger("Move");
                 }
 
 
@@ -41,9 +41,9 @@ namespace Enemy.Boss3
             else
             {
 
-                if (boss.currentAttack.trigger != "Sheild")
+                if (boss.currentAttack.trigger == "Shoot")
                 {
-                    boss.isAttacking = true;
+                    boss.isShooting = true;
                 }
                 animator.SetTrigger(boss.currentAttack.trigger);
 
