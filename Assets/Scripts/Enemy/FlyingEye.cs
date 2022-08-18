@@ -87,8 +87,16 @@ namespace Enemy
 
         private void EnterIdleState()
         {
-            anim.Play("flying");
-            idleTime = Random.Range(2, 5);
+            if (foundPlayer)
+            {
+                SwitchState(State.Move);
+            }
+            else
+            {
+                anim.Play("flying");
+                idleTime = Random.Range(2, 5);
+            }
+
         }
 
         private void UpdateIdleState()
@@ -114,7 +122,7 @@ namespace Enemy
                 return;
             }
 
-            if (Utils.Utils.Chances(.5f))
+            if (Utils.Utils.Chances(1f))
             {
                 FlipDirection();
             }
@@ -122,17 +130,31 @@ namespace Enemy
 
         private void UpdateMoveState()
         {
-            rb.velocity = new Vector2(transform.GetFacingFloat() * moveSpeed, 0);
+
 
             if (foundPlayer)
             {
+                transform.LookAtTarget(PlayerManager.Instance.transform);
+                Vector3 originalPos = transform.position;
+                float posX = originalPos.x;
+                float targetX = PlayerManager.Instance.transform.position.x;
+                float dist = targetX - posX;
+                float nextX = Mathf.MoveTowards(transform.position.x, PlayerManager.Instance.transform.position.x, moveSpeed * Time.deltaTime);
+                float baseY = Mathf.Lerp(originalPos.y, PlayerManager.Instance.transform.position.y, (nextX - posX) / dist);
+                Vector3 movePosition = new Vector3(nextX, baseY, transform.position.z);
+                transform.position = movePosition;
+
                 if (Vector2.Distance(transform.position, PlayerManager.Instance.transform.position) <= attackRange && !attackCooldown)
                 {
                     SwitchState(State.Attack);
                 }
             }
+            else
+            {
+                rb.velocity = new Vector2(transform.GetFacingFloat() * moveSpeed, 0);
+            }
 
-            if (timer >= 3)
+            if (timer >= 1 && !foundPlayer)
             {
                 SwitchState(State.Idle);
             }
