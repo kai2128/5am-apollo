@@ -59,9 +59,9 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -20.434933, y: 2.9434876}
       - {x: -20.255154, y: -2.4725142}
-      - {x: -13.132069, y: -11.082961}
-      - {x: 15.74534, y: -10.898908}
-      - {x: 15.811685, y: 5.4406157}
+      - {x: -14.603565, y: -12.974872}
+      - {x: 16.270868, y: -13.106139}
+      - {x: 16.757637, y: 5.6508274}
       - {x: -13.161256, y: 5.3783445}
 --- !u!1 &3183641272461646969
 GameObject:
@@ -8427,6 +8427,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3183641272940606370}
     m_Modifications:
+    - target: {fileID: 798444445349648480, guid: 5c1d531ff67f47646978d75ef0ae52f5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: de38c7ddce1c54248a7d13218d75d09a, type: 2}
     - target: {fileID: 4092681997544914972, guid: 5c1d531ff67f47646978d75ef0ae52f5, type: 3}
       propertyPath: m_Name
       value: BossEntrance

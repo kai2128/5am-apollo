@@ -57,7 +57,7 @@ namespace Enemy.Boss3
                 sr.enabled = false;
                 anim.enabled = false;
                 gameObject.SetActive(false);
-                boss.laser.SetWeight(0);
+                boss.laser.SetWeight(-1);
                 //check if this two weakness point inactve then dont flip
                 if (!boss.rightShoulder.gameObject.activeSelf && !boss.head.gameObject.activeSelf)
                 {

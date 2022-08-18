@@ -53,7 +53,7 @@ namespace Enemy.Boss3
 
         public bool goingEnlarge = false;
         public bool isShooting = false;
-        public float SpawnProjectilesCooldown = 30f;
+        public float SpawnProjectilesCooldown = 10f;
         public int NumberOfSpawns = 0;
         public float timer = 0f;
         // Projectiele
@@ -215,7 +215,7 @@ namespace Enemy.Boss3
             if (currentHp < (maxHp / 3) && !rageMode && isEnlarge)
             {
                 rageMode = true;
-                SpawnProjectiles();
+                // SpawnProjectiles();
             }
             if (currentHp <= 0)
             {
@@ -288,31 +288,30 @@ namespace Enemy.Boss3
         public void SpawnProjectiles()
         {
             NumberOfSpawns = Random.Range(1, 3);
-            DOVirtual.Color(sr.color, new Color(255, 0, 0), 5f, (Color color) =>
-                {
-                    sr.color = color;
-                });
-            Invoke("SpawnMinion", 10f);//call spawn bomb method with 10 sec  delay;
+
+            Invoke("SpawnMinion", 2f);//call spawn bomb method with 1 sec  delay;
 
         }
 
         private void SpawnMinion()
         {
+            sr.color = new Color(255, 0, 0);
             //to spawn the bomb x number of spawns
             if (NumberOfSpawns <= 0)
             {
-                DOVirtual.Color(sr.color, new Color(255, 255, 255), 5f, (Color color) =>
-                {
-                    sr.color = color;
-                });
+                sr.color = new Color(255, 255, 255);
                 return;
             }
+            else
+            {
+                // Instantiate(bombPrefab, ProjectileSpawnPoint1.position, transform.rotation);
+                Instantiate(flyingEyePrefab, ProjectileSpawnPoint1.position, transform.rotation);
 
-            // Instantiate(bombPrefab, ProjectileSpawnPoint1.position, transform.rotation);
-            Instantiate(flyingEyePrefab, ProjectileSpawnPoint1.position, transform.rotation);
+                NumberOfSpawns--;
+                Invoke("SpawnMinion", 2f);
+            }
 
-            NumberOfSpawns--;
-            Invoke("SpawnMinion", 10f);
+
         }
 
         public void OnSheildCast()

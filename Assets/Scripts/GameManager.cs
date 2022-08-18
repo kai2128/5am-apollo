@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         var levelGeneration = clonedLevelGeneration.GetComponent<LevelGeneration>();
         levelGeneration.StartGeneration(() =>
         {
-            boss3Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.down * 11f + Vector3.right * 4.5f);
+            boss3Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.down * 10f + Vector3.right * 5f);
             boss3Entrance.ResetBossRoom();
             Destroy(clonedLevelGeneration);
         });

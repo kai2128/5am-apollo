@@ -3975,6 +3975,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3183641272940606370}
     m_Modifications:
+    - target: {fileID: 798444445349648480, guid: 9a315e219e4976f4b90ab1522a5e1d67, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: de38c7ddce1c54248a7d13218d75d09a, type: 2}
     - target: {fileID: 4092681997544914972, guid: 9a315e219e4976f4b90ab1522a5e1d67, type: 3}
       propertyPath: m_Name
       value: Boss4Entrance

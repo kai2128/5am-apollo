@@ -37,7 +37,7 @@ namespace Enemy
         // Start is called before the first frame update
         void Awake()
         {
-            launchArmPoint = GameObject.FindGameObjectWithTag("LaunchProjectilePoint");
+            launchArmPoint = GameObject.FindGameObjectWithTag("SpawnProjectilePoint");
 
             target = GameObject.FindGameObjectWithTag("Player");
             maxHp = 15;
