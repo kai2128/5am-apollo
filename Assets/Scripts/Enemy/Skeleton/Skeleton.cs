@@ -71,6 +71,7 @@ namespace Enemy
                 {
                     if (weaponCol.IsTouching(col) && col.CompareTag("Player"))
                         col.gameObject.GetComponent<PlayerOnHit>().GetHit(atkArgs.UpdateTransform(transform));
+                    return;
                 }
                 if (!reacted)
                 {
@@ -192,12 +193,17 @@ namespace Enemy
             {
                 SwitchState(State.Die);
             }
-            if (!reacted && timer > 0.3f)
+
+            if (timer > 0.5f)
             {
-                if (anim.HasPlayedOver(0.9f))
+                if (!reacted)
                 {
                     SwitchState(State.React);
                 }
+                else
+                {
+                    SwitchState(State.Chase);
+                }                
             }
         }
 
