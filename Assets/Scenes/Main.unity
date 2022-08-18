@@ -1035,7 +1035,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1676301, y: 1}
+    m_SensorSize: {x: 1.3699422, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1702,20 +1702,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.size
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[1]
       value: 
-      objectReference: {fileID: 6832817655951633902, guid: 06fa997d562e8a54bb793d33b11a16e8, type: 3}
+      objectReference: {fileID: 5527985289199104235, guid: 7fd586140c07013438443d11165f4a38, type: 3}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[2]
       value: 
-      objectReference: {fileID: 6832817655951633902, guid: 06fa997d562e8a54bb793d33b11a16e8, type: 3}
+      objectReference: {fileID: 5527985289199104235, guid: 7fd586140c07013438443d11165f4a38, type: 3}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[3]
       value: 
-      objectReference: {fileID: 6832817655951633902, guid: 06fa997d562e8a54bb793d33b11a16e8, type: 3}
+      objectReference: {fileID: 5527985289199104235, guid: 7fd586140c07013438443d11165f4a38, type: 3}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[4]
       value: 
