@@ -681,6 +681,7 @@ MonoBehaviour:
   statusText: {fileID: 928835485}
   playerAbilityUI: {fileID: 0}
   playerGrowShrink: {fileID: 0}
+  playerFly: {fileID: 0}
 --- !u!114 &-6593218008384008361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,6 +833,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  stamina: 0
+  maxStamina: 100
+  startRecoverStamina: 0
+  recoverTimer: 2
 --- !u!114 &815051678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,6 +850,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  stamina: 0
+  maxStamina: 100
+  startRecoverStamina: 0
+  recoverTimer: 2
 --- !u!114 &815051679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +882,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  stamina: 0
+  maxStamina: 100
+  startRecoverStamina: 0
+  recoverTimer: 2
 --- !u!114 &2974657890513063443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,11 +1247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1476057538323508680, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1476057538323508680, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1476057538323508683, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
       propertyPath: m_Layer
@@ -1358,7 +1371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1476057539114424063, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1476057539341876487, guid: 24ec106e400bed14c8d89d9308eb3772, type: 3}
       propertyPath: m_Layer

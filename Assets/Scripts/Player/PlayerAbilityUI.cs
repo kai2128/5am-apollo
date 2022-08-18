@@ -66,26 +66,9 @@ public class PlayerAbilityUI : MonoBehaviour
 
     private void Fly()
     {
-        if (!isCooldown3)
-        {
-            fly.fillAmount = 1;
-        }
-
-        if (Input.GetKey(ability3) && !isCooldown3)
-        {
-            isCooldown3 = true;
-            fly.fillAmount = 1;
-        }
-
-        if (isCooldown3)
-        {
-            fly.fillAmount -= 1 / cooldown3 * Time.deltaTime;
-            if (fly.fillAmount <= 0)
-            {
-                fly.fillAmount = 0;
-                isCooldown3 = false;
-            }
-        }
+        var stamina = PlayerManager.Instance.playerFly.stamina;
+        var maxStamina = PlayerManager.Instance.playerFly.maxStamina;
+        fly.fillAmount = stamina / maxStamina; 
     }
 
     private void Grow()

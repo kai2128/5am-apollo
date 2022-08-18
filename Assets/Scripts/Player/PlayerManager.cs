@@ -39,6 +39,7 @@ namespace Player
         public PlayerAbilityUI playerAbilityUI;
         public PlayerGrowShrink playerGrowShrink;
         public Action OnPlayerRespawn;
+        public PlayerFly playerFly;
 
         public void SetStatusMessage(string msg, float duration = 4f)
         {
@@ -74,6 +75,7 @@ namespace Player
             mainCamera = GameObject.FindGameObjectWithTag("MainCM").GetComponent<CinemachineVirtualCamera>();
             playerAbilityUI = GetComponentInChildren<PlayerAbilityUI>();
             playerGrowShrink = GetComponent<PlayerGrowShrink>();
+            playerFly = GetComponent<PlayerFly>();
         }
 
         public void BecomeInvulnerable()
