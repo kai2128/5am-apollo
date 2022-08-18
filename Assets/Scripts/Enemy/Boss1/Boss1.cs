@@ -211,6 +211,11 @@ namespace Enemy.Boss1
             {
                 dead = true;
                 anim.Play("Die");
+                PlayerManager.Instance.SetStatusMessage("You have defeated Meta Knight!");
+                DOVirtual.DelayedCall(2f, () =>
+                {
+                    PlayerManager.Instance.SetStatusMessage("Unlocked 'Sword', press 'Q' to switch weapon.");
+                });
             }
         }
         private void ReduceTenacity(AttackArguments atkArgs)
