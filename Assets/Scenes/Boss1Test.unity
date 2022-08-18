@@ -250,7 +250,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.082569, y: 1}
+    m_SensorSize: {x: 1.6608863, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -600,6 +600,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3183641271953444847, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -14.603565
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183641271953444847, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: -12.974872
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183641271953444847, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: 16.270868
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183641271953444847, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: -13.106139
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183641271953444847, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
+      value: 16.757637
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183641271953444847, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
+      value: 5.6508274
+      objectReference: {fileID: 0}
     - target: {fileID: 3183641273299753072, guid: e82363b61c41b6e45b8adcd4ae715215, type: 3}
       propertyPath: m_Name
       value: Boss1Room

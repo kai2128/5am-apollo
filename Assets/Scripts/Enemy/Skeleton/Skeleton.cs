@@ -5,11 +5,13 @@ using System.Numerics;
 using Class;
 using DG.Tweening;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Enemy
 {
@@ -27,7 +29,6 @@ namespace Enemy
         }
 
         private PolygonCollider2D weaponCol;
-
         [SerializeField] private State currentState;
         [Header("Properties")] 
         public AttackArguments atkArgs = new AttackArguments(20f, 3f);
@@ -35,15 +36,17 @@ namespace Enemy
         public float walkSpeed = 1.5f;
         public float idleTime = 1.5f;
         public float walkTime = 5f;
-        [Header("Roam")] public float chaseRadius = 15f;
+        public bool reacted = false;
+        [Header("Roam")] 
+        public float chaseRadius = 15f;
         public float walkRadius = 10f;
+        public Transform chasePosition;
 
         public LayerMask groundLayer;
         [SerializeField] private float timer;
         [SerializeField] private Transform groundCheck, wallCheck;
         [SerializeField] private float groundCheckDist, wallCheckDist;
         [SerializeField] bool groundDetected, wallDetected;
-        // LevelSystem playerLevel;
         private Vector2 movement;
 
         private new void Start()
@@ -54,6 +57,8 @@ namespace Enemy
             enemyXp = 30;
             weaponCol = GetComponent<PolygonCollider2D>();
             currentState = State.Idle;
+            chasePosition = transform.Clone();
+            chasePosition.position = startingPosition;
         }
 
         private AttackArguments getHitArgs;
@@ -67,21 +72,7 @@ namespace Enemy
                     if (weaponCol.IsTouching(col) && col.CompareTag("Player"))
                         col.gameObject.GetComponent<PlayerOnHit>().GetHit(atkArgs.UpdateTransform(transform));
                 }
-                if (currentState is State.Idle or State.Walk)
-                {
-                    SwitchState(State.React);
-                }
-            }
-        }
-
-        private void OnTriggerStay2D(Collider2D col)
-        {
-            if (Vector2.Distance(col.gameObject.transform.position, startingPosition) >= chaseRadius)
-                return;
-
-            if (col.CompareTag("Player"))
-            {
-                if (currentState == State.Idle || currentState == State.Walk)
+                if (!reacted)
                 {
                     SwitchState(State.React);
                 }
@@ -131,6 +122,7 @@ namespace Enemy
                     UpdateDieState();
                     break;
             }
+            timer += Time.deltaTime;
         }
 
 
@@ -147,15 +139,12 @@ namespace Enemy
             Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + attackRange, transform.position.y));
 
             // chase range
-            var radius = transform.position;
-            radius.x -= chaseRadius;
-            Gizmos.DrawLine(radius, new Vector2(radius.x + chaseRadius * 2, startingPosition.y));
-
-            Gizmos.color = Color.grey;
-            // walk range
-            radius = transform.position;
-            radius.x -= walkRadius;
-            Gizmos.DrawLine(radius, new Vector2(radius.x + walkRadius * 2, startingPosition.y));
+            if (chasePosition && reacted)
+            {
+                var radius = chasePosition.position;
+                radius.x -= chaseRadius;
+                Gizmos.DrawLine(radius, new Vector2(radius.x + chaseRadius * 2, chasePosition.position.y));                
+            }
         }
 
         private void EnterWalkingState()
@@ -172,19 +161,12 @@ namespace Enemy
             {
                 FlipDirection();
             }
-            else if (Vector2.Distance(startingPosition, rb.position) >= chaseRadius)
-            {
-                transform.LookAtTarget(startingPosition);
-                movement.Set(walkSpeed * transform.GetFacingDirection().x, rb.velocity.y);
-                rb.velocity = movement;
-            }
             else
             {
                 movement.Set(walkSpeed * transform.GetFacingDirection().x, rb.velocity.y);
                 rb.velocity = movement;
             }
 
-            timer += Time.deltaTime;
             if (timer > walkTime)
             {
                 SwitchState(State.Idle);
@@ -206,12 +188,11 @@ namespace Enemy
 
         private void UpdateHitState()
         {
-            timer += Time.deltaTime;
             if (currentHp <= 0)
             {
                 SwitchState(State.Die);
             }
-            if (timer > 0.3f)
+            if (!reacted && timer > 0.3f)
             {
                 if (anim.HasPlayedOver(0.9f))
                 {
@@ -232,7 +213,6 @@ namespace Enemy
 
         private void UpdateIdleState()
         {
-            timer += Time.deltaTime;
             if (timer > idleTime)
             {
                 SwitchState(State.Walk);
@@ -286,9 +266,10 @@ namespace Enemy
                 SwitchState(State.Attack);
             }
 
-            if (Vector2.Distance(target, startingPosition) >= chaseRadius)
+            if (Vector2.Distance(target, chasePosition.position) >= chaseRadius)
             {
-                if (!transform.IsFacingTarget(startingPosition))
+                reacted = false;
+                if (!transform.IsFacingTarget(chasePosition.position))
                 {
                     SwitchState(State.Idle);
                 }
@@ -302,13 +283,17 @@ namespace Enemy
 
         private void EnterReactState()
         {
+            if(reacted)
+                SwitchState(State.Chase);
             transform.LookAtTarget(PlayerManager.Instance.transform);
+            chasePosition.position = transform.position;
+            reacted = true;
             anim.Play("React");
         }
 
         private void UpdateReactState()
         {
-            if (anim.HasPlayedOver())
+            if (timer >= .8f)
             {
                 SwitchState(State.Chase);
             }

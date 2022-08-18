@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6832817655951633897
 Transform:
   m_ObjectHideFlags: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 30
   enemyLevel: 0
   currentState: 0

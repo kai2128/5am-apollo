@@ -62,7 +62,7 @@ namespace Enemy
                     boss.GetComponent<Animator>().enabled = true;
                     fillBossHealth.SetActive(true);
                 });
-                DOVirtual.DelayedCall(5f, () =>
+                DOVirtual.DelayedCall(6.5f, () =>
                 {
                     vcam.m_Follow = PlayerManager.Instance.transform;
                     PlayerManager.Instance.canMove = true;
