@@ -2669,6 +2669,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2959348531498535314, guid: a92a18451a9bfe44497084ea57554678, type: 3}
     - target: {fileID: 85870833931730423, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
+      propertyPath: flyingEyePrefab
+      value: 
+      objectReference: {fileID: 5670846410062709570, guid: c90e811444708db48aa733192a7103f1, type: 3}
+    - target: {fileID: 85870833931730423, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: ProjectileSpawnPoint1
       value: 
       objectReference: {fileID: 6542329835846305294}

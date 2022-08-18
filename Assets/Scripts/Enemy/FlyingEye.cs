@@ -29,16 +29,36 @@ namespace Enemy
         public bool isDead = false;
         public float attackCooldownTime = 1f;
         public AttackArguments atkArgs = new AttackArguments(10f, 5f);
+        private Boss3.Boss3 boss;
+        public GameObject launchArmPoint;
+        public GameObject target;
+
 
         // Start is called before the first frame update
         void Awake()
         {
+            launchArmPoint = GameObject.FindGameObjectWithTag("LaunchProjectilePoint");
+
+            target = GameObject.FindGameObjectWithTag("Player");
             maxHp = 15;
             enemyXp = 20;
             currentHp = maxHp;
             currentState = State.Idle;
+            boss = GameObject.Find("Boss_3").GetComponent<Boss3.Boss3>();
+            if (boss.isEnlarge)
+            {
+                foundPlayer = true;
+            }
+            Physics2D.IgnoreCollision(boss.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
 
+        void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Physics.IgnoreCollision(boss.GetComponent<Collider>(), GetComponent<Collider>());
+            }
+        }
         // Update is called once per frame
         void Update()
         {
@@ -61,6 +81,10 @@ namespace Enemy
                 case State.Die:
                     UpdateDieState();
                     break;
+            }
+            if (boss.isEnlarge)
+            {
+                Destroy(gameObject, 8f);
             }
         }
 
@@ -132,7 +156,7 @@ namespace Enemy
         {
 
 
-            if (foundPlayer)
+            if (foundPlayer && !boss.isEnlarge)
             {
                 transform.LookAtTarget(PlayerManager.Instance.transform);
                 Vector3 originalPos = transform.position;
@@ -149,6 +173,22 @@ namespace Enemy
                     SwitchState(State.Attack);
                 }
             }
+            else if (foundPlayer && boss.isEnlarge)
+            {
+                float launchArmPointX = launchArmPoint.transform.position.x;
+                float targetX = target.transform.position.x;
+                float dist = targetX - launchArmPointX;
+                float nextX = Mathf.MoveTowards(transform.position.x, target.transform.position.x, moveSpeed * Time.deltaTime);
+                float baseY = Mathf.Lerp(launchArmPoint.transform.position.y, target.transform.position.y, (nextX - launchArmPointX) / dist);
+                // height = 2 * (nextX - launchArmPointX) * (nextX - targetX) / (-0.25f * dist * dist);
+                Vector3 movePosition = new Vector3(nextX, baseY, transform.position.z);
+                transform.position = movePosition;
+                transform.LookAtTarget(PlayerManager.Instance.transform);
+                if (Vector2.Distance(transform.position, PlayerManager.Instance.transform.position) <= attackRange && !attackCooldown)
+                {
+                    SwitchState(State.Attack);
+                }
+            }
             else
             {
                 rb.velocity = new Vector2(transform.GetFacingFloat() * moveSpeed, 0);
@@ -159,6 +199,7 @@ namespace Enemy
                 SwitchState(State.Idle);
             }
         }
+
 
         private void ExitMoveState()
         {

@@ -53,12 +53,13 @@ namespace Enemy.Boss3
 
         public bool goingEnlarge = false;
         public bool isShooting = false;
-        public float SpawnProjectilesCooldown = 10f;
+        public float SpawnProjectilesCooldown = 30f;
         public int NumberOfSpawns = 0;
         public float timer = 0f;
         // Projectiele
         public ProjectileBehavior ProjectilePrefab;
-        public BombProjectileBehavior bombPrefab;
+        // public BombProjectileBehavior bombPrefab;
+        public FlyingEye flyingEyePrefab;
         public Transform LaunchArmProjectileOffset;
         public Transform ProjectileSpawnPoint1;
         public Transform ProjectileSpawnPoint2;
@@ -286,26 +287,32 @@ namespace Enemy.Boss3
 
         public void SpawnProjectiles()
         {
-            NumberOfSpawns = Random.Range(1, 4);
+            NumberOfSpawns = Random.Range(1, 3);
             DOVirtual.Color(sr.color, new Color(255, 0, 0), 5f, (Color color) =>
                 {
                     sr.color = color;
                 });
-            Invoke("SpawnBomb", 1f);//call spawn bomb method with 1 sec  delay;
+            Invoke("SpawnMinion", 10f);//call spawn bomb method with 10 sec  delay;
 
         }
 
-        private void SpawnBomb()
+        private void SpawnMinion()
         {
             //to spawn the bomb x number of spawns
             if (NumberOfSpawns <= 0)
             {
+                DOVirtual.Color(sr.color, new Color(255, 255, 255), 5f, (Color color) =>
+                {
+                    sr.color = color;
+                });
                 return;
             }
 
-            Instantiate(bombPrefab, ProjectileSpawnPoint1.position, transform.rotation);
+            // Instantiate(bombPrefab, ProjectileSpawnPoint1.position, transform.rotation);
+            Instantiate(flyingEyePrefab, ProjectileSpawnPoint1.position, transform.rotation);
+
             NumberOfSpawns--;
-            Invoke("SpawnBomb", 1f);
+            Invoke("SpawnMinion", 10f);
         }
 
         public void OnSheildCast()

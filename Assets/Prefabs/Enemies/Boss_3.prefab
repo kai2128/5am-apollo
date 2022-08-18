@@ -764,7 +764,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 974925567
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 5605086426025547735, guid: db6fddd621c0ea04eb94be1f7ecaa466, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -818,7 +818,7 @@ MonoBehaviour:
   NumberOfSpawns: 0
   timer: 0
   ProjectilePrefab: {fileID: 4690638272398094697, guid: 3e83eda359e6c5b45879465b617e916e, type: 3}
-  bombPrefab: {fileID: 0}
+  flyingEyePrefab: {fileID: 0}
   LaunchArmProjectileOffset: {fileID: 768502243413015317}
   ProjectileSpawnPoint1: {fileID: 0}
   ProjectileSpawnPoint2: {fileID: 0}
