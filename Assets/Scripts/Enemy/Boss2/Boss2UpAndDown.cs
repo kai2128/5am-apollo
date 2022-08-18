@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Numerics;
-using Vector2 = UnityEngine.Vector2;
 using Utils;
 
 namespace Enemy.Boss2
@@ -38,6 +36,10 @@ namespace Enemy.Boss2
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            // if (boss.isRageHit)
+            // {
+            //     sr.material.color = Color.red;
+            // }
             if (boss.isGround() || boss.isWall())
             {
                 index++;
@@ -51,6 +53,7 @@ namespace Enemy.Boss2
                 //     index = 0;
                 // }
                 // target = counter[index];
+
             }
             else if (boss.isTop())
             {
@@ -69,6 +72,21 @@ namespace Enemy.Boss2
                 // }
                 // target = counter[index];
             }
+            Vector3 flipped = boss.transform.localScale;
+            flipped.z *= -1f;
+            if (boss.transform.position.x > targetPoint[target].position.x)
+            {
+                boss.transform.localScale = flipped;
+                boss.transform.Rotate(0f, 180f, 0f);
+                boss.isFlipped = false;
+            }
+            else if (boss.transform.position.x < targetPoint[target].position.x)
+            {
+                boss.transform.localScale = flipped;
+                boss.transform.Rotate(0f, 180f, 0f);
+                boss.isFlipped = true;
+            }
+
             Vector2 newPos = Vector2.MoveTowards(rb.position, targetPoint[target].position, boss.attackUDSpeed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
             float distance = Vector2.Distance(rb.position, player.position);

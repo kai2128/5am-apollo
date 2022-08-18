@@ -19,6 +19,7 @@ namespace Enemy.Boss2
         private float Speed;
 
         private Vector2 target;
+        private Transform point;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -30,21 +31,39 @@ namespace Enemy.Boss2
             dir = fireball.transform.localScale;
             Speed = 10f;
             fireballs = new List<Fireball>();
+            point = boss.patrolPoint[3];
 
-            // create fireballs
-            for (int i = 0; i < 5; i++)
+            if (boss.transform.position.x > player.position.x)
             {
-                Fireball fb = Instantiate(fireball, null);
-                Vector3 dir = Quaternion.Euler(0, i * 15, 0) * -boss.transform.right;
-                fb.transform.position = boss.transform.position + dir * 1.0f;
-                fb.transform.rotation = Quaternion.Euler(0, 0, i * 15);
-                fireballs.Add(fb);
+
+                // create fireballs
+                for (int i = 0; i < 5; i++)
+                {
+                    Fireball fb = Instantiate(fireball, null);
+                    Vector3 dir = Quaternion.Euler(0, i * 15, 0) * -boss.transform.right;
+                    fb.transform.position = boss.transform.position + dir * 1.0f;
+                    fb.transform.rotation = Quaternion.Euler(0, 0, i * 15);
+                    fireballs.Add(fb);
+                }
+            }
+            else if (boss.transform.position.x < player.position.x)
+            {
+                // create fireballs
+                for (int i = 5; i < 10; i++)
+                {
+                    Fireball fb = Instantiate(fireball, null);
+                    Vector3 dir = Quaternion.Euler(0, i * 15, 0) * boss.transform.right;
+                    fb.transform.position = boss.transform.position + dir * 1.0f;
+                    fb.transform.rotation = Quaternion.Euler(0, 0, i * 15);
+                    fireballs.Add(fb);
+                }
             }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            boss.LookAtPlayer();
             timer += Time.deltaTime;
             if (timer >= boss.attack1.attackTime || boss.allowChase == false || boss.readyAttack == false)
             {
@@ -97,7 +116,7 @@ namespace Enemy.Boss2
 
             }
             //boss.Ready();
-            target = new Vector2(player.position.x, rb.position.y);
+            target = new Vector2(player.position.x, point.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, 2.5f * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
         }
