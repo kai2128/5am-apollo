@@ -86,6 +86,10 @@ namespace Enemy
             {
                 Destroy(gameObject, 8f);
             }
+            if (boss.isdead)
+            {
+                Destroy(gameObject);
+            }
         }
 
 
@@ -175,6 +179,7 @@ namespace Enemy
             }
             else if (foundPlayer && boss.isEnlarge)
             {
+                transform.LookAtTarget(PlayerManager.Instance.transform);
                 float launchArmPointX = launchArmPoint.transform.position.x;
                 float targetX = target.transform.position.x;
                 float dist = targetX - launchArmPointX;
@@ -183,7 +188,7 @@ namespace Enemy
                 // height = 2 * (nextX - launchArmPointX) * (nextX - targetX) / (-0.25f * dist * dist);
                 Vector3 movePosition = new Vector3(nextX, baseY, transform.position.z);
                 transform.position = movePosition;
-                transform.LookAtTarget(PlayerManager.Instance.transform);
+
                 if (Vector2.Distance(transform.position, PlayerManager.Instance.transform.position) <= attackRange && !attackCooldown)
                 {
                     SwitchState(State.Attack);
@@ -226,6 +231,7 @@ namespace Enemy
 
         private void EnterAttackState()
         {
+            transform.LookAtTarget(PlayerManager.Instance.transform);
             anim.Play("attack");
         }
 

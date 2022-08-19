@@ -24,12 +24,11 @@ namespace Enemy.Boss3
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Debug.Log(boss.transform.localScale);
-            DOVirtual.Vector3(boss.transform.localScale, new Vector3(1.01f, 0.98f, 1), 1f, (scale) =>
-            {
-                boss.transform.localScale = scale;
-                Debug.Log(scale);
-            });
+            // Debug.Log(boss.transform.localScale);
+            // DOVirtual.Vector3(boss.transform.localScale, new Vector3(1.01f, 0.98f, 1), 1f, (scale) =>
+            // {
+            //     boss.transform.localScale = scale;
+            // });
         }
 
     }
