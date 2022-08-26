@@ -22,6 +22,11 @@ namespace Player
         [Header("Properties")] public float maxHp = 20;
         public float currentHp;
 
+        [Header("Unlockable")] 
+        public bool unlockedSword = false;
+        public bool unlockedFly = false;
+        public bool unlockedGrowShrink = false;
+
         [HideInInspector] public PlayerAnimation playerAnim;
         [HideInInspector] public Transform playerTrans;
         [HideInInspector] public Animator anim;

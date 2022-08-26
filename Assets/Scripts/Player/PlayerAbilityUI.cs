@@ -33,11 +33,31 @@ public class PlayerAbilityUI : MonoBehaviour
     void Start()
     {
         playerGrowShrink = GetComponentInParent<Player.PlayerGrowShrink>();
+        fly.enabled = false;
+        shrink.enabled = false;
+        grow.enabled = false;
     }
     void Update()
     {
+        if (!fly.enabled && PlayerManager.Instance.unlockedFly)
+        {
+            fly.enabled = true;
+        }
+
+        if (!shrink.enabled && !grow.enabled && PlayerManager.Instance.unlockedGrowShrink)
+        {
+            shrink.enabled = true;
+            grow.enabled = true;
+        }
+
         Weapon();
         Fly();
+
+        if (!PlayerManager.Instance.unlockedGrowShrink)
+        {
+            return;
+        }
+        
         Grow();
         Shrink();
     }

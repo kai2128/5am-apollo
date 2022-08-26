@@ -198,6 +198,7 @@ namespace Enemy.Boss2
             {
                 dead = true;
                 anim.Play("Die");
+                PlayerManager.Instance.unlockedFly = true;
             }
         }
 

@@ -28,6 +28,9 @@ namespace Player
         }
         void Update()
         {
+            if(!PlayerManager.Instance.unlockedFly)
+                return;
+            
             timer += Time.deltaTime;
             if (stamina <= maxStamina && startRecoverStamina)
             {
