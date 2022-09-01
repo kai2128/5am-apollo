@@ -43,7 +43,7 @@ namespace Player
         public TextMeshProUGUI statusText;
         public PlayerAbilityUI playerAbilityUI;
         public PlayerGrowShrink playerGrowShrink;
-        public Action OnPlayerRespawn;
+        public Action onPlayerRespawn;
         public PlayerFly playerFly;
 
         public void SetStatusMessage(string msg, float duration = 4f)
@@ -115,7 +115,7 @@ namespace Player
             playerAbilityUI.ResetCooldown();
             playerGrowShrink.ResetGrowShrink();
             playerAttack.ActiveCurrentWeapon();
-            OnPlayerRespawn();
+            onPlayerRespawn();
             mainCamera.MoveToTopOfPrioritySubqueue();
         }
 
@@ -149,6 +149,14 @@ namespace Player
         {
             attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.1f);
             playerAttack.UpdateDamages(attackLevelMultiplier);
+        }
+
+        [ContextMenu("Unlock all skill")]
+        public void UnlockAllSkill()
+        {
+            unlockedSword = true;
+            unlockedFly = true;
+            unlockedGrowShrink = true;
         }
 
         public void GrowDmg(bool growed)

@@ -64,8 +64,8 @@ namespace Player
             });
         }
 
-        [ContextMenu("Test reset")]
-        public void TestRest()
+        [ContextMenu("Reset cooldown")]
+        public void ResetCooldown()
         {
             PlayerManager.Instance.playerAbilityUI.ResetCooldown();
             ResetGrowShrink();

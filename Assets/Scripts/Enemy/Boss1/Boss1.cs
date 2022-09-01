@@ -34,10 +34,10 @@ namespace Enemy.Boss1
         [Header("Attacks")]
         public float readyTime = 1f;
 
-        public Attack attack1 = new Attack(20f, 1f, 3f, "attack_1",.8f, 35, AttackHint.AttackType.Normal); // slash
+        public Attack attack1 = new Attack(20f, 1f, 3f, "attack_1",.8f, 60, AttackHint.AttackType.Normal); // slash
         public Attack attack2 = new Attack(25f, 2f, 4f, "attack_2",1.5f, 25, AttackHint.AttackType.Medium); // double slash
-        public Attack attack3 = new Attack(25f, 3f, 7f, "attack_3",1.8f, 20, AttackHint.AttackType.Danger); // ranged attack
-        public Attack attack4 = new Attack(25f, 3.5f, 6f, "attack_4",2.2f,  10, AttackHint.AttackType.Special); // ground attack
+        public Attack attack3 = new Attack(25f, 3f, 7f, "attack_3",1.8f, 100, AttackHint.AttackType.Danger); // ranged attack
+        public Attack attack4 = new Attack(25f, 3.5f, 6f, "attack_4",2.2f,  0, AttackHint.AttackType.Special); // ground attack
         public Attack attack5 = new Attack(15f, 1f, 8f, "attack_5",1.3f, 0, AttackHint.AttackType.Danger); // dash attack
 
         public Attack[] attacks;
@@ -89,6 +89,7 @@ namespace Enemy.Boss1
             currentHp = maxHp;
             tenacity = maxTenacity;
             enemyName = "Meta Knight";
+            enemyXp = 100;
             attackHint = GetComponentInChildren<AttackHint>(true);
         }
 
@@ -109,9 +110,9 @@ namespace Enemy.Boss1
             attack5.damage *= 1.2f;
             
             attack1.weight = 5;
-            attack2.weight = 30;
-            attack3.weight = 25;
-            attack4.weight = 20;
+            attack2.weight = 20;
+            attack3.weight = 30;
+            attack4.weight = 25;
             attack5.weight = 20;
         }
 
@@ -144,7 +145,9 @@ namespace Enemy.Boss1
             {
                 sum += atk.weight;
                 if (rand <= sum)
-                {
+                {                
+                    print(sum);
+                    print(rand);
                     return atk;
                 }
             }
@@ -212,11 +215,15 @@ namespace Enemy.Boss1
                 dead = true;
                 anim.Play("Die");
                 PlayerManager.Instance.SetStatusMessage("You have defeated Meta Knight!");
-                PlayerManager.Instance.unlockedSword = true;
-                DOVirtual.DelayedCall(2f, () =>
+                DropExperience();
+                if (!PlayerManager.Instance.unlockedSword)
                 {
-                    PlayerManager.Instance.SetStatusMessage("Unlocked 'Sword', press 'Q' to switch weapon.");
-                });
+                    DOVirtual.DelayedCall(2f, () =>
+                    {
+                        PlayerManager.Instance.SetStatusMessage("Unlocked 'Sword', press 'Q' to switch weapon.");
+                    });
+                    PlayerManager.Instance.unlockedSword = true;                    
+                }                
             }
         }
         private void ReduceTenacity(AttackArguments atkArgs)
@@ -226,6 +233,8 @@ namespace Enemy.Boss1
                 rate += 0.02f;
             if (tenacity < 20f)
                 rate += 0.08f;
+            if (rageMode)
+                rate -= 0.05f;
             tenacity -= maxTenacity * rate;
         }
         
