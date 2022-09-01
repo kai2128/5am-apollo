@@ -146,8 +146,6 @@ namespace Enemy.Boss1
                 sum += atk.weight;
                 if (rand <= sum)
                 {                
-                    print(sum);
-                    print(rand);
                     return atk;
                 }
             }
