@@ -151,6 +151,18 @@ namespace Player
             playerAttack.UpdateDamages(attackLevelMultiplier);
         }
 
+        public void BackToSpawnPoint(Action onBackToSpawnPoint, float delay = 2f, bool shouldRestoreHp = true)
+        {
+            
+            if(shouldRestoreHp)
+                currentHp = maxHp;
+            DOVirtual.DelayedCall(delay, () =>
+            {
+                onBackToSpawnPoint();
+                transform.position = spawnPoint;
+            });
+        }
+
         [ContextMenu("Unlock all skill")]
         public void UnlockAllSkill()
         {

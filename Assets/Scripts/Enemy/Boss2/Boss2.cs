@@ -199,6 +199,7 @@ namespace Enemy.Boss2
                 dead = true;
                 anim.Play("Die");
                 PlayerManager.Instance.unlockedFly = true;
+                PlayerManager.Instance.BackToSpawnPoint(transform.parent.gameObject.GetComponentInChildren<Boss2Entrance>().ResetBossRoom);
             }
         }
 

@@ -43,7 +43,13 @@ namespace Player
         public void DecreaseHp(float damage)
         {
             ref var currentHp = ref PlayerManager.Instance.currentHp;
-            currentHp -= damage;
+            if (currentHp <= 0) return;
+            
+            if (damage >= currentHp)
+                currentHp = 0;
+            else
+                currentHp -= damage;
+            
             if (currentHp <= 0)
             {
                 rb.AddForce(Vector2.down);

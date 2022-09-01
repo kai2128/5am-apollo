@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using Class;
 using DG.Tweening;
 using Player;
+using Unity.VisualScripting;
 using static Utils.Utils;
 using Utils;
 using Debug = UnityEngine.Debug;
@@ -221,7 +223,8 @@ namespace Enemy.Boss1
                         PlayerManager.Instance.SetStatusMessage("Unlocked 'Sword', press 'Q' to switch weapon.");
                     });
                     PlayerManager.Instance.unlockedSword = true;                    
-                }                
+                }
+                PlayerManager.Instance.BackToSpawnPoint(transform.parent.gameObject.GetComponentInChildren<BossEntrance>().ResetBossRoom);
             }
         }
         private void ReduceTenacity(AttackArguments atkArgs)
