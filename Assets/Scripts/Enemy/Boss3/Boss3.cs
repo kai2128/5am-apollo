@@ -53,7 +53,7 @@ namespace Enemy.Boss3
 
         public bool goingEnlarge = false;
         public bool isShooting = false;
-        public float SpawnProjectilesCooldown = 10f;
+        public float SpawnProjectilesCooldown = 5f;
         public int NumberOfSpawns = 0;
         public float timer = 0f;
         // Projectiele
@@ -214,6 +214,7 @@ namespace Enemy.Boss3
 
             if (currentHp < (maxHp / 3) && !rageMode && isEnlarge)
             {
+                AstarPath.active.Scan();
                 rageMode = true;
                 // SpawnProjectiles();
             }
@@ -291,7 +292,7 @@ namespace Enemy.Boss3
         {
             NumberOfSpawns = Random.Range(1, 3);
 
-            Invoke("SpawnMinion", 2f);//call spawn bomb method with 1 sec  delay;
+            Invoke("SpawnMinion", 1f);//call spawn minion method with 1 sec  delay;
 
         }
 

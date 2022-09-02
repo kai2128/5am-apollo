@@ -110,10 +110,10 @@ namespace Enemy
                     UpdateDieState();
                     break;
             }
-            if (boss.isEnlarge)
-            {
-                Destroy(gameObject, 8f);
-            }
+            // if (boss.isEnlarge)
+            // {
+            //     Destroy(gameObject, 8f);
+            // }
             if (boss.isdead)
             {
                 Destroy(gameObject);

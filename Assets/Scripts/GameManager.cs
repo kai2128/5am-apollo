@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
             boss3Entrance.ResetBossRoom();
             Destroy(clonedLevelGeneration);
             AstarPath.active.Scan();
-            Debug.Log(AstarPath.active);
         });
 
     }
