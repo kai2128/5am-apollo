@@ -22,6 +22,11 @@ namespace Player
         [Header("Properties")] public float maxHp = 20;
         public float currentHp;
 
+        [Header("Unlockable")] 
+        public bool unlockedSword = false;
+        public bool unlockedFly = false;
+        public bool unlockedGrowShrink = false;
+
         [HideInInspector] public PlayerAnimation playerAnim;
         [HideInInspector] public Transform playerTrans;
         [HideInInspector] public Animator anim;
@@ -38,7 +43,7 @@ namespace Player
         public TextMeshProUGUI statusText;
         public PlayerAbilityUI playerAbilityUI;
         public PlayerGrowShrink playerGrowShrink;
-        public Action OnPlayerRespawn;
+        public Action onPlayerRespawn;
         public PlayerFly playerFly;
 
         public void SetStatusMessage(string msg, float duration = 4f)
@@ -110,7 +115,7 @@ namespace Player
             playerAbilityUI.ResetCooldown();
             playerGrowShrink.ResetGrowShrink();
             playerAttack.ActiveCurrentWeapon();
-            OnPlayerRespawn();
+            onPlayerRespawn();
             mainCamera.MoveToTopOfPrioritySubqueue();
         }
 
@@ -144,6 +149,26 @@ namespace Player
         {
             attackLevelMultiplier = 1 + ((100 - (100 - level)) * 0.1f);
             playerAttack.UpdateDamages(attackLevelMultiplier);
+        }
+
+        public void BackToSpawnPoint(Action onBackToSpawnPoint, float delay = 2f, bool shouldRestoreHp = true)
+        {
+            
+            if(shouldRestoreHp)
+                currentHp = maxHp;
+            DOVirtual.DelayedCall(delay, () =>
+            {
+                onBackToSpawnPoint();
+                transform.position = spawnPoint;
+            });
+        }
+
+        [ContextMenu("Unlock all skill")]
+        public void UnlockAllSkill()
+        {
+            unlockedSword = true;
+            unlockedFly = true;
+            unlockedGrowShrink = true;
         }
 
         public void GrowDmg(bool growed)

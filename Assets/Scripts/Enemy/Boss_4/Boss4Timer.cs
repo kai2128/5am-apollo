@@ -16,7 +16,7 @@ public class Boss4Timer : MonoBehaviour
     {
         endTime = 60;
         timer = endTime;
-        PlayerManager.Instance.OnPlayerRespawn += ResetLevel4Timer;
+        PlayerManager.Instance.onPlayerRespawn += ResetLevel4Timer;
     }
 
     void Update()

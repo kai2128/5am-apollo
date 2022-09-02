@@ -27,6 +27,9 @@ namespace Player
                 DisableAllWeapon();
                 return;
             }
+            
+            if(!PlayerManager.Instance.unlockedSword)
+                return;
             SwitchWeapon();
         }
 

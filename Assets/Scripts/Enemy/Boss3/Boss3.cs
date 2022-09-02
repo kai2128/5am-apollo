@@ -221,6 +221,8 @@ namespace Enemy.Boss3
             {
                 anim.Play("death");
                 isdead = true;
+                PlayerManager.Instance.unlockedGrowShrink = true;
+                PlayerManager.Instance.BackToSpawnPoint(transform.parent.gameObject.GetComponentInChildren<Boss3Entrance>().ResetBossRoom);
                 // leftShoulder.gameObject.SetActive(false);
                 // rightShoulder.gameObject.SetActive(false);
                 // head.gameObject.SetActive(false);

@@ -275,6 +275,7 @@ namespace Enemy
         private void EnterDieState()
         {
             anim.Play("Die");
+            PlayerManager.Instance.BackToSpawnPoint(transform.parent.gameObject.GetComponentInChildren<Boss4Entrance>().ResetBossRoom,5f);
         }
 
         private void UpdateDieState()
