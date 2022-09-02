@@ -13,7 +13,7 @@ namespace Enemy.Boss3
         // Start is called before the first frame update
         void Awake()
         {
-            currentHp = boss.maxHp / 3;
+            // currentHp = boss.maxHp / 3;
 
         }
 
@@ -28,6 +28,7 @@ namespace Enemy.Boss3
             // currentHp = hp / 3; //update hp hold by this weakness point with new max hp of boss
 
             currentHp = hp;
+            Debug.Log("Head:" + hp);
             sr.enabled = true;
             anim.enabled = true;
 

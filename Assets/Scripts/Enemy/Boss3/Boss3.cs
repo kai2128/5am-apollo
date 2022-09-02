@@ -23,7 +23,7 @@ namespace Enemy.Boss3
 
         public bool isImmune = false;
         public Attack melee = new Attack(10f, 1f, "Melee", 2f, 70);
-        public Attack laser = new Attack(30f, 1f, "Laser", 20f, 30);
+        public Attack laser = new Attack(30f, 20f, "Laser", 20f, 30);
         public Attack shoot = new Attack(20f, 1f, "Shoot", 20f, 30);
         public Attack shield_cast = new Attack(0f, 1f, "Sheild", 0f, 10);
 
@@ -96,7 +96,7 @@ namespace Enemy.Boss3
             giantBossAttacks = new[] { shoot, shield_cast, laser };
             attacks = miniBossAttacks; // mini boss attacks
             enemyName = "Mecha Golem";
-            maxHp = 100;
+            maxHp = 50;
             currentHp = maxHp;
             enemyXp = 100;
 
@@ -266,17 +266,17 @@ namespace Enemy.Boss3
 
         public void EnterGiantMode()
         {
-            maxHp = 100;
-            currentHp = 100;
+            maxHp = 50;
+            currentHp = 50;
             canFlip = true; //just in case
             ShowWeaknessPoints();
         }
 
         public void ShowWeaknessPoints()
         {
-            leftShoulder.Show(30);
-            rightShoulder.Show(30);
-            head.Show(40);
+            leftShoulder.Show(15);
+            rightShoulder.Show(15);
+            head.Show(20);
 
         }
 

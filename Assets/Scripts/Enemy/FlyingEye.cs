@@ -5,7 +5,7 @@ using Player;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
-
+using Pathfinding;
 namespace Enemy
 {
     public class FlyingEye : Enemy
@@ -22,9 +22,9 @@ namespace Enemy
         public State currentState;
         public float timer;
         public float idleTime;
-        public float moveSpeed = 5;
+        public float moveSpeed = 100f;
         public bool foundPlayer = false;
-        public float attackRange = 2f;
+        public float attackRange = 1.5f;
         public bool attackCooldown;
         public bool isDead = false;
         public float attackCooldownTime = 1f;
@@ -33,10 +33,19 @@ namespace Enemy
         public GameObject launchArmPoint;
         public GameObject target;
 
+        //pathfinding 
+        public float nextWaypointDistance = 5f; //how close the enemy needs to be to a waypoint before move to the next one
+
+        Path path; //current path following
+        int currentWayPoint = 0; //current waypoint along the path that we are following
+        bool reachedEndOfPath = false;
+
+        Seeker seeker;
 
         // Start is called before the first frame update
         void Awake()
         {
+
             launchArmPoint = GameObject.FindGameObjectWithTag("SpawnProjectilePoint");
 
             target = GameObject.FindGameObjectWithTag("Player");
@@ -49,7 +58,26 @@ namespace Enemy
             {
                 foundPlayer = true;
             }
-            Physics2D.IgnoreCollision(boss.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            seeker = GetComponent<Seeker>();
+            InvokeRepeating("UpdatePath", 0f, .5f); //update path instantly every half second;
+
+        }
+        void UpdatePath()
+        {
+            if (seeker.IsDone())
+            {
+                // make sure that it isnt currently calculating a path
+                seeker.StartPath(rb.position, PlayerManager.Instance.transform.position, OnPathComplete);
+            }
+        }
+
+        void OnPathComplete(Path p)
+        {
+            if (!p.error) //if didnt get error
+            {
+                path = p;
+                currentWayPoint = 0;
+            }
         }
 
         void OnCollisionEnter(Collision collision)
@@ -60,7 +88,7 @@ namespace Enemy
             }
         }
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
 
             timer += Time.deltaTime;
@@ -158,45 +186,41 @@ namespace Enemy
 
         private void UpdateMoveState()
         {
-
-
-            if (foundPlayer && !boss.isEnlarge)
+            if (foundPlayer && path == null)
+                return;
+            if (currentWayPoint >= path.vectorPath.Count)
             {
-                transform.LookAtTarget(PlayerManager.Instance.transform);
-                Vector3 originalPos = transform.position;
-                float posX = originalPos.x;
-                float targetX = PlayerManager.Instance.transform.position.x;
-                float dist = targetX - posX;
-                float nextX = Mathf.MoveTowards(transform.position.x, PlayerManager.Instance.transform.position.x, moveSpeed * Time.deltaTime);
-                float baseY = Mathf.Lerp(originalPos.y, PlayerManager.Instance.transform.position.y, (nextX - posX) / dist);
-                Vector3 movePosition = new Vector3(nextX, baseY, transform.position.z);
-                transform.position = movePosition;
-
-                if (Vector2.Distance(transform.position, PlayerManager.Instance.transform.position) <= attackRange && !attackCooldown)
-                {
-                    SwitchState(State.Attack);
-                }
+                reachedEndOfPath = true;
+                return;
             }
-            else if (foundPlayer && boss.isEnlarge)
+            else
+            {
+                reachedEndOfPath = false;
+            }
+            if (foundPlayer)
             {
                 transform.LookAtTarget(PlayerManager.Instance.transform);
-                float launchArmPointX = launchArmPoint.transform.position.x;
-                float targetX = target.transform.position.x;
-                float dist = targetX - launchArmPointX;
-                float nextX = Mathf.MoveTowards(transform.position.x, target.transform.position.x, moveSpeed * Time.deltaTime);
-                float baseY = Mathf.Lerp(launchArmPoint.transform.position.y, target.transform.position.y, (nextX - launchArmPointX) / dist);
-                // height = 2 * (nextX - launchArmPointX) * (nextX - targetX) / (-0.25f * dist * dist);
-                Vector3 movePosition = new Vector3(nextX, baseY, transform.position.z);
-                transform.position = movePosition;
 
-                if (Vector2.Distance(transform.position, PlayerManager.Instance.transform.position) <= attackRange && !attackCooldown)
+                // float dist = (transform.position - PlayerManager.Instance.transform.position).sqrMagnitude;
+                // transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+
+                //follow along the path
+                Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+                Vector2 force = direction * moveSpeed * Time.deltaTime;
+                rb.AddForce(force);
+                float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
+                if (distance < nextWaypointDistance)
+                {
+                    currentWayPoint++;
+                }
+                if (Vector2.Distance(rb.position, PlayerManager.Instance.transform.position) <= attackRange && !attackCooldown)
                 {
                     SwitchState(State.Attack);
                 }
             }
             else
             {
-                rb.velocity = new Vector2(transform.GetFacingFloat() * moveSpeed, 0);
+                rb.velocity = new Vector2(transform.GetFacingFloat() * moveSpeed * Time.deltaTime, 0);
             }
 
             if (timer >= 1 && !foundPlayer)

@@ -27,9 +27,6 @@ namespace Enemy.Boss3
             boss.leftShoulder.gameObject.SetActive(true);
             boss.rightShoulder.gameObject.SetActive(true);
             boss.head.gameObject.SetActive(true);
-            boss.leftShoulder.Show(30);
-            boss.rightShoulder.Show(30);
-            boss.head.Show(40);
         }
 
         // OnStateMove is called right after Animator.OnAnimatorMove()

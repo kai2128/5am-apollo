@@ -79,7 +79,10 @@ public class GameManager : MonoBehaviour
             boss3Entrance.MoveBossRoomTo(levelGeneration.pos2.transform.position + Vector3.down * 10f + Vector3.right * 5f);
             boss3Entrance.ResetBossRoom();
             Destroy(clonedLevelGeneration);
+            AstarPath.active.Scan();
+            Debug.Log(AstarPath.active);
         });
+
     }
 
 

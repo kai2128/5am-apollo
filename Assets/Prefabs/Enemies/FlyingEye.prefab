@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5670846410062709573}
   - component: {fileID: 5670846410062709572}
   - component: {fileID: 5670846410062709570}
+  - component: {fileID: -9050194839151824616}
   m_Layer: 9
   m_Name: FlyingEye
   m_TagString: Enemy
@@ -122,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2301485, y: -0.07750353}
+  m_Offset: {x: 0.1637013, y: 0.05338469}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.91856134, y: 1.3839049}
+  m_Size: {x: 0.3795451, y: 0.62463063}
   m_EdgeRadius: 0
 --- !u!50 &5670846410062709572
 Rigidbody2D:
@@ -148,9 +149,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d866cfc25a3ee224a9283764f24ac962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 5670846410062709572}
   currentHp: 0
   maxHp: 0
   enemyName: 
@@ -177,14 +178,43 @@ MonoBehaviour:
   currentState: 0
   timer: 0
   idleTime: 0
-  moveSpeed: 5
+  moveSpeed: 200
   foundPlayer: 0
-  attackRange: 2
+  attackRange: 1.5
   attackCooldown: 0
   isDead: 0
   attackCooldownTime: 1
   launchArmPoint: {fileID: 0}
   target: {fileID: 0}
+  nextWaypointDistance: 3
+--- !u!114 &-9050194839151824616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670846410062709576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 4
+    exactEndPoint: 4
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &5670846410199662429
 GameObject:
   m_ObjectHideFlags: 0

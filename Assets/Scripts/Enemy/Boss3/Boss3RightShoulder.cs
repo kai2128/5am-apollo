@@ -13,7 +13,7 @@ namespace Enemy.Boss3
         // Start is called before the first frame update
         void Awake()
         {
-            currentHp = boss.maxHp / 3;
+            // currentHp = boss.maxHp / 3;
 
         }
 
