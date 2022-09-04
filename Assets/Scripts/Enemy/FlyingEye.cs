@@ -35,9 +35,15 @@ namespace Enemy
 
         [Header("GoundCheck")]
         [SerializeField] public Transform groundCheck;
+        [SerializeField] public Transform upCheck;
+
         [SerializeField] public float groundCheckRadius;
+        [SerializeField] public float upCheckRadius;
+
         [SerializeField] LayerMask groundLayer;
         private bool isTouchingGround;
+        private bool isTouchingUp;
+
 
         [Header("Pathfinding")]
         public float nextWaypointDistance = 5f; //how close the enemy needs to be to a waypoint before move to the next one
@@ -187,10 +193,16 @@ namespace Enemy
         private void UpdateMoveState()
         {
             isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            isTouchingUp = Physics2D.OverlapCircle(upCheck.position, upCheckRadius, groundLayer);
+
             if (isTouchingGround)
             {
-                rb.velocity = new Vector2(transform.GetFacingFloat() * -1 * moveSpeed * Time.deltaTime, 0);
+                rb.velocity += transform.GetOppositeDirection() * moveSpeed * Time.deltaTime;
 
+            }
+            if (isTouchingUp)
+            {
+                rb.velocity += Vector2.down * moveSpeed * Time.deltaTime;
             }
             if (foundPlayer && path == null)
                 return;
@@ -350,8 +362,9 @@ namespace Enemy
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            var groundPos = groundCheck.position;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            Gizmos.DrawWireSphere(upCheck.position, upCheckRadius);
+
         }
     }
 
