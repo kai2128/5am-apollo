@@ -33,7 +33,13 @@ namespace Enemy
         public GameObject launchArmPoint;
         public GameObject target;
 
-        //pathfinding 
+        [Header("GoundCheck")]
+        [SerializeField] public Transform groundCheck;
+        [SerializeField] public float groundCheckRadius;
+        [SerializeField] LayerMask groundLayer;
+        private bool isTouchingGround;
+
+        [Header("Pathfinding")]
         public float nextWaypointDistance = 5f; //how close the enemy needs to be to a waypoint before move to the next one
 
         Path path; //current path following
@@ -80,13 +86,7 @@ namespace Enemy
             }
         }
 
-        void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.tag == "Enemy")
-            {
-                Physics.IgnoreCollision(boss.GetComponent<Collider>(), GetComponent<Collider>());
-            }
-        }
+
         // Update is called once per frame
         void FixedUpdate()
         {
@@ -186,6 +186,12 @@ namespace Enemy
 
         private void UpdateMoveState()
         {
+            isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            if (isTouchingGround)
+            {
+                rb.velocity = new Vector2(transform.GetFacingFloat() * -1 * moveSpeed * Time.deltaTime, 0);
+
+            }
             if (foundPlayer && path == null)
                 return;
             if (currentWayPoint >= path.vectorPath.Count)
@@ -341,7 +347,15 @@ namespace Enemy
             timer = 0;
             currentState = state;
         }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.cyan;
+            var groundPos = groundCheck.position;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
     }
+
+
 }
 
 
