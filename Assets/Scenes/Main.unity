@@ -1855,7 +1855,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3108535, y: 1}
+    m_SensorSize: {x: 4.2402825, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3021,6 +3021,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1582045804325477552, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582045804325477552, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: rooms.Array.data[2]
       value: 
       objectReference: {fileID: 4308347967079503383, guid: b329e3ad395fd974880e78ab08d11213, type: 3}
@@ -3032,6 +3036,10 @@ PrefabInstance:
       propertyPath: rooms.Array.data[4]
       value: 
       objectReference: {fileID: 1931702214541820750, guid: 483dc2270f77a4e41995fcade549d196, type: 3}
+    - target: {fileID: 1582045804325477552, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[3]
+      value: 
+      objectReference: {fileID: 7090874695961971519, guid: ffbd387e7ee130a41861a7139dd6c202, type: 3}
     - target: {fileID: 2873817467072130966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -45.56
