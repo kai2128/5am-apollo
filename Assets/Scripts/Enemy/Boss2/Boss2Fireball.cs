@@ -15,7 +15,7 @@ namespace Enemy.Boss2
 
         private Vector2 startingPoint;
 
-        private Vector3 dir;//ori dir
+        private Vector3 dir;//original dir
         private float Speed;
 
         private Vector2 target;
@@ -115,17 +115,10 @@ namespace Enemy.Boss2
                 }
 
             }
-            //boss.Ready();
-            target = new Vector2(player.position.x, point.position.y);
+            //boss.Ready();   target = new Vector2(player.position.x, point.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, 2.5f * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
         }
-
-        // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-        //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    
-        //}
 
     }
 }

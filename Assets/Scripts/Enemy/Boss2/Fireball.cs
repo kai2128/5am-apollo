@@ -35,17 +35,11 @@ namespace Enemy.Boss2
 
         void Update()
         {
-            // Move();
-            // LifeTime -= Time.deltaTime;
-            // if (LifeTime <= 0)
-            // {
-            //     Destroy(gameObject);
-            // }
+
         }
         public void Destroy()
         {
             hit = true;
-            //Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

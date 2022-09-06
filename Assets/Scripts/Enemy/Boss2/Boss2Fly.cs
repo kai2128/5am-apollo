@@ -15,9 +15,6 @@ namespace Enemy.Boss2
         private Transform[] flyingPoint;
         public float speed = 2.5f;
         private int randomPoint;
-        // public float attackRange = 1f;
-        // public bool chase = false;
-        // public Transform startingPoint;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -53,11 +50,6 @@ namespace Enemy.Boss2
                 Vector2 newPos = Vector2.MoveTowards(rb.position, flyingPoint[randomPoint].position, speed * Time.fixedDeltaTime);
                 rb.MovePosition(newPos);
             }
-            // else
-            // {
-            //     // boss.LookAtPoint();
-            //     // boss.ReturnStartPosition();
-            // }
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -64,19 +64,11 @@ namespace Enemy.Boss2
                     animator.SetBool("Ready", false);
 
                 }
-                // Enter rage mode
-                // Exit rage mode
             }
             else
             {
-                // animator.SetBool("Fly", true);
-                // animator.SetBool("Ready", false);
-                // Debug.Log("Ready < timer");
                 animator.Play("Ready");
                 boss.Ready();
-                // Vector2 target = new Vector2(player.position.x, rb.position.y);
-                // Vector2 newPos = Vector2.MoveTowards(rb.position, target, 2.5f * Time.fixedDeltaTime);
-                // rb.MovePosition(newPos);
             }
 
 

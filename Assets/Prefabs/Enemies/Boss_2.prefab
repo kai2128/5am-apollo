@@ -182,7 +182,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -238,21 +238,19 @@ MonoBehaviour:
   rb: {fileID: 0}
   currentHp: 0
   maxHp: 0
+  enemyName: 
   enemyXp: 0
   enemyLevel: 0
-  enemyName: 
   isFlipped: 0
   chaseSpeed: 10.07
   returnSpeed: 1
   distanceBetweenPlayer: 0
-  currentDistanceBetweenPlayer: 0
   readyTime: 1
   recoverTime: 3
-  tenacity: 0
-  maxTenacity: 50
   isReady: 0
   readyAttack: 0
   rageMode: 0
+  isRageHit: 0
   dead: 0
   groundLayer:
     serializedVersion: 2

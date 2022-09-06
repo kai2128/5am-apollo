@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject level1Generator;
     public BossEntrance boss1Entrance;
     public GameObject level2Generator;
-    public Boss2Entrance boss2Entrance;
+    public Enemy.Boss2.Boss2Entrance boss2Entrance;
 
     public GameObject level3Generator;
     public Enemy.Boss3.Boss3Entrance boss3Entrance;

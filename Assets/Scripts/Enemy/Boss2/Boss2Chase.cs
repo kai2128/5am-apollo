@@ -13,8 +13,6 @@ namespace Enemy.Boss2
         private Boss2 boss;
         public float speed = 2.5f;
         public float attackRange = 3f;
-        // public bool chase = false;
-        // public bool allowChase = false;
         private Transform startingPoint;
         private float timer = 0;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

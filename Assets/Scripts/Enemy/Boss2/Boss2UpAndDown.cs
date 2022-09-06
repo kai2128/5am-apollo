@@ -30,7 +30,7 @@ namespace Enemy.Boss2
             targetPoint = boss.attackPoint;
             target = 0;
             index = -1;
-            sr.material.color = Color.red;
+            //sr.material.color = Color.red;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
