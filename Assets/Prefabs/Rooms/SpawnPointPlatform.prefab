@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.94, y: -4.22}
+  m_AnchoredPosition: {x: -3.03, y: -4.22}
   m_SizeDelta: {x: 987, y: 519}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1924024206922333330
@@ -133,7 +133,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 1656574353
+  m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7805840663170592712
@@ -9626,7 +9626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: 103}
+  m_AnchoredPosition: {x: 70, y: 53}
   m_SizeDelta: {x: 523.15, y: 349.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8426228710608735565
@@ -9657,29 +9657,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'W, A, S, D to move around
+  m_text: 'Player level and skills is saved automatically
+
+
+    W, A, S, D to move
+    around
 
 
     Left Ctrl to dash
 
 
-    Space to jump,
-    Press space again to double jump
+    Space to jump, Press space again to double
+    jump
 
 
-    Q to switch weapons
-
-    For claw, Z to
-    attack
-
-    For sword, Z to attack, X to ranged attack, Z + S in middle air to
-    perform ground attack
-
-
-    Hold C to Fly
-
-    V to Grow, B to Shrinks
-
+    Z to attack
 
 '
   m_isRightToLeft: 0
@@ -9763,6 +9755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guideText: {fileID: 0}
+  guideCanvas: {fileID: 0}
 --- !u!1001 &6933216720365107716
 PrefabInstance:
   m_ObjectHideFlags: 0

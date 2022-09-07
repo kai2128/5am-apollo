@@ -562,7 +562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286616192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.58, y: 14.88, z: -10}
+  m_LocalPosition: {x: 0.1, y: -4.85, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -696,11 +696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7148716943611569209, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.58
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7148716943611569209, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.63
+      value: -6.1
       objectReference: {fileID: 0}
     - target: {fileID: 7148716943611569209, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -738,10 +738,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7746118519328399018, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7746118520686536093, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -749,10 +745,6 @@ PrefabInstance:
     - target: {fileID: 7746118520686536093, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8780202083422600478, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
-      propertyPath: enemyMask.m_Bits
-      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df836afad092f8c48b4158747c0f14c7, type: 3}
@@ -1855,7 +1847,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 4.2402825, y: 1}
+    m_SensorSize: {x: 1.6691729, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1872,7 +1864,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106052377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.58, y: 14.88, z: -10}
+  m_LocalPosition: {x: 0.1, y: -4.85, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2915,14 +2907,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 286616194}
-    - target: {fileID: 1924024206922333330, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3378427519057256403, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -5
-      objectReference: {fileID: 0}
     - target: {fileID: 6038148711885272061, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}
       propertyPath: m_Name
       value: SpawnPointPlatform
@@ -2970,26 +2954,6 @@ PrefabInstance:
     - target: {fileID: 6038148711885272063, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7885858552278519764, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -3.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 9115204130757725319, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}
-      propertyPath: m_text
-      value: 'W, A, S, D to move around
-
-
-        Left Ctrl to dash
-
-
-        Space
-        to jump, Press space again to double jump
-
-
-        Z to attack
-
-'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bba7cb09c2d24d248bbf71008b699a8d, type: 3}

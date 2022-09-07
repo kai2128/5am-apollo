@@ -665,6 +665,9 @@ MonoBehaviour:
   spawnPoint: {x: 1.54, y: -3.84}
   maxHp: 100
   currentHp: 0
+  unlockedSword: 0
+  unlockedFly: 0
+  unlockedGrowShrink: 0
   playerAnim: {fileID: 0}
   playerTrans: {fileID: 0}
   anim: {fileID: 0}
@@ -718,7 +721,7 @@ MonoBehaviour:
     m_Bits: 128
   enemyMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   onGround: 0
   bottomOffset: {x: -0.01, y: 0.11}
   collisionRadius: 0.1

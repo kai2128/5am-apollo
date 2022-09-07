@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Cinemachine;
+using Class;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,11 +53,26 @@ namespace Player
             statusText.DOFade(1, 0.5f).SetEase(Ease.OutQuint);
             statusText.DOFade(0, duration).SetEase(Ease.InQuint);
         }
-        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(spawnPoint, 1);
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveData();
+        }
+
+        public void SaveData()
+        {
+            PlayerSave save = new PlayerSave();
+            save.data.level = playerLevel.level;
+            save.data.currentXP = playerLevel.currentXP;
+            save.data.unlockedGrowShrink = unlockedGrowShrink;
+            save.data.unlockedSword = unlockedSword;
+            save.data.unlockedFly = unlockedFly;
+            FileManager.WriteToSaveFile(save.ToJson());
         }
 
         private void Awake()
@@ -81,6 +97,21 @@ namespace Player
             playerAbilityUI = GetComponentInChildren<PlayerAbilityUI>();
             playerGrowShrink = GetComponent<PlayerGrowShrink>();
             playerFly = GetComponent<PlayerFly>();
+
+            if (FileManager.IsSaveFileExist())
+            {
+                PlayerSave loaded = PlayerSave.LoadFromJson(FileManager.ReadFromSaveFile());
+                unlockedFly = loaded.data.unlockedFly;
+                unlockedGrowShrink = loaded.data.unlockedGrowShrink;
+                unlockedSword = loaded.data.unlockedSword;
+                while (loaded.data.level > 1)
+                {
+                    playerLevel.LevelUp();
+                    loaded.data.level--;
+                }
+
+                playerLevel.currentXP = loaded.data.currentXP;
+            }
         }
 
         public void BecomeInvulnerable()
