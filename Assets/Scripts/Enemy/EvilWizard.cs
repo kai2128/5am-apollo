@@ -1,6 +1,8 @@
 using System;
 using Class;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Player;
 using UnityEngine;
 using Utils;
@@ -28,7 +30,6 @@ namespace Enemy
         public bool attackCooldown;
         public bool isDead = false;
         public float attackCooldownTime = 2f;
-
         public AttackArguments atkArgs = new AttackArguments(10f, 15f);
 
         void Awake()
@@ -42,7 +43,9 @@ namespace Enemy
         // Update is called once per frame
         void Update()
         {
-            ChasePlayer();
+            if(currentState != State.Attack)
+                ChasePlayer();
+
             timer += Time.deltaTime;
             switch (currentState)
             {
@@ -70,7 +73,7 @@ namespace Enemy
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, moveSpeed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
 
-            if (Vector2.Distance(PlayerManager.Instance.transform.position, rb.position) <= attackRange)
+            if (!attackCooldown && Vector2.Distance(PlayerManager.Instance.transform.position, rb.position) <= attackRange)
             {
                 SwitchState(State.Attack);
                 foundPlayer = true;
@@ -91,10 +94,21 @@ namespace Enemy
             SwitchState(State.Hit);
         }
 
+        private Tweener pauseMovementTween;
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.CompareTag("Player"))
+            {
+                if (pauseMovementTween != null)
+                {
+                    pauseMovementTween.Kill();
+                }
+
                 col.gameObject.GetComponent<PlayerOnHit>().GetHit(atkArgs.UpdateTransform(transform));
+                pauseMovementTween = DOVirtual.Vector3(Vector2.zero, Vector2.zero, 1f, (x) => { PlayerManager.Instance.rb.velocity = x; });
+                // PlayerManager.Instance.rb.velocity.DOMove(Vector2.zero, 5);
+                // StartCoroutine(PlayerManager.Instance.playerMovement.PauseMovement(5));
+            }
         }
 
          private void EnterIdleState()
