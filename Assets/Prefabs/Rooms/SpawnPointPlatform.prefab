@@ -9626,7 +9626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: 53}
+  m_AnchoredPosition: {x: 70, y: 64.68}
   m_SizeDelta: {x: 523.15, y: 349.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8426228710608735565
@@ -9657,18 +9657,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Player level and skills is saved automatically
+  m_text: 'Player level and skills is saved automatically. Esc to pause game.
 
 
-    W, A, S, D to move
-    around
+    A,
+    D to move left and right
 
 
     Left Ctrl to dash
 
 
-    Space to jump, Press space again to double
-    jump
+    Space to jump, Press space
+    again to double jump
 
 
     Z to attack
