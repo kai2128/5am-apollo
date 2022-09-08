@@ -106,12 +106,13 @@ namespace Player
                 unlockedSword = loaded.data.unlockedSword;
                 while (loaded.data.level > 1)
                 {
+                    playerLevel.levelSoundEffect.mute = true;
                     playerLevel.LevelUp();
                     loaded.data.level--;
                 }
-
                 playerLevel.currentXP = loaded.data.currentXP;
             }
+            DOVirtual.DelayedCall(2f, () => { playerLevel.levelSoundEffect.mute = false; });
         }
 
         public void BecomeInvulnerable()

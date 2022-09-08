@@ -16,30 +16,14 @@ namespace Player
 
         public bool growed = false;
         public bool shrinked = false;
-        public Rigidbody2D rb;
         private TweenerCore<Vector3, Vector3, VectorOptions> growToTween;
         private TweenerCore<Vector3, Vector3, VectorOptions> growBackTween;
         private TweenerCore<Vector3, Vector3, VectorOptions> shrinkToTween;
         private TweenerCore<Vector3, Vector3, VectorOptions> shrinkBackTween;
 
-
-        void Start()
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            // if (growed)
-            // {
-            //     gameObject.transform.localScale = new Vector3(2f, 2f, 1f);//modify local scale y manually
-            // }
-            // if (shrinked)
-            // {
-            //     gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1f);//modify local scale y manually
-            // }
-        }
+        [Header("Sound Effect")]
+        [SerializeField]
+        private AudioSource growShrinkAudio;
 
         public void Grow()
         {
@@ -50,7 +34,7 @@ namespace Player
             // {
             //     
             // });
-
+            growShrinkAudio.Play();
             growToTween = transform.DOScale(scaleTo, 2.0f).OnComplete(() =>
             {
                 growed = true;
@@ -106,6 +90,7 @@ namespace Player
         {
             var currentFacingDirection = transform.localScale.x < 0 ? -1 : 1;
             Vector3 scaleTo = new Vector3(_shrinkScaleTo.x * currentFacingDirection, _shrinkScaleTo.y, _shrinkScaleTo.z);
+            growShrinkAudio.Play();
             shrinkToTween = transform.DOScale(_shrinkScaleTo, 2.0f).OnComplete(() =>
             {
                 shrinked = true;

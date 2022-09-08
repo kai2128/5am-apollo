@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8153438638576708145
 Transform:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 415599739
   m_SortingLayer: -1
-  m_SortingOrder: 3
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 5055f981fc7e5df4faefa5a655460c9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2051,7 +2051,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 415599739
   m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: ef46d4e5c24a38e4f82d0fdfe664548a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2222,7 +2222,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 415599739
   m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: b86f9635d7b8a044ab346784ea7af084, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2560,15 +2560,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1845555848972197724, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1845555849760433259, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1845555849760433259, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760a8b9335288fe45b7ffcc9cf5d4ba6, type: 3}
@@ -2681,12 +2681,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4463704266850284860}
     - target: {fileID: 85870833931730423, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
+      propertyPath: flyingEyePrefab
+      value: 
+      objectReference: {fileID: 5670846410062709570, guid: c90e811444708db48aa733192a7103f1, type: 3}
+    - target: {fileID: 85870833931730423, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: ProjectileSpawnPoint1
       value: 
       objectReference: {fileID: 6542329835846305294}
     - target: {fileID: 85870833931730423, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: SpawnProjectilesCooldown
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 768502243413015317, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2762,7 +2766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5636596037758566696, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9046178419893076372, guid: 01c3a0d683dc27c4fb05e18b46329041, type: 3}
       propertyPath: m_Enabled

@@ -29,7 +29,7 @@ namespace Player
         public TextMeshProUGUI LevelText;
         // Start is called before the first frame update
         [Header("Sound Effect")]
-        [SerializeField] private AudioSource levelSoundEffect;
+        [SerializeField] public AudioSource levelSoundEffect;
 
         void Start()
         {
