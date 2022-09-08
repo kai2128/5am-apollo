@@ -1851,7 +1851,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7086467, y: 1}
+    m_SensorSize: {x: 0.8364662, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3082,7 +3082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: rooms.Array.data[2]
@@ -3107,7 +3107,7 @@ PrefabInstance:
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[3]
       value: 
-      objectReference: {fileID: 4432475287155740797, guid: a688f05e40b8b6449a1dfe0d4cf6c66e, type: 3}
+      objectReference: {fileID: 6832817655951633902, guid: 06fa997d562e8a54bb793d33b11a16e8, type: 3}
     - target: {fileID: 2873817468290489966, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[4]
       value: 
@@ -3132,6 +3132,10 @@ PrefabInstance:
       propertyPath: rooms.Array.data[4]
       value: 
       objectReference: {fileID: 8499430300419294731, guid: f55d3517535936a449d9e18ae2afb7df, type: 3}
+    - target: {fileID: 4647415757846420478, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[2]
+      value: 
+      objectReference: {fileID: 600752167564645616, guid: 30d49537bd2727044bab793798cd9d85, type: 3}
     - target: {fileID: 6320387296439102896, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -3150,7 +3154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6320387296439102899, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6320387296439102899, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: rooms.Array.data[2]
@@ -3170,6 +3174,14 @@ PrefabInstance:
       objectReference: {fileID: 5670846410062709576, guid: c90e811444708db48aa733192a7103f1, type: 3}
     - target: {fileID: 6320387296439102899, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
       propertyPath: minions.Array.data[1]
+      value: 
+      objectReference: {fileID: 5527985289199104235, guid: 7fd586140c07013438443d11165f4a38, type: 3}
+    - target: {fileID: 6320387296439102899, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[2]
+      value: 
+      objectReference: {fileID: 5670846410062709576, guid: c90e811444708db48aa733192a7103f1, type: 3}
+    - target: {fileID: 6320387296439102899, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
+      propertyPath: minions.Array.data[3]
       value: 
       objectReference: {fileID: 5670846410062709576, guid: c90e811444708db48aa733192a7103f1, type: 3}
     - target: {fileID: 7787622439511316424, guid: eea41de0124314e46a574ec2f259ef2e, type: 3}
