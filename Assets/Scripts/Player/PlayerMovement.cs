@@ -22,6 +22,9 @@ namespace Player
         public float dashSpeed = 10;
         public float dashTime = 0.4f;
 
+        [Header("Sound Effect")]
+        [SerializeField] private AudioSource jumpSoundEffect;
+        [SerializeField] private AudioSource dashSoundEffect;
         // Start is called before the first frame update
         void Start()
         {
@@ -94,6 +97,7 @@ namespace Player
             if (coll.onGround) jumpCount = 2;
             if (Input.GetButtonDown("Jump") && jumpCount > 1)
             {
+                jumpSoundEffect.Play();
                 anim.SetTrigger("jump");
                 rb.velocity = Vector2.up * jumpVelocity;
                 jumpCount--;
@@ -125,6 +129,7 @@ namespace Player
 
         private IEnumerator Dash()
         {
+            dashSoundEffect.Play();
             anim.SetTrigger("dash");
             canDash = false;
             PlayerManager.Instance.isAttacking = false;

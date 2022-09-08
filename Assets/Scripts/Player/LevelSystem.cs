@@ -28,6 +28,9 @@ namespace Player
         public TextMeshProUGUI XPText;
         public TextMeshProUGUI LevelText;
         // Start is called before the first frame update
+        [Header("Sound Effect")]
+        [SerializeField] private AudioSource levelSoundEffect;
+
         void Start()
         {
             frontXpBar.fillAmount = 0f;
@@ -79,6 +82,7 @@ namespace Player
 
         public void LevelUp()
         {
+            levelSoundEffect.Play();
             level++;
             // FillPlayerXP.Instance.levelUp();
             frontXpBar.fillAmount = 0f;

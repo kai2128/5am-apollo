@@ -18,6 +18,8 @@ namespace Player
         public bool startRecoverStamina;
         public float recoverTimer = 2f;
         private float timer = 0f;
+        [Header("Sound Effect")]
+        [SerializeField] private AudioSource flySoundEffect;
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -28,9 +30,9 @@ namespace Player
         }
         void Update()
         {
-            if(!PlayerManager.Instance.unlockedFly)
+            if (!PlayerManager.Instance.unlockedFly)
                 return;
-            
+
             timer += Time.deltaTime;
             if (stamina <= maxStamina && startRecoverStamina)
             {
@@ -40,15 +42,16 @@ namespace Player
             {
                 startRecoverStamina = true;
             }
-            
+
             if (stamina <= Mathf.Epsilon)
             {
                 wings.SetActive(false);
                 return;
             }
-            
+
             if (Input.GetButton("Fly"))
             {
+                flySoundEffect.Play();
                 wings.SetActive(true);
                 rb.velocity = Vector2.up * 5f;
                 stamina -= maxStamina * 0.3f * Time.deltaTime;

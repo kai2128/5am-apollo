@@ -17,10 +17,10 @@ namespace Player
         public bool growed = false;
         public bool shrinked = false;
         public Rigidbody2D rb;
-        private TweenerCore<Vector3,Vector3,VectorOptions> growToTween;
-        private TweenerCore<Vector3,Vector3,VectorOptions> growBackTween;
-        private TweenerCore<Vector3,Vector3,VectorOptions> shrinkToTween;
-        private TweenerCore<Vector3,Vector3,VectorOptions> shrinkBackTween;
+        private TweenerCore<Vector3, Vector3, VectorOptions> growToTween;
+        private TweenerCore<Vector3, Vector3, VectorOptions> growBackTween;
+        private TweenerCore<Vector3, Vector3, VectorOptions> shrinkToTween;
+        private TweenerCore<Vector3, Vector3, VectorOptions> shrinkBackTween;
 
 
         void Start()
@@ -50,7 +50,7 @@ namespace Player
             // {
             //     
             // });
-            
+
             growToTween = transform.DOScale(scaleTo, 2.0f).OnComplete(() =>
             {
                 growed = true;
@@ -70,7 +70,7 @@ namespace Player
             PlayerManager.Instance.playerAbilityUI.ResetCooldown();
             ResetGrowShrink();
         }
-        
+
         public void ResetGrowShrink()
         {
             shrinkToTween.Kill();

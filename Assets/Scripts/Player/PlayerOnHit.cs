@@ -12,6 +12,7 @@ namespace Player
         private Rigidbody2D rb;
         private SpriteRenderer sr;
         private CapsuleCollider2D col;
+        [SerializeField] private AudioSource hitSoundEffect;
         private void Start()
         {
             anim = PlayerManager.Instance.anim;
@@ -33,7 +34,7 @@ namespace Player
             {
                 sr.BlinkRed();
             }
-            
+
             StartCoroutine(PlayerManager.Instance.playerMovement.PauseMovement(.2f));
             rb.velocity += args.PushBackwardForce(transform);
             DecreaseHp(args.damage);
@@ -42,14 +43,15 @@ namespace Player
 
         public void DecreaseHp(float damage)
         {
+            hitSoundEffect.Play();
             ref var currentHp = ref PlayerManager.Instance.currentHp;
             if (currentHp <= 0) return;
-            
+
             if (damage >= currentHp)
                 currentHp = 0;
             else
                 currentHp -= damage;
-            
+
             if (currentHp <= 0)
             {
                 rb.AddForce(Vector2.down);

@@ -8,6 +8,8 @@ namespace Player
         private PlayerMovement playerMovement;
         private GameObject clawEffect;
         public float clawForwardForce = 0.3f;
+        [Header("Sound Effect")]
+        [SerializeField] private AudioSource clawSoundEffect;
 
         // Start is called before the first frame update
         void Start()
@@ -25,6 +27,7 @@ namespace Player
 
             if (Input.GetButtonDown("Fire1") && !PlayerManager.Instance.isDashing && !PlayerManager.Instance.isAttacking)
             {
+                clawSoundEffect.Play();
                 PlayerManager.Instance.isAttacking = true;
                 playerAnim.SetTrigger("claw");
                 StartCoroutine(playerMovement.ZeroGravity(playerAnim.GetCurrentStateTime() + 0.5f));

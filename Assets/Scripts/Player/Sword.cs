@@ -38,7 +38,8 @@ namespace Player
 
 
         private AttackArguments _atkArgs = new();
-
+        [Header("Sound Effect")]
+        [SerializeField] private AudioSource swordSoundEffect;
         // Start is called before the first frame update
         void Start()
         {
@@ -65,6 +66,7 @@ namespace Player
         {
             if (!_col.onGround && Input.GetButtonDown("Fire1") && Input.GetAxis("Vertical") >= 0)
             {
+                swordSoundEffect.Play();
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
                 _atkArgs = new AttackArguments(airDamage);
@@ -74,6 +76,7 @@ namespace Player
             }
             else if (!_col.onGround && Input.GetButtonDown("Fire1"))
             {
+                swordSoundEffect.Play();
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
                 _atkArgs = new AttackArguments(groundDamage, groundForce * .5f);
@@ -87,6 +90,7 @@ namespace Player
         {
             if (Input.GetButtonDown("Fire2") && _col.onGround)
             {
+                swordSoundEffect.Play();
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep = 1;
                 _atkArgs = new AttackArguments(rangedDamage, rangedForce);
@@ -112,6 +116,7 @@ namespace Player
         {
             if (_col.onGround && Input.GetButtonDown("Fire1"))
             {
+                swordSoundEffect.Play();
                 PlayerManager.Instance.isAttacking = true;
                 PlayerManager.Instance.comboStep++;
                 if (PlayerManager.Instance.comboStep > 3)
