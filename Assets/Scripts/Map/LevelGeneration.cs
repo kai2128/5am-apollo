@@ -115,7 +115,6 @@ public class LevelGeneration : MonoBehaviour
         {
             if (transform.position.x > minX)
             {
-                Debug.Log(pos1.position.x);
                 //Move left
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;

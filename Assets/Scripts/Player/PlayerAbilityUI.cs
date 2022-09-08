@@ -17,7 +17,6 @@ public class PlayerAbilityUI : MonoBehaviour
     [Header("Fly")]
     public Image fly;
     public float cooldown3 = 20;
-    bool isCooldown3 = false;
     public KeyCode ability3;
 
     [Header("Grow")]
@@ -64,7 +63,6 @@ public class PlayerAbilityUI : MonoBehaviour
 
     public void ResetCooldown()
     {
-        isCooldown3 = false;
         isCooldown4 = false;
         PlayerManager.Instance.transform.localScale = new Vector3(1, 1, 1);
     }

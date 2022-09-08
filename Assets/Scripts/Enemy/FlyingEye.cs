@@ -50,7 +50,6 @@ namespace Enemy
 
         Path path; //current path following
         int currentWayPoint = 0; //current waypoint along the path that we are following
-        bool reachedEndOfPath = false;
 
         Seeker seeker;
 
@@ -206,15 +205,6 @@ namespace Enemy
             }
             if (foundPlayer && path == null)
                 return;
-            if (currentWayPoint >= path.vectorPath.Count)
-            {
-                reachedEndOfPath = true;
-                return;
-            }
-            else
-            {
-                reachedEndOfPath = false;
-            }
             if (foundPlayer)
             {
                 transform.LookAtTarget(PlayerManager.Instance.transform);

@@ -30,7 +30,7 @@ namespace Enemy
             boss4 = GameObject.Find("Boss_4");
         }
 
-        void Start()
+        new void Start()
         {
             time = 0f;
             timeDelay = 1f;
