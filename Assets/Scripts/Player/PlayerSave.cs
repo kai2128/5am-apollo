@@ -10,7 +10,6 @@ namespace Player
         {
             public int level;
             public float currentXP;
-            public float currentHp;
             public bool unlockedSword;
             public bool unlockedFly;
             public bool unlockedGrowShrink;

@@ -30,10 +30,6 @@ namespace Player
             var currentFacingDirection = transform.localScale.x < 0 ? -1 : 1;
             Vector3 scaleTo = new Vector3(_growScaleTo.x * currentFacingDirection, _growScaleTo.y, _growScaleTo.z);
 
-            // DOVirtual.Vector3(new Vector3(1f, 1f, 1f), new Vector3(2f, 2f, 2f), 2f, () =>
-            // {
-            //     
-            // });
             growShrinkAudio.Play();
             growToTween = transform.DOScale(scaleTo, 2.0f).OnComplete(() =>
             {

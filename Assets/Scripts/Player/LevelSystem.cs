@@ -73,11 +73,9 @@ namespace Player
 
         public void GainExperienceFlatRate(float xpGained)
         {
-            Debug.Log("Gain exp!");
             currentXP += xpGained;
             lerpTimer = 0f;
             delayTimer = 0f;
-            return;
         }
 
         public void LevelUp()
