@@ -36,13 +36,19 @@ namespace Enemy
         [Header("GoundCheck")]
         [SerializeField] public Transform groundCheck;
         [SerializeField] public Transform upCheck;
+        [SerializeField] public Transform downCheck;
+
 
         [SerializeField] public float groundCheckRadius;
         [SerializeField] public float upCheckRadius;
+        [SerializeField] public float downCheckRadius;
+
 
         [SerializeField] LayerMask groundLayer;
         private bool isTouchingGround;
         private bool isTouchingUp;
+        private bool isTouchingDown;
+
 
 
         [Header("Pathfinding")]
@@ -193,15 +199,21 @@ namespace Enemy
         {
             isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
             isTouchingUp = Physics2D.OverlapCircle(upCheck.position, upCheckRadius, groundLayer);
+            isTouchingDown = Physics2D.OverlapCircle(downCheck.position, downCheckRadius, groundLayer);
+
 
             if (isTouchingGround)
             {
-                rb.velocity += transform.GetOppositeDirection() * moveSpeed * Time.deltaTime;
+                rb.velocity += transform.GetOppositeDirection() * Vector2.one * 20f * Time.deltaTime;
 
             }
             if (isTouchingUp)
             {
-                rb.velocity += Vector2.down * moveSpeed * Time.deltaTime;
+                rb.velocity += Vector2.down * 30f * Time.deltaTime;
+            }
+            if (isTouchingDown)
+            {
+                rb.velocity += Vector2.up * 30f * Time.deltaTime;
             }
             if (foundPlayer && path == null)
                 return;
@@ -354,6 +366,7 @@ namespace Enemy
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
             Gizmos.DrawWireSphere(upCheck.position, upCheckRadius);
+            Gizmos.DrawWireSphere(downCheck.position, downCheckRadius);
 
         }
     }
