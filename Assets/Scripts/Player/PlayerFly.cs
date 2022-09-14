@@ -19,7 +19,7 @@ namespace Player
         public float recoverTimer = 2f;
         private float timer = 0f;
         [Header("Sound Effect")]
-        [SerializeField] private AudioSource flySoundEffect;
+        [SerializeField] private AudioClip flySoundEffect;
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -51,7 +51,7 @@ namespace Player
 
             if (Input.GetButton("Fly"))
             {
-                flySoundEffect.Play();
+                SoundManager.Instance.PlaySound(flySoundEffect);
                 wings.SetActive(true);
                 rb.velocity = Vector2.up * 5f;
                 stamina -= maxStamina * 0.3f * Time.deltaTime;

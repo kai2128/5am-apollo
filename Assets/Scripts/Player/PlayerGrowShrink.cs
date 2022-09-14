@@ -23,14 +23,15 @@ namespace Player
 
         [Header("Sound Effect")]
         [SerializeField]
-        private AudioSource growShrinkAudio;
+        private AudioClip growShrinkAudio;
 
         public void Grow()
         {
             var currentFacingDirection = transform.localScale.x < 0 ? -1 : 1;
             Vector3 scaleTo = new Vector3(_growScaleTo.x * currentFacingDirection, _growScaleTo.y, _growScaleTo.z);
 
-            growShrinkAudio.Play();
+            SoundManager.Instance.PlaySound(growShrinkAudio);
+            //  growShrinkAudio.Play();
             growToTween = transform.DOScale(scaleTo, 2.0f).OnComplete(() =>
             {
                 growed = true;
@@ -86,7 +87,8 @@ namespace Player
         {
             var currentFacingDirection = transform.localScale.x < 0 ? -1 : 1;
             Vector3 scaleTo = new Vector3(_shrinkScaleTo.x * currentFacingDirection, _shrinkScaleTo.y, _shrinkScaleTo.z);
-            growShrinkAudio.Play();
+            SoundManager.Instance.PlaySound(growShrinkAudio);
+            //growShrinkAudio.Play();
             shrinkToTween = transform.DOScale(_shrinkScaleTo, 2.0f).OnComplete(() =>
             {
                 shrinked = true;

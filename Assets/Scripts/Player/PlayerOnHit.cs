@@ -12,7 +12,7 @@ namespace Player
         private Rigidbody2D rb;
         private SpriteRenderer sr;
         private CapsuleCollider2D col;
-        [SerializeField] private AudioSource hitSoundEffect;
+        [SerializeField] private AudioClip hitSoundEffect;
         private void Start()
         {
             anim = PlayerManager.Instance.anim;
@@ -43,7 +43,7 @@ namespace Player
 
         public void DecreaseHp(float damage)
         {
-            hitSoundEffect.Play();
+            SoundManager.Instance.PlaySound(hitSoundEffect);
             ref var currentHp = ref PlayerManager.Instance.currentHp;
             if (currentHp <= 0) return;
 
