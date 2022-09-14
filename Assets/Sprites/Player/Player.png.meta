@@ -1708,17 +1708,17 @@ TextureImporter:
       Player_Jump_2: -560937678416875687
       Player_Attack_2_1: 8259541448387475485
       Player_Claw_1_5: 0
-      Player_Attack_3_1: 8915559442604700741
-      Player_Test_3: 0
+      Player_Claw_0: 0
+      Player_Attack_1_5: -5185822226372146389
       Player_Attack_1_6: -3092529070303952417
       Player_Death_3: -894729927518332931
       Player_Claw_Attack_1_1: 0
       Player_Fall_3: -1973582045016827254
       Player_Claw_1_2: 0
-      Player_Claw_0: 0
+      Player_Attack_3_1: 8915559442604700741
       Player_Claw_1: 0
       Player_Claw_1_3: 0
-      Player_Attack_1_5: -5185822226372146389
+      Player_Test_3: 0
       Player_Run_4: 3041140956625590587
       Player_Attack_1_0: -1454337063218153646
       Player_Dodge_4: -4802804912074169348

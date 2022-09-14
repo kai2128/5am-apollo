@@ -106,13 +106,15 @@ namespace Player
                 unlockedSword = loaded.data.unlockedSword;
                 while (loaded.data.level > 1)
                 {
-                    playerLevel.levelSoundEffect.mute = true;
+                    // to mute player level up sound while load player save data
+                    SoundManager.Instance.EffectsSource.mute = true;
                     playerLevel.LevelUp();
                     loaded.data.level--;
                 }
                 playerLevel.currentXP = loaded.data.currentXP;
             }
-            DOVirtual.DelayedCall(2f, () => { playerLevel.levelSoundEffect.mute = false; });
+            // unmute player sound after 1 second
+            DOVirtual.DelayedCall(1f, () => { SoundManager.Instance.EffectsSource.mute = false; });
         }
 
         public void BecomeInvulnerable()
